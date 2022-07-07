@@ -6,12 +6,13 @@
 
 
 int PlayerData::getAttributeScore(Attribute attr) const {
-	AttributeSet finalAttributes = race.getStats() + dndClass.getStats() +
-		dndSubClass.getStats() + baseStats + backgroundStats +
-		(AttributeSet(std::min((2 + static_cast<int>(floor((level - 1) / 4))), 6)) + proficiencyStats);
+	AttributeSet& finalAttributes = race.getStats();
 
-	for (auto tool : toolStatsList)
-		finalAttributes += tool;
+	finalAttributes += dndClass.getStats();
+	finalAttributes += dndSubClass.getStats();
+	finalAttributes += baseStats;
+	finalAttributes += backgroundStats;
+	finalAttributes += (AttributeSet(std::min((2 + static_cast<int>(floor((level - 1) / 4))), 6)) + proficiencyStats);
 
 	return finalAttributes.getAttributeScore(attr);
 }
@@ -60,21 +61,12 @@ std::string PlayerData::getBackground() const {
 	return background;
 }
 
-/// <summary>
-/// Increases the level of the character by 1.
-/// </summary>
 void PlayerData::incrementLevel() {
 	level++;
 }
 
-/// <summary>
-/// Add an item to the character's inventory.
-/// </summary>
-/// <param name="itemName">The name of the item.</param>
-/// <param name="statChanges">The changes to the player's stats, default is all 0.</param>
-void PlayerData::addToInventory(std::string itemName, AttributeSet statChanges = AttributeSet::createEmpty()) {
-	inventory.push_back(itemName);
-	toolStatsList.push_back(statChanges);
+void PlayerData::addToInventory(Item& item) {
+	itemList.push_back(item);
 }
 
 void PlayerData::changeCoins(int amt) {
@@ -87,20 +79,4 @@ void PlayerData::addSpell(Spell spell) {
 
 void PlayerData::changeHP(int amt) {
 	hp += amt;
-}
-
-/// <summary>
-/// Write the contents of the characters with an XML file with the character's name as filename.
-/// </summary>
-void PlayerData::toFile() const {
-
-}
-
-/// <summary>
-/// Flushes the contents of the characters with an XML file with the character's name as filename.
-/// Unlike the toFile() function this method never throws and as such can exit without writing the data back to the file.
-/// Always use toFile() before destroying the object.
-/// </summary>
-PlayerData::~PlayerData() {
-	toFile();
 }
