@@ -3,9 +3,11 @@
 #include "Spell.h"
 #include "StatModifier.h"
 #include "Item.h"
+#include "Currency.h"
 
 #include <string>
 #include <list>
+#include <unordered_map>
 
 /// <summary>
 /// An entity class holding all the information about a character's runtime information.
@@ -27,7 +29,7 @@ public:
 	/// <returns>The score of the attribute.</returns>
 	int getAttributeScore(Attribute attr) const;
 
-	int getCoins() const;
+	int getCurrencyAmount(Currency type) const;
 
 	int getSpeed() const;
 
@@ -60,7 +62,7 @@ public:
 	/// <param name="item">The item</param>
 	void addToInventory(Item& item);
 
-	void changeCoins(int amt);
+	void changeCoins(Currency type, int amt);
 
 	void addSpell(Spell spell);
 
@@ -73,7 +75,10 @@ private:
 	int ac;
 	int speed;
 	
-	int coins;
+	int gold;
+	int	electrum;
+	int	silver;
+	int	copper;
 
 	const StatModifier race;
 	const StatModifier dndClass;
@@ -87,6 +92,7 @@ private:
 	const AttributeSet backgroundStats;
 	const AttributeSet proficiencyStats;
 
+	std::unordered_map<Currency, int> currencyMap;
 	std::list<Item> itemList;
 	std::list<Spell> spellList;
 };

@@ -17,8 +17,9 @@ int PlayerData::getAttributeScore(Attribute attr) const {
 	return finalAttributes.getAttributeScore(attr);
 }
 
-int PlayerData::getCoins() const {
-	return coins;
+int PlayerData::getCurrencyAmount(Currency type) const {
+	// should never throw
+	return currencyMap.find(type)->second;
 }
 
 int PlayerData::getSpeed() const {
@@ -69,8 +70,8 @@ void PlayerData::addToInventory(Item& item) {
 	itemList.push_back(item);
 }
 
-void PlayerData::changeCoins(int amt) {
-	coins += amt;
+void PlayerData::changeCoins(Currency type, int amt) {
+	currencyMap.find(type)->second += amt;
 }
 
 void PlayerData::addSpell(Spell spell) {
