@@ -3,18 +3,20 @@
 #include <string>
 
 /// <summary>
-/// An immutable name, stats tuple describing any stats modifier such as a job, the background
-/// or the class / subclass.
+/// An immutable (String, AttributeSet) tuple describing any stats modifier such as the character's job,
+///  his background or his class / subclass.
 /// </summary>
 class StatModifier {
-private:
-	std::string name;
-	AttributeSet stats;
-
 public:
+	StatModifier();
+
 	StatModifier(std::string& name, AttributeSet& stats);
 
 	std::string getName() const;
 
 	AttributeSet getStats() const;
+
+private:
+	std::string name;
+	AttributeSet stats;
 };

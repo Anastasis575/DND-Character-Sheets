@@ -1,7 +1,8 @@
 #include "AttributeSet.h"
 
-AttributeSet AttributeSet::createEmpty() {
-	return AttributeSet(0, 0, 0, 0, 0, 0);
+AttributeSet::AttributeSet(){
+	for (int i = 0; i <= ATTRIBUTES_LENGTH; i++)
+		attributes[i] = 0;
 }
 
 AttributeSet::AttributeSet(int strengthValue, int dexterityValue,

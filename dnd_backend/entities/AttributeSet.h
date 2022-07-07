@@ -12,8 +12,7 @@ public:
 	/// <summary>
 	/// Create an AttributeSet with 0 stats.
 	/// </summary>
-	/// <returns></returns>
-	static AttributeSet createEmpty();
+	AttributeSet();
 
 	/// <summary>
 	/// Creates an AttributeSet inititalizing all the attributes with a default score of 0.
