@@ -429,3 +429,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+DND-Character-Sheets.sln
+DND-Character-Sheets.vcxproj
+DND-Character-Sheets.vcxproj.filters
