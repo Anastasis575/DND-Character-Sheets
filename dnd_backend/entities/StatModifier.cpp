@@ -1,13 +1,13 @@
 #include "StatModifier.h"
 
-StatModifier::StatModifier(std::string& name, AttributeSet& stats): name(name), stats(stats){}
+DND::StatModifier::StatModifier(std::string& name, DND::AttributeSet& stats): name(name), stats(stats){}
 
-StatModifier::StatModifier():name(""), stats(AttributeSet()){}
+DND::StatModifier::StatModifier():name(""), stats(AttributeSet()){}
 
-std::string StatModifier::getName() const {
+std::string DND::StatModifier::getName() const {
 	return name;
 }
 
-AttributeSet StatModifier::getStats() const {
+DND::AttributeSet DND::StatModifier::getStats() const {
 	return stats;
 }

@@ -2,6 +2,7 @@
 #include <cmath>
 #include <algorithm> 
 
+using namespace DND;
 //TODO: add parameter value checking
 
 PlayerData::PlayerData(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,

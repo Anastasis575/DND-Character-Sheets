@@ -9,158 +9,160 @@
 #include <list>
 #include <unordered_map>
 
-class PlayerBuilder;
-
-/// <summary>
-/// An entity class holding all the information about a character's runtime information.
-/// </summary>
-class PlayerData {
-
-public:
-	
-	/// <summary>
-	/// Return the score for the specified attribute.
-	/// </summary>
-	/// <param name="attr">The attribute whose score will be returned.</param>
-	/// <returns>The score of the attribute.</returns>
-	int getAttributeScore(Attribute attr) const;
-
-	int getCurrencyAmount(Currency type) const;
-
-	int getSpeed() const;
-
-	int getHP() const;
-
-	int getAC() const;
-
-	std::list<Spell> getSpells() const;
-
-	std::string getRace() const;
-
-	std::string getName() const;
-
-	std::string getClass() const;
-
-	std::string getSubclass() const;
-
-	std::string getHdType() const;
-
-	std::string getBackground() const;
+namespace DND {
+	class PlayerBuilder;
 
 	/// <summary>
-	/// Add an item to the character's inventory.
+	/// An entity class holding all the information about a character's runtime information.
 	/// </summary>
-	/// <param name="item">The item</param>
-	void addToInventory(Item& item);
+	class PlayerData {
 
-	void setCurrencyAmount(Currency type, int amt);
+	public:
 
-	void addSpell(Spell spell);
+		/// <summary>
+		/// Return the score for the specified attribute.
+		/// </summary>
+		/// <param name="attr">The attribute whose score will be returned.</param>
+		/// <returns>The score of the attribute.</returns>
+		int getAttributeScore(Attribute attr) const;
 
-	void setHP(int amt);
+		int getCurrencyAmount(Currency type) const;
 
-	void setSpeed(int speed);
+		int getSpeed() const;
 
-	void setAC(int ac);
+		int getHP() const;
 
-	void setLevel(int level);
+		int getAC() const;
 
+		std::list<Spell> getSpells() const;
 
-private:
-	/// <summary>
-	/// Creates a PlayerData instance by reading the character's name.
-	/// </summary>
-	/// <param name="charName">The name of the character.</param>
-	PlayerData(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
-		const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, const AttributeSet& baseStats,
-		const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats);
+		std::string getRace() const;
 
-	friend class PlayerBuilder;
+		std::string getName() const;
 
-	int level = 1;
-	int hp = 0;
-	int ac = 0;
-	int speed = 0;
+		std::string getClass() const;
 
-	const StatModifier race;
-	const StatModifier dndClass;
-	const StatModifier dndSubClass;
+		std::string getSubclass() const;
 
-	const std::string name;
-	const std::string hdType;
-	const std::string background;
+		std::string getHdType() const;
 
-	const AttributeSet baseStats;
-	const AttributeSet backgroundStats;
-	const AttributeSet proficiencyStats;
+		std::string getBackground() const;
 
-	std::unordered_map<Currency, int> currencyMap;
-	std::list<Item> itemList;
-	std::list<Spell> spellList;
-};
+		/// <summary>
+		/// Add an item to the character's inventory.
+		/// </summary>
+		/// <param name="item">The item</param>
+		void addToInventory(Item& item);
 
-/**
- * @brief A builder that constructs PlayerData objects.
- * @author Dimitris Tsirmpas
-*/
-class PlayerBuilder {
+		void setCurrencyAmount(Currency type, int amt);
 
-public:
-	PlayerBuilder(std::string name);
+		void addSpell(Spell spell);
 
-	PlayerData build() const;
+		void setHP(int amt);
 
-	PlayerBuilder& setLevel(int level);
+		void setSpeed(int speed);
 
-	PlayerBuilder& setHp(int hp);
+		void setAC(int ac);
 
-	PlayerBuilder& setAc(int ac);
-
-	PlayerBuilder& setSpeed(int speed);
-
-	PlayerBuilder& setGold(int gold);
-
-	PlayerBuilder& setElectrum(int electrum);
-
-	PlayerBuilder& setSilver(int silver);
-
-	PlayerBuilder& setCopper(int copper);
-
-	PlayerBuilder& setRace(StatModifier race);
-
-	PlayerBuilder& setClass(StatModifier _class);
-
-	PlayerBuilder& setSubClass(StatModifier subClass);
-
-	PlayerBuilder& setHdType(std::string hdType);
-
-	PlayerBuilder& setBaseStats(AttributeSet baseStats);
-
-	PlayerBuilder& setBackgroundStats(AttributeSet backgroundStats);
-
-	PlayerBuilder& setProficiencyStats(AttributeSet proficiencyStats);
+		void setLevel(int level);
 
 
-private:
-	int level = 1;
-	int hp = 0;
-	int ac = 0;
-	int speed = 0;
+	private:
+		/// <summary>
+		/// Creates a PlayerData instance by reading the character's name.
+		/// </summary>
+		/// <param name="charName">The name of the character.</param>
+		PlayerData(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
+			const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, const AttributeSet& baseStats,
+			const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats);
 
-	int gold = 0;
-	int	electrum = 0;
-	int	silver = 0;
-	int	copper = 0;
+		friend class PlayerBuilder;
 
-	StatModifier race;
-	StatModifier dndClass;
-	StatModifier dndSubClass;
+		int level = 1;
+		int hp = 0;
+		int ac = 0;
+		int speed = 0;
 
-	std::string name;
-	std::string hdType;
-	std::string background;
+		const StatModifier race;
+		const StatModifier dndClass;
+		const StatModifier dndSubClass;
 
-	AttributeSet baseStats;
-	AttributeSet backgroundStats;
-	AttributeSet proficiencyStats;
-};
+		const std::string name;
+		const std::string hdType;
+		const std::string background;
+
+		const AttributeSet baseStats;
+		const AttributeSet backgroundStats;
+		const AttributeSet proficiencyStats;
+
+		std::unordered_map<Currency, int> currencyMap;
+		std::list<Item> itemList;
+		std::list<Spell> spellList;
+	};
+
+	/**
+	 * @brief A builder that constructs PlayerData objects.
+	 * @author Dimitris Tsirmpas
+	*/
+	class PlayerBuilder {
+
+	public:
+		PlayerBuilder(std::string name);
+
+		PlayerData build() const;
+
+		PlayerBuilder& setLevel(int level);
+
+		PlayerBuilder& setHp(int hp);
+
+		PlayerBuilder& setAc(int ac);
+
+		PlayerBuilder& setSpeed(int speed);
+
+		PlayerBuilder& setGold(int gold);
+
+		PlayerBuilder& setElectrum(int electrum);
+
+		PlayerBuilder& setSilver(int silver);
+
+		PlayerBuilder& setCopper(int copper);
+
+		PlayerBuilder& setRace(StatModifier race);
+
+		PlayerBuilder& setClass(StatModifier _class);
+
+		PlayerBuilder& setSubClass(StatModifier subClass);
+
+		PlayerBuilder& setHdType(std::string hdType);
+
+		PlayerBuilder& setBaseStats(AttributeSet baseStats);
+
+		PlayerBuilder& setBackgroundStats(AttributeSet backgroundStats);
+
+		PlayerBuilder& setProficiencyStats(AttributeSet proficiencyStats);
+
+
+	private:
+		int level = 1;
+		int hp = 0;
+		int ac = 0;
+		int speed = 0;
+
+		int gold = 0;
+		int	electrum = 0;
+		int	silver = 0;
+		int	copper = 0;
+
+		StatModifier race;
+		StatModifier dndClass;
+		StatModifier dndSubClass;
+
+		std::string name;
+		std::string hdType;
+		std::string background;
+
+		AttributeSet baseStats;
+		AttributeSet backgroundStats;
+		AttributeSet proficiencyStats;
+	};
+}
