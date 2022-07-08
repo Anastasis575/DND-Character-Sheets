@@ -1,4 +1,5 @@
 namespace DND {
+
 	/**
 	 * @brief The currency types used in the DND economy.
 	 * @author Dimitris Tsirmpas
@@ -9,4 +10,5 @@ namespace DND {
 		SILVER,
 		COPPER
 	};
+
 }
