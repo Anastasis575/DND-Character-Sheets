@@ -7,11 +7,11 @@ namespace DND {
 	*/
 	class XMLPlayerDao : IPlayerDao {
 	public:
-		virtual PlayerData createPlayer(std::string name) override;
+		virtual Character createPlayer(std::string name) override;
 
-		virtual PlayerData getPlayer(std::string name) override;
+		virtual Character getPlayer(std::string name) override;
 
-		virtual void updatePlayer(PlayerData data) override;
+		virtual void updatePlayer(Character data) override;
 
 		virtual void deletePlayer(std::string name) override;
 	};

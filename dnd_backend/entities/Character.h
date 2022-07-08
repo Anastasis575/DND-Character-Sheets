@@ -8,6 +8,8 @@
 #include <string>
 #include <list>
 #include <unordered_map>
+#include <limits>
+#include <stdexcept>
 
 namespace DND {
 
@@ -74,12 +76,32 @@ namespace DND {
 		*/
 		void addSpell(Spell spell);
 
+		/**
+		 * @brief Sets the hp to the specified amount.
+		 * @param amt the amount
+		 * @throws std::invalid_argument if amt is out of bounds
+		*/
 		void setHP(int amt);
 
+		/**
+		 * @brief Sets the speed to the specified amount.
+		 * @param amt the amount
+		 * @throws std::invalid_argument if the new speed is out of bounds
+		*/
 		void setSpeed(int speed);
 
+		/**
+		 * @brief Sets the Armor Class to the specified amount.
+		 * @param amt the amount
+		 * @throws std::invalid_argument if the new ac is out of bounds
+		*/
 		void setAC(int ac);
 
+		/**
+		 * @brief Sets the level to the specified amount.
+		 * @param amt the amount
+		 * @throws std::invalid_argument if the new level is out of bounds
+		*/
 		void setLevel(int level);
 
 
@@ -94,6 +116,16 @@ namespace DND {
 			const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats);
 
 		friend class CharacterBuilder; //realistically there is no reason for another builder to exist
+
+		static const int MIN_LEVEL = 1;
+		static const int MAX_LEVEL = 20;
+		static const int MIN_HP = 0;
+		static const int MAX_HP = std::numeric_limits<int>::max();
+		static const int MIN_AC = -5;
+		static const int MAX_AC = 32;
+		static const int MIN_SPEED = 1;
+		static const int MAX_SPEED = std::numeric_limits<int>::max();
+
 
 		int level = 1;
 		int hp = 0;

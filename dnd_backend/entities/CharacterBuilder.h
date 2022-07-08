@@ -10,8 +10,16 @@ namespace DND {
 	class CharacterBuilder {
 
 	public:
+		/**
+		 * @brief Begin construction of a @ref{Character} 
+		 * @param name the character's name
+		*/
 		CharacterBuilder(std::string name);
 
+		/**
+		 * @brief Finish construction of a character and return an entity describing him.
+		 * @return the constructed character
+		*/
 		Character build() const;
 
 		CharacterBuilder& setLevel(int level);
@@ -51,7 +59,7 @@ namespace DND {
 		int ac = 0;
 		int speed = 0;
 
-		int gold = 0;
+		int gold = 0; // refactor later?
 		int	electrum = 0;
 		int	silver = 0;
 		int	copper = 0;

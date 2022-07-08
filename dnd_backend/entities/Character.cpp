@@ -71,14 +71,23 @@ std::string Character::getBackground() const {
 
 
 void Character::setSpeed(int speed) {
+	if (this->speed < MIN_SPEED || this->speed > MAX_SPEED)
+		throw std::invalid_argument(outOfBoundsErrorMessage("Speed", MIN_SPEED, MAX_SPEED));
+
 	this->speed = speed;
 }
 
 void Character::setAC(int ac) {
+	if (this->ac < MIN_AC || this->ac > MAX_AC)
+		throw std::invalid_argument(outOfBoundsErrorMessage("Armor Class", MIN_AC, MAX_AC));
+
 	this->ac = ac;
 }
 
 void Character::setLevel(int level) {
+	if (this->level < MIN_LEVEL || this->level > MAX_LEVEL)
+		throw std::invalid_argument(outOfBoundsErrorMessage("Level", MIN_LEVEL, MAX_LEVEL));
+
 	this->level = level;
 }
 
@@ -95,5 +104,12 @@ void Character::addSpell(Spell spell) {
 }
 
 void Character::setHP(int amt) {
-	hp += amt;
+	if (this->hp < MIN_HP || this->hp > MAX_HP)
+		throw std::invalid_argument(outOfBoundsErrorMessage("HP", MIN_HP, MAX_HP));
+
+	hp = amt;
+}
+
+std::string outOfBoundsErrorMessage(std::string field, int min, int max) {
+	return field + " can only be between " + std::to_string(min) + " and " + std::to_string(max);
 }

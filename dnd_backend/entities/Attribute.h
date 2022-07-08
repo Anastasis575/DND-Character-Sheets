@@ -6,6 +6,17 @@ namespace DND {
 		const int ATTRIBUTES_LENGTH = 6;
 	}
 	
+	/**
+	 * @brief The minimum accepted value for any Attribute.
+	 * @see Attribute
+	*/
+	const int MIN_ATTRIBUTE_VALUE = 0;
+
+	/**
+	 * @brief The maximum accepted value for any Attribute.
+	 * @see Attribute
+	*/
+	const int MAX_ATTRIBUTE_VALUE = 20;
 
 	/**
 	 * @brief An enum describing the basic stats of a character.

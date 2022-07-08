@@ -25,6 +25,7 @@ namespace DND {
 		 * @param inteligenceValue the value of the Intelligence stat
 		 * @param wisdomValue the value of the Wisdom stat
 		 * @param charismaValue the value of the Charisma stat
+		 * @throws std::invalid_argument if any of the attributes go out of bounds
 		*/
 		AttributeSet(int strengthValue, int dexterityValue,
 			int constitutionValue, int inteligenceValue, int wisdomValue, int charismaValue); //high coupling?
@@ -32,15 +33,23 @@ namespace DND {
 		/**
 		 * @brief Creates an AttributeSet inititalizing all the attributes with the specified amount
 		 * @param amt the value of all stats
+		 * @throws std::invalid_argument if any of the attributes go out of bounds
 		*/
 		AttributeSet(int amt);
 
+		/**
+		 * @brief Adds the scores for each attribute with that of another AttributeSet.
+		 * @param The set whose attribute scores will be added.
+		 * @return the modified AttributeSet for chaining
+		 * @warning resulting AttributeSets MAY be out of bounds
+		*/
 		AttributeSet& operator+=(AttributeSet const&);
 		
 		/**
 		 * @brief Adds the scores for each attribute with that of another AttributeSet.
 		 * @param The set whose attribute scores will be added.
 		 * @return the modified AttributeSet for chaining
+		 * @warning resulting AttributeSets MAY be out of bounds
 		*/
 		AttributeSet operator+(AttributeSet const&);
 
@@ -48,6 +57,7 @@ namespace DND {
 		 * @brief Adds the scores for each attribute with a constant number each.
 		 * @param The amount that will be added to each attribute's score.
 		 * @return the modified AttributeSet for chaining
+		 * @warning resulting AttributeSets MAY be out of bounds
 		*/
 		AttributeSet operator+(int);
 
@@ -62,10 +72,17 @@ namespace DND {
 		 * @brief Increase the score of the specified attribute by a constant amount.
 		 * @param attr The attribute whose score will be increased.
 		 * @param amt The amount that will be added to the attribute's score
+		 * @throws std::invalid_argument if any of the attributes go out of bounds
 		*/
 		void increaseAttribute(Attribute attr, int amt);
 
 	private:
 		std::array<int, entity_details::ATTRIBUTES_LENGTH> attributes;
+
+		/**
+		 * @brief Throw an exception if any element in the set is out of bounds.
+		 * @throws std::invalid_argument
+		*/
+		void throwIfOutOfBounds();
 	};
 }
