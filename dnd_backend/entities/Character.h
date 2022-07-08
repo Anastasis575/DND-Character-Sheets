@@ -10,7 +10,6 @@
 #include <unordered_map>
 
 namespace DND {
-	class PlayerBuilder;
 
 	/**
 	 * @brief An entity class managing all the information about a character's static information. It doesn't necessarily 
@@ -18,7 +17,7 @@ namespace DND {
 	 * 
 	 * @author Dimitris Tsirmpas
 	*/
-	class PlayerData {
+	class Character {
 
 	public:
 
@@ -85,20 +84,16 @@ namespace DND {
 
 
 	private:
-		/// <summary>
-		/// Creates a PlayerData instance by reading the character's name.
-		/// </summary>
-		/// <param name="charName">The name of the character.</param>
-		
+	
 		/**
 		 * @brief Creates a PlayerData instance by reading the character's name. To be used by a builder object.
 		 * @see CharacterBuilder
 		*/
-		PlayerData(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
+		Character(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
 			const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, const AttributeSet& baseStats,
 			const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats);
 
-		friend class PlayerBuilder;
+		friend class CharacterBuilder; //realistically there is no reason for another builder to exist
 
 		int level = 1;
 		int hp = 0;
@@ -122,69 +117,4 @@ namespace DND {
 		std::list<Spell> spellList;
 	};
 
-	/**
-	 * @brief A builder that constructs PlayerData objects.
-	 * @author Dimitris Tsirmpas
-	*/
-	class PlayerBuilder {
-
-	public:
-		PlayerBuilder(std::string name);
-
-		PlayerData build() const;
-
-		PlayerBuilder& setLevel(int level);
-
-		PlayerBuilder& setHp(int hp);
-
-		PlayerBuilder& setAc(int ac);
-
-		PlayerBuilder& setSpeed(int speed);
-
-		PlayerBuilder& setGold(int gold);
-
-		PlayerBuilder& setElectrum(int electrum);
-
-		PlayerBuilder& setSilver(int silver);
-
-		PlayerBuilder& setCopper(int copper);
-
-		PlayerBuilder& setRace(StatModifier race);
-
-		PlayerBuilder& setClass(StatModifier _class);
-
-		PlayerBuilder& setSubClass(StatModifier subClass);
-
-		PlayerBuilder& setHdType(std::string hdType);
-
-		PlayerBuilder& setBaseStats(AttributeSet baseStats);
-
-		PlayerBuilder& setBackgroundStats(AttributeSet backgroundStats);
-
-		PlayerBuilder& setProficiencyStats(AttributeSet proficiencyStats);
-
-
-	private:
-		int level = 1;
-		int hp = 0;
-		int ac = 0;
-		int speed = 0;
-
-		int gold = 0;
-		int	electrum = 0;
-		int	silver = 0;
-		int	copper = 0;
-
-		StatModifier race;
-		StatModifier dndClass;
-		StatModifier dndSubClass;
-
-		std::string name;
-		std::string hdType;
-		std::string background;
-
-		AttributeSet baseStats;
-		AttributeSet backgroundStats;
-		AttributeSet proficiencyStats;
-	};
 }

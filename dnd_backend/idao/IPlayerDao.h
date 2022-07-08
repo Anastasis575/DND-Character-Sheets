@@ -1,4 +1,4 @@
-#include "..\entities\PlayerData.h"
+#include "..\entities\Character.h"
 
 namespace DND {
 	
@@ -14,20 +14,20 @@ namespace DND {
 		 * @param name The character's name
 		 * @return the character's data
 		*/
-		virtual PlayerData createPlayer(std::string name) = 0;
+		virtual Character createPlayer(std::string name) = 0;
 
 		/**
 		 * @brief Retrieve the data of the character with the specified name from persistent storage.
 		 * @param name The character's name
 		 * @return The data of the character
 		*/
-		virtual PlayerData getPlayer(std::string name) = 0;
+		virtual Character getPlayer(std::string name) = 0;
 		
 		/**
 		 * @brief Write the contents of the characters with an XML file with the character's name as filename.
 		 * @param data the character's data
 		*/
-		virtual void updatePlayer(PlayerData data) = 0;
+		virtual void updatePlayer(Character data) = 0;
 		
 		/**
 		 * @brief Delete a character from persistent storage.
