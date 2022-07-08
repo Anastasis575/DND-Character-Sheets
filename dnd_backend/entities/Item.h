@@ -1,5 +1,6 @@
 #include <string>
 
+
 namespace DND {
 	/**
 	 * @brief A class representing a DND item.
@@ -15,5 +16,16 @@ namespace DND {
 	private:
 		const std::string name;
 		const std::string description;
+	};
+
+	inline bool operator == (Item const& lhs, Item const& rhs) {
+		return (lhs.getName() == rhs.getName());
+	}
+
+	struct ItemHasher {
+		size_t operator()(const Item& item) const {
+			std::hash<std::string> hasher;
+			return hasher(item.getName());
+		}
 	};
 }

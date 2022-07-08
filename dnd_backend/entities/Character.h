@@ -8,10 +8,13 @@
 #include <string>
 #include <list>
 #include <unordered_map>
+#include <unordered_set>
 #include <limits>
 #include <stdexcept>
 
 namespace DND {
+	typedef std::unordered_set<Item, ItemHasher>::const_iterator ItemIterator;
+	typedef std::unordered_set<Spell, SpellHasher>::const_iterator SpellIterator;
 
 	/**
 	 * @brief An entity class managing all the information about a character's static information. It doesn't necessarily 
@@ -43,8 +46,6 @@ namespace DND {
 
 		int getAC() const;
 
-		std::list<Spell> getSpells() const;
-
 		std::string getRace() const;
 
 		std::string getName() const;
@@ -64,6 +65,18 @@ namespace DND {
 		void addToInventory(Item& item);
 
 		/**
+		 * @brief Remove an item from the character's inventory.
+		 * @param item the item to be removed
+		*/
+		void removeFromInventory(Item& item);
+
+		/**
+		 * @brief Get all the items this character posseses.
+		 * @return a list of all the items
+		*/
+		ItemIterator getItems() const;
+
+		/**
 		 * @brief Set the amount of currency this character posseses.
 		 * @param type the type of the currency
 		 * @param amt the new amount of the currency in the character's possesion
@@ -74,7 +87,19 @@ namespace DND {
 		 * @brief Add a new spell to the character's inventory.
 		 * @param spell the new spell
 		*/
-		void addSpell(Spell spell);
+		void addSpell(Spell& spell);
+
+		/**
+		 * @brief Remove a spell from the character's inventory.
+		 * @param spell the spell to be removed
+		*/
+		void removeSpell(Spell& spell);
+
+		/**
+		 * @brief Get all the spells in the character's inventory.
+		 * @return the spells
+		*/
+		SpellIterator getSpells() const;
 
 		/**
 		 * @brief Sets the hp to the specified amount.
@@ -117,6 +142,8 @@ namespace DND {
 
 		friend class CharacterBuilder; //realistically there is no reason for another builder to exist
 
+
+		//limits
 		static const int MIN_LEVEL = 1;
 		static const int MAX_LEVEL = 20;
 		static const int MIN_HP = 0;
@@ -145,8 +172,8 @@ namespace DND {
 		const AttributeSet proficiencyStats;
 
 		std::unordered_map<Currency, int> currencyMap;
-		std::list<Item> itemList;
-		std::list<Spell> spellList;
+		std::unordered_set<Item, ItemHasher> items;
+		std::unordered_set<Spell, SpellHasher> spells;
 	};
 
 }

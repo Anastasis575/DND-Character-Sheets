@@ -3,7 +3,8 @@
 #include <algorithm> 
 
 using namespace DND;
-//TODO: add parameter value checking
+
+std::string outOfBoundsErrorMessage(std::string field, int min, int max);
 
 Character::Character(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
 	const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, const AttributeSet& baseStats,
@@ -41,8 +42,8 @@ int Character::getAC() const {
 	return ac;
 }
 
-std::list<Spell> Character::getSpells() const {
-	return spellList;
+SpellIterator Character::getSpells() const {
+	return spells.begin();
 }
 
 std::string Character::getRace() const {
@@ -92,15 +93,27 @@ void Character::setLevel(int level) {
 }
 
 void Character::addToInventory(Item& item) {
-	itemList.push_back(item);
+	items.insert(item);
+}
+
+void Character::removeFromInventory(Item& item) {
+	items.erase(item);
+}
+
+ItemIterator Character::getItems() const {
+	return items.begin();
 }
 
 void Character::setCurrencyAmount(Currency type, int amt) {
 	currencyMap.find(type)->second += amt;
 }
 
-void Character::addSpell(Spell spell) {
-	spellList.push_back(spell);
+void Character::addSpell(Spell& spell) {
+	spells.insert(spell);
+}
+
+void Character::removeSpell(Spell& spell) {
+	spells.erase(spell);
 }
 
 void Character::setHP(int amt) {

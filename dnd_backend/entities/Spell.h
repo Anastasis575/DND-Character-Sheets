@@ -20,4 +20,15 @@ namespace DND {
 		std::string description;
 		const int level;
 	};
+
+	inline bool operator == (Spell const& lhs, Spell const& rhs) {
+		return (lhs.getName() == rhs.getName());
+	}
+
+	struct SpellHasher {
+		size_t operator()(const Spell& spell) const {
+			std::hash<std::string> hasher;
+			return hasher(spell.getName());
+		}
+	};
 }
