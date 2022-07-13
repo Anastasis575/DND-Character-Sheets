@@ -3,6 +3,7 @@
 #include <array>
 
 namespace DND {
+
 	/**
 	 * @brief A class representing the basic attributes of each character such as Strength, Charisma, Dexterity etc.
 	 * @see Attribute
@@ -74,7 +75,7 @@ namespace DND {
 		 * @param amt The amount that will be added to the attribute's score
 		 * @throws std::invalid_argument if any of the attributes go out of bounds
 		*/
-		void increaseAttribute(Attribute attr, int amt);
+		void setAttribute(Attribute attr, int amt);
 
 	private:
 		std::array<int, entity_details::ATTRIBUTES_LENGTH> attributes;

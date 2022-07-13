@@ -26,7 +26,7 @@ namespace DND {
 		Strength,
 		Dexterity,
 		Constitution,
-		Inteligence,
+		Intelligence,
 		Wisdom,
 		Charisma
 	};
