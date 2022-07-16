@@ -29,22 +29,29 @@ DND::AttributeSet::AttributeSet(int amt) {
 }
 
 DND::AttributeSet& DND::AttributeSet::operator+=(DND::AttributeSet const& other) {
-	*this + other;
+	*this = *this + other;
 	return *this;
 }
 
-DND::AttributeSet DND::AttributeSet::operator+(DND::AttributeSet const & other) {
-	for (int i = 0; i < DND::entity_details::ATTRIBUTES_LENGTH; i++)
-		attributes[i] += other.attributes[i];
+DND::AttributeSet DND::AttributeSet::operator+(DND::AttributeSet const & other) const {
+	AttributeSet newSet(*this);
 
-	return *this;
+	for (int i = 0; i < DND::entity_details::ATTRIBUTES_LENGTH; i++)
+		newSet.attributes[i] += other.attributes[i];
+
+	return newSet;
 }
 
-DND::AttributeSet DND::AttributeSet::operator+(int amt) {
-	for (int i = 0; i < DND::entity_details::ATTRIBUTES_LENGTH; i++)
-		attributes[i] += amt;
+DND::AttributeSet DND::AttributeSet::operator+(int amt) const {
+	return *this + AttributeSet(amt);
+}
 
-	return *this;
+bool DND::AttributeSet::operator==(DND::AttributeSet const& other) const {
+	return other.attributes == this->attributes;
+}
+
+bool DND::AttributeSet::operator!=(DND::AttributeSet const& other) const {
+	return !( *(this) == other );
 }
 
 int DND::AttributeSet::getAttributeScore(DND::Attribute attr) const {
