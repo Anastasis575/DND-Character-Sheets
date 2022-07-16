@@ -52,7 +52,7 @@ namespace DND {
 		 * @return the modified AttributeSet for chaining
 		 * @warning resulting AttributeSets MAY be out of bounds
 		*/
-		AttributeSet operator+(AttributeSet const&);
+		AttributeSet operator+(AttributeSet const&) const;
 
 		/**
 		 * @brief Adds the scores for each attribute with a constant number each.
@@ -60,7 +60,11 @@ namespace DND {
 		 * @return the modified AttributeSet for chaining
 		 * @warning resulting AttributeSets MAY be out of bounds
 		*/
-		AttributeSet operator+(int);
+		AttributeSet operator+(int) const;
+
+		bool operator==(AttributeSet const &) const;
+
+		bool operator!=(AttributeSet const&) const;
 
 		/**
 		 * @brief Return the score for the specified attribute.
