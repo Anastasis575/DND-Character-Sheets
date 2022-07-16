@@ -2,6 +2,8 @@
 #include "AttributeSet.h"
 #include "AttributeSet.cpp"
 
+#include <iostream>
+
 using namespace DND;
 
 class AttributeSetTest : public ::testing::Test {
@@ -17,43 +19,46 @@ protected:
 	}
 };
 
-bool allEqualTo(const AttributeSet set, int strengthValue, int dexterityValue,
+void expectAllEqualTo(const AttributeSet& set, int strengthValue, int dexterityValue,
 	int constitutionValue, int intelligenceValue, int wisdomValue, int charismaValue);
 
-bool allEqualTo(const AttributeSet set, int amt);
+void expectAllEqualTo(const AttributeSet& set, int amt);
 
 TEST_F(AttributeSetTest, TestConstructor) {
 	AttributeSet set = AttributeSet();
 
-	EXPECT_TRUE(allEqualTo(set, 0));
+	expectAllEqualTo(set,0);
 }
 
 TEST_F(AttributeSetTest, TestCustomConstructor) {
 	AttributeSet set = AttributeSet(1, 2, 3, 4, 5, 6);
 
-	EXPECT_TRUE(allEqualTo(set, 1, 2, 3, 4, 5, 6));
+	expectAllEqualTo(set, 1, 2, 3, 4, 5, 6);
 }
 
 TEST_F(AttributeSetTest, TestConstantConstructor) {
-	EXPECT_TRUE(allEqualTo(original, 2));
+	expectAllEqualTo(original, 2);
 }
 
 TEST_F(AttributeSetTest, TestOperatorAssign) {
 	original += 2;
-	EXPECT_TRUE(allEqualTo(original, 4));
+	expectAllEqualTo(original, 4);
 }
 
 TEST_F(AttributeSetTest, TestOperatorAdditionAttributeSet) {
 	AttributeSet set2 = AttributeSet(6);
+	AttributeSet set3 = original + set2;
 
-	AttributeSet set3 = original +set2;
-	EXPECT_TRUE(allEqualTo(set3, 8));
+	expectAllEqualTo(set2, 6);
+	expectAllEqualTo(original, 2);
+	expectAllEqualTo(set3, 8);
 }
 
 TEST_F(AttributeSetTest, TestOperatorAdditionInteger) {
-	AttributeSet set = original +2;
+	AttributeSet set = original + 2;
 
-	EXPECT_TRUE(allEqualTo(set, 4));
+	expectAllEqualTo(original, 2);
+	expectAllEqualTo(set, 4);
 }
 
 TEST_F(AttributeSetTest, TestConstructorOverflow) {
@@ -71,20 +76,25 @@ TEST_F(AttributeSetTest, TestSetAttribute) {
 	EXPECT_FALSE(original.getAttributeScore(Attribute::Charisma) == -1);
 }
 
-bool allEqualTo(const AttributeSet set, int amt) {
-	bool success = true;
+TEST_F(AttributeSetTest, TestEqualsOperator) {
+	AttributeSet same = AttributeSet(original);
+	AttributeSet other = (original + 2);
 
-	success &= set.getAttributeScore(Attribute::Charisma) == amt;
-	success &= set.getAttributeScore(Attribute::Dexterity) == amt;
-	success &= set.getAttributeScore(Attribute::Constitution) == amt;
-	success &= set.getAttributeScore(Attribute::Intelligence) == amt;
-	success &= set.getAttributeScore(Attribute::Strength) == amt;
-	success &= set.getAttributeScore(Attribute::Wisdom) == amt;
-
-	return success;
+	EXPECT_TRUE(original == same);
+	expectAllEqualTo(original, 2);
+	EXPECT_FALSE(original == other);
 }
 
-bool allEqualTo(const AttributeSet set, int strengthValue, int dexterityValue,
+TEST_F(AttributeSetTest, TestNotEqualsOperator) {
+	EXPECT_FALSE(original != AttributeSet(original));
+	EXPECT_TRUE(original != (original + 2));
+}
+
+void expectAllEqualTo(const AttributeSet& set, int amt) {
+	return expectAllEqualTo(set, amt, amt, amt, amt, amt, amt);
+}
+
+void expectAllEqualTo(const AttributeSet& set, int strengthValue, int dexterityValue,
 	int constitutionValue, int intelligenceValue, int wisdomValue, int charismaValue) {
 
 	bool success = true;
@@ -96,5 +106,6 @@ bool allEqualTo(const AttributeSet set, int strengthValue, int dexterityValue,
 	success &= set.getAttributeScore(Attribute::Strength) == strengthValue;
 	success &= set.getAttributeScore(Attribute::Wisdom) == wisdomValue;
 
-	return success;
+	std::cout << success << std::endl;
+	EXPECT_TRUE(success);
 }
