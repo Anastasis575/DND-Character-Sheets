@@ -13,14 +13,14 @@ namespace DND {
 	public:
 		StatModifier();
 
-		StatModifier(std::string& name, AttributeSet& stats);
+		StatModifier(const std::string& name, const AttributeSet& stats);
 
 		std::string getName() const;
 
 		AttributeSet getStats() const;
 
 	private:
-		std::string name;
+		std::string name; // non-const to allow copy constructor to exist
 		AttributeSet stats;
 	};
 }

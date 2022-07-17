@@ -1,6 +1,6 @@
 #include "StatModifier.h"
 
-DND::StatModifier::StatModifier(std::string& name, DND::AttributeSet& stats): name(name), stats(stats){}
+DND::StatModifier::StatModifier(const std::string& name, const DND::AttributeSet& stats): name(name), stats(stats){}
 
 DND::StatModifier::StatModifier():name(""), stats(AttributeSet()){}
 
