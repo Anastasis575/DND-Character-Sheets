@@ -1,5 +1,5 @@
 #include <string>
-
+#include <iostream>
 
 namespace DND {
 	/**
@@ -8,7 +8,7 @@ namespace DND {
 	*/
 	class Item {
 	public:
-		Item(std::string itemName, std::string description) : name(itemName), description(description) {}
+		Item(const std::string& itemName, const std::string& description) : name(itemName), description(description) {}
 
 		std::string getName() const { return name; }
 		std::string getDescription() const { return description; }
