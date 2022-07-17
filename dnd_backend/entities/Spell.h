@@ -9,11 +9,12 @@ namespace DND {
 	*/
 	class Spell {
 	public:
-		Spell(const std::string& name, const std::string& description, int level);
+		Spell(const std::string& name, const std::string& description, int level) 
+			: name(name), description(description), level(level) {}
 
-		std::string getName() const;
-		std::string getDescription() const;
-		int getLevel() const;
+		std::string getName() const { return name; }
+		std::string getDescription() const { return description; }
+		int getLevel() const { return level; }
 
 	private:
 		std::string name;
