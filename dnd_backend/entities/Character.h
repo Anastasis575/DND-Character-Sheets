@@ -3,7 +3,8 @@
 #include "Spell.h"
 #include "StatModifier.h"
 #include "Item.h"
-#include "Wallet.h"
+#include "Currency.h"
+#include "EnumMap.h"
 
 #include <string>
 #include <unordered_map>
@@ -37,7 +38,7 @@ namespace DND {
 		 * @param type the currency's type (e.g gold)
 		 * @return the amount of this currency in the character's possesion
 		*/
-		int getCurrencyAmount(Currency type) const;
+		int getAmount(Currency type) const;
 
 		int getSpeed() const;
 
@@ -80,7 +81,7 @@ namespace DND {
 		 * @param type the type of the currency
 		 * @param amt the new amount of the currency in the character's possesion
 		*/
-		void setCurrencyAmount(Currency type, int amt);
+		void setAmount(Currency type, int amt);
 
 		/**
 		 * @brief Add a new spell to the character's inventory.
@@ -137,7 +138,7 @@ namespace DND {
 		*/
 		Character(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
 			const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, const AttributeSet& baseStats,
-			const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats, entity_details::Wallet wallet);
+			const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats, entity_details::EnumMap<Currency> wallet);
 
 		friend class CharacterBuilder; //realistically there is no reason for another builder to exist
 
@@ -170,7 +171,7 @@ namespace DND {
 		AttributeSet backgroundStats;
 		AttributeSet proficiencyStats;
 
-		entity_details::Wallet wallet;
+		entity_details::EnumMap<Currency> wallet;
 		std::unordered_set<Item, ItemHasher> items;
 		std::unordered_set<Spell, SpellHasher> spells;
 	};

@@ -1,6 +1,6 @@
 #pragma once
 #include "Attribute.h"
-#include <array>
+#include "EnumMap.h"
 
 namespace DND {
 
@@ -17,19 +17,6 @@ namespace DND {
 		 * @brief Create an AttributeSet with all-0 stats.
 		*/
 		AttributeSet();
-
-		/**
-		 * @brief Creates an AttributeSet inititalizing all the attributes with a default score of 0.
-		 * @param strengthValue the value of the Strength stat
-		 * @param dexterityValue the value of the Dexterity stat
-		 * @param constitutionValue the value of the Constitution stat
-		 * @param inteligenceValue the value of the Intelligence stat
-		 * @param wisdomValue the value of the Wisdom stat
-		 * @param charismaValue the value of the Charisma stat
-		 * @throws std::invalid_argument if any of the attributes go out of bounds
-		*/
-		AttributeSet(int strengthValue, int dexterityValue,
-			int constitutionValue, int inteligenceValue, int wisdomValue, int charismaValue); //high coupling?
 
 		/**
 		 * @brief Creates an AttributeSet inititalizing all the attributes with the specified amount
@@ -82,12 +69,6 @@ namespace DND {
 		void setAttribute(Attribute attr, int amt);
 
 	private:
-		std::array<int, entity_details::ATTRIBUTES_LENGTH> attributes;
-
-		/**
-		 * @brief Throw an exception if any element in the set is out of bounds.
-		 * @throws std::invalid_argument
-		*/
-		void throwIfOutOfBounds();
+		entity_details::EnumMap<Attribute> map;
 	};
 }

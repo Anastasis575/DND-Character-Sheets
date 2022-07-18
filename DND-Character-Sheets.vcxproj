@@ -120,6 +120,9 @@
     <ClCompile Include="dnd_backend\xmldao\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dnd_backend\entities\Attribute.hpp" />
+    <ClInclude Include="dnd_backend\entities\EnumMap.h" />
+    <ClInclude Include="dnd_backend\entities\EnumMap.hpp" />
     <ClInclude Include="dnd_backend\entities\Wallet.h" />
     <ClInclude Include="dnd_backend\entities\CharacterBuilder.h" />
     <ClInclude Include="dnd_backend\entities\Attribute.h" />

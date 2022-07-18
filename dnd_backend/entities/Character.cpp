@@ -25,9 +25,9 @@ int Character::getAttributeScore(Attribute attr) const {
 	return finalAttributes.getAttributeScore(attr);
 }
 
-int Character::getCurrencyAmount(Currency type) const {
+int Character::getAmount(Currency type) const {
 	// should never throw
-	return wallet.getCurrencyAmount(type);
+	return wallet.getAmount(type);
 }
 
 int Character::getSpeed() const {
@@ -104,8 +104,8 @@ ItemIterator Character::getItems() const {
 	return items.begin();
 }
 
-void Character::setCurrencyAmount(Currency type, int amt) {
-	wallet.setCurrencyAmount(type, amt);
+void Character::setAmount(Currency type, int amt) {
+	wallet.setAmount(type, amt);
 }
 
 void Character::addSpell(Spell& original) {

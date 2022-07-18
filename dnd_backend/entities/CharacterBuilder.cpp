@@ -25,7 +25,7 @@ CharacterBuilder& CharacterBuilder::setSpeed(int speed) {
 }
 
 CharacterBuilder& CharacterBuilder::setCurrency(Currency currency, int amount) {
-	wallet.setCurrencyAmount(currency, amount);
+	wallet.setAmount(currency, amount);
 	return *this;
 }
 

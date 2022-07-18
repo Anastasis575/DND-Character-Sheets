@@ -1,10 +1,7 @@
 #pragma once
+#include <vector>
 
 namespace DND {
-
-	namespace entity_details {
-		const int ATTRIBUTES_LENGTH = 6;
-	}
 	
 	/**
 	 * @brief The minimum accepted value for any Attribute.
@@ -22,12 +19,17 @@ namespace DND {
 	 * @brief An enum describing the basic stats of a character.
 	 * @author Dimitris Tsirmpas
 	*/
-	enum Attribute { // weakly typed enum because we need implicit int conversion for array indexes
+	enum class Attribute {
 		Strength,
 		Dexterity,
 		Constitution,
 		Intelligence,
 		Wisdom,
 		Charisma
+		// if you modify this enum remember to change the vector in the .hpp file
 	};
+
+	namespace entity_details {
+		extern const std::vector<Attribute> attributeTypes;
+	}
 }
