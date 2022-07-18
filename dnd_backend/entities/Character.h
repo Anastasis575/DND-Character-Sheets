@@ -3,10 +3,9 @@
 #include "Spell.h"
 #include "StatModifier.h"
 #include "Item.h"
-#include "Currency.h"
+#include "Wallet.h"
 
 #include <string>
-#include <list>
 #include <unordered_map>
 #include <unordered_set>
 #include <limits>
@@ -87,13 +86,13 @@ namespace DND {
 		 * @brief Add a new spell to the character's inventory.
 		 * @param spell the new spell
 		*/
-		void addSpell(Spell& spell);
+		void addSpell(Spell& original);
 
 		/**
 		 * @brief Remove a spell from the character's inventory.
 		 * @param spell the spell to be removed
 		*/
-		void removeSpell(Spell& spell);
+		void removeSpell(Spell& original);
 
 		/**
 		 * @brief Get all the spells in the character's inventory.
@@ -138,7 +137,7 @@ namespace DND {
 		*/
 		Character(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
 			const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, const AttributeSet& baseStats,
-			const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats);
+			const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats, entity_details::Wallet wallet);
 
 		friend class CharacterBuilder; //realistically there is no reason for another builder to exist
 
@@ -171,7 +170,7 @@ namespace DND {
 		const AttributeSet backgroundStats;
 		const AttributeSet proficiencyStats;
 
-		std::unordered_map<Currency, int> currencyMap;
+		entity_details::Wallet wallet;
 		std::unordered_set<Item, ItemHasher> items;
 		std::unordered_set<Spell, SpellHasher> spells;
 	};

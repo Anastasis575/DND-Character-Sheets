@@ -8,9 +8,9 @@ std::string outOfBoundsErrorMessage(std::string field, int min, int max);
 
 Character::Character(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
 	const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, const AttributeSet& baseStats,
-	const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats):
+	const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats, entity_details::Wallet wallet):
 	name(charName), race(race), dndClass(dndClass), dndSubClass(dndSubClass), hdType(hdType), background(background), baseStats(baseStats),
-	backgroundStats(backgroundStats), proficiencyStats(proficiencyStats){}
+	backgroundStats(backgroundStats), proficiencyStats(proficiencyStats), wallet(wallet){}
 
 
 int Character::getAttributeScore(Attribute attr) const {
@@ -27,7 +27,7 @@ int Character::getAttributeScore(Attribute attr) const {
 
 int Character::getCurrencyAmount(Currency type) const {
 	// should never throw
-	return currencyMap.find(type)->second;
+	return wallet.getCurrencyAmount(type);
 }
 
 int Character::getSpeed() const {
@@ -105,15 +105,15 @@ ItemIterator Character::getItems() const {
 }
 
 void Character::setCurrencyAmount(Currency type, int amt) {
-	currencyMap.find(type)->second += amt;
+	wallet.setCurrencyAmount(type, amt);
 }
 
-void Character::addSpell(Spell& spell) {
-	spells.insert(spell);
+void Character::addSpell(Spell& original) {
+	spells.insert(original);
 }
 
-void Character::removeSpell(Spell& spell) {
-	spells.erase(spell);
+void Character::removeSpell(Spell& original) {
+	spells.erase(original);
 }
 
 void Character::setHP(int amt) {

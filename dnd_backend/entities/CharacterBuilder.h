@@ -30,13 +30,7 @@ namespace DND {
 
 		CharacterBuilder& setSpeed(int speed);
 
-		CharacterBuilder& setGold(int gold);
-
-		CharacterBuilder& setElectrum(int electrum);
-
-		CharacterBuilder& setSilver(int silver);
-
-		CharacterBuilder& setCopper(int copper);
+		CharacterBuilder& setCurrency(Currency currency, int amount);
 
 		CharacterBuilder& setRace(StatModifier race);
 
@@ -59,10 +53,7 @@ namespace DND {
 		int ac = 0;
 		int speed = 0;
 
-		int gold = 0; // refactor later?
-		int	electrum = 0;
-		int	silver = 0;
-		int	copper = 0;
+		entity_details::Wallet wallet;
 
 		StatModifier race;
 		StatModifier dndClass;
