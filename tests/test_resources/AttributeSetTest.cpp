@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "AttributeSet.h"
-#include "AttributeSet.cpp"
 
 #include <iostream>
 
