@@ -46,20 +46,20 @@ SpellIterator Character::getSpells() const {
 	return spells.begin();
 }
 
-std::string Character::getRace() const {
-	return race.getName();
-}
-
 std::string Character::getName() const {
 	return name;
 }
 
-std::string Character::getClass() const {
-	return dndClass.getName();
+StatModifier Character::getRace() const {
+	return race;
 }
 
-std::string Character::getSubclass() const {
-	return dndSubClass.getName();
+StatModifier Character::getClass() const {
+	return dndClass;
+}
+
+StatModifier Character::getSubclass() const {
+	return dndSubClass;
 }
 
 std::string Character::getHdType() const {

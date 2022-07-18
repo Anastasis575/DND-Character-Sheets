@@ -45,13 +45,13 @@ namespace DND {
 
 		int getAC() const;
 
-		std::string getRace() const;
-
 		std::string getName() const;
 
-		std::string getClass() const;
+		StatModifier getRace() const;
 
-		std::string getSubclass() const;
+		StatModifier getClass() const;
+
+		StatModifier getSubclass() const;
 
 		std::string getHdType() const;
 
@@ -158,17 +158,17 @@ namespace DND {
 		int ac = 0;
 		int speed = 0;
 
-		const StatModifier race;
-		const StatModifier dndClass;
-		const StatModifier dndSubClass;
+		StatModifier race;
+		StatModifier dndClass;
+		StatModifier dndSubClass;
 
-		const std::string name;
-		const std::string hdType;
-		const std::string background;
+		std::string name;
+		std::string hdType;
+		std::string background;
 
-		const AttributeSet baseStats;
-		const AttributeSet backgroundStats;
-		const AttributeSet proficiencyStats;
+		AttributeSet baseStats;
+		AttributeSet backgroundStats;
+		AttributeSet proficiencyStats;
 
 		entity_details::Wallet wallet;
 		std::unordered_set<Item, ItemHasher> items;
