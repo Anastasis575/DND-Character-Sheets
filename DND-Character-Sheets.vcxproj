@@ -22,6 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{CD084D5B-407E-4905-8AA9-37BB38832237}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -35,7 +36,7 @@
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
@@ -102,27 +103,41 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\user\source\repos\DND-Character-Sheets\dnd_backend;C:\Users\user\source\repos\DND-Character-Sheets\dnd_backend\xmldao;C:\Users\user\source\repos\DND-Character-Sheets\dnd_backend\idao;C:\Users\user\source\repos\DND-Character-Sheets\dnd_backend\entities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)xmldao;$(ProjectDir)idao;$(ProjectDir)entities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="dnd_backend\entities\Currency.hpp" />
+    <ClCompile Include="dnd_backend\entities\Wallet.cpp" />
+    <ClCompile Include="dnd_backend\entities\CharacterBuilder.cpp" />
     <ClCompile Include="dnd_backend\entities\AttributeSet.cpp" />
-    <ClCompile Include="dnd_backend\entities\PlayerData.cpp" />
-    <ClCompile Include="dnd_backend\entities\Spell.cpp" />
+    <ClCompile Include="dnd_backend\entities\Character.cpp" />
     <ClCompile Include="dnd_backend\entities\StatModifier.cpp" />
     <ClCompile Include="dnd_backend\xmldao\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dnd_backend\entities\Wallet.h" />
+    <ClInclude Include="dnd_backend\entities\CharacterBuilder.h" />
     <ClInclude Include="dnd_backend\entities\Attribute.h" />
     <ClInclude Include="dnd_backend\entities\AttributeSet.h" />
+    <ClInclude Include="dnd_backend\entities\Currency.h" />
     <ClInclude Include="dnd_backend\entities\Entity.h" />
     <ClInclude Include="dnd_backend\entities\Header.h" />
-    <ClInclude Include="dnd_backend\entities\PlayerData.h" />
+    <ClInclude Include="dnd_backend\entities\Item.h" />
+    <ClInclude Include="dnd_backend\entities\Character.h" />
     <ClInclude Include="dnd_backend\entities\Spell.h" />
     <ClInclude Include="dnd_backend\entities\StatModifier.h" />
     <ClInclude Include="dnd_backend\idao\IPlayerDao.h" />
     <ClInclude Include="dnd_backend\xmldao\tinyxml2.h" />
     <ClInclude Include="dnd_backend\xmldao\XMLPlayerDao.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

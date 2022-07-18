@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DND-Character-Sheets", "DND-Character-Sheets.vcxproj", "{CD084D5B-407E-4905-8AA9-37BB38832237}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "backend_test", "backend_test\backend_test.vcxproj", "{295CE6A4-5A5D-407C-BF26-3F50DBC47E7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{CD084D5B-407E-4905-8AA9-37BB38832237}.Release|x64.Build.0 = Release|x64
 		{CD084D5B-407E-4905-8AA9-37BB38832237}.Release|x86.ActiveCfg = Release|Win32
 		{CD084D5B-407E-4905-8AA9-37BB38832237}.Release|x86.Build.0 = Release|Win32
+		{295CE6A4-5A5D-407C-BF26-3F50DBC47E7C}.Debug|x64.ActiveCfg = Debug|x64
+		{295CE6A4-5A5D-407C-BF26-3F50DBC47E7C}.Debug|x64.Build.0 = Debug|x64
+		{295CE6A4-5A5D-407C-BF26-3F50DBC47E7C}.Debug|x86.ActiveCfg = Debug|Win32
+		{295CE6A4-5A5D-407C-BF26-3F50DBC47E7C}.Debug|x86.Build.0 = Debug|Win32
+		{295CE6A4-5A5D-407C-BF26-3F50DBC47E7C}.Release|x64.ActiveCfg = Release|x64
+		{295CE6A4-5A5D-407C-BF26-3F50DBC47E7C}.Release|x64.Build.0 = Release|x64
+		{295CE6A4-5A5D-407C-BF26-3F50DBC47E7C}.Release|x86.ActiveCfg = Release|Win32
+		{295CE6A4-5A5D-407C-BF26-3F50DBC47E7C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

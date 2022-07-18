@@ -18,16 +18,22 @@
     <ClCompile Include="dnd_backend\entities\AttributeSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dnd_backend\entities\PlayerData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dnd_backend\entities\Spell.cpp">
+    <ClCompile Include="dnd_backend\entities\Character.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dnd_backend\entities\StatModifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dnd_backend\xmldao\tinyxml2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dnd_backend\entities\CharacterBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dnd_backend\entities\Wallet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dnd_backend\entities\Currency.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,7 +50,7 @@
     <ClInclude Include="dnd_backend\entities\Header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dnd_backend\entities\PlayerData.h">
+    <ClInclude Include="dnd_backend\entities\Character.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dnd_backend\entities\Spell.h">
@@ -62,5 +68,21 @@
     <ClInclude Include="dnd_backend\xmldao\XMLPlayerDao.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dnd_backend\entities\Currency.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dnd_backend\entities\Item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dnd_backend\entities\CharacterBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dnd_backend\entities\Wallet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="README.md" />
   </ItemGroup>
 </Project>
