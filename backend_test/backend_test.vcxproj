@@ -48,7 +48,7 @@
     <ClCompile Include="test_resources\ItemTest.cpp" />
     <ClCompile Include="test_resources\SpellTest.cpp" />
     <ClCompile Include="test_resources\StatModifierTest.cpp" />
-    <ClCompile Include="test_resources\WalletTest.cpp" />
+    <ClCompile Include="test_resources\EnumMapTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DND-Character-Sheets.vcxproj">
