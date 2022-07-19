@@ -29,12 +29,6 @@ TEST_F(AttributeSetTest, TestConstructor) {
 	expectAllEqualTo(set,0);
 }
 
-TEST_F(AttributeSetTest, TestCustomConstructor) {
-	AttributeSet set = AttributeSet(1, 2, 3, 4, 5, 6);
-
-	expectAllEqualTo(set, 1, 2, 3, 4, 5, 6);
-}
-
 TEST_F(AttributeSetTest, TestConstantConstructor) {
 	expectAllEqualTo(original, 2);
 }
@@ -63,8 +57,7 @@ TEST_F(AttributeSetTest, TestOperatorAdditionInteger) {
 TEST_F(AttributeSetTest, TestConstructorOverflow) {
 	EXPECT_ANY_THROW(AttributeSet(788));
 	EXPECT_ANY_THROW(AttributeSet(-1));
-	EXPECT_ANY_THROW(AttributeSet(0, 0, -1, 2, 2, 2));
-	EXPECT_ANY_THROW(AttributeSet(10000, 0, 6, 2, 2, 2));
+	EXPECT_ANY_THROW(AttributeSet(10000));
 }
 
 TEST_F(AttributeSetTest, TestSetAttribute) {
