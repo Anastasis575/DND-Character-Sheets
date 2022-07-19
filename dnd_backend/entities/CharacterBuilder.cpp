@@ -2,7 +2,7 @@
 
 using namespace DND;
 
-CharacterBuilder::CharacterBuilder(std::string name) : name(name) {}
+CharacterBuilder::CharacterBuilder(std::string name) : name(name), wallet(entity_details::currencyTypes){}
 
 CharacterBuilder& CharacterBuilder::setLevel(int level) {
 	this->level = level;

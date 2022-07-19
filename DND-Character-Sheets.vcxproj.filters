@@ -30,10 +30,10 @@
     <ClCompile Include="dnd_backend\entities\CharacterBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dnd_backend\entities\Currency.hpp">
+    <ClCompile Include="dnd_backend\entities\Attribute.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dnd_backend\entities\Wallet.cpp">
+    <ClCompile Include="dnd_backend\entities\Currency.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -75,12 +75,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dnd_backend\entities\CharacterBuilder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dnd_backend\entities\Wallet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dnd_backend\entities\Attribute.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dnd_backend\entities\EnumMap.h">

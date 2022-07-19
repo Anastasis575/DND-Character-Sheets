@@ -157,7 +157,7 @@ namespace DND {
 		int level = 1;
 		int hp = 0;
 		int ac = 0;
-		int speed = 0;
+		int speed = 1;
 
 		StatModifier race;
 		StatModifier dndClass;

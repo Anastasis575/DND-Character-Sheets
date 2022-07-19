@@ -8,7 +8,7 @@ std::string outOfBoundsErrorMessage(std::string field, int min, int max);
 
 Character::Character(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
 	const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, const AttributeSet& baseStats,
-	const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats, entity_details::Wallet wallet):
+	const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats, entity_details::EnumMap<Currency> wallet):
 	name(charName), race(race), dndClass(dndClass), dndSubClass(dndSubClass), hdType(hdType), background(background), baseStats(baseStats),
 	backgroundStats(backgroundStats), proficiencyStats(proficiencyStats), wallet(wallet){}
 

@@ -72,3 +72,5 @@ namespace DND {
 		entity_details::EnumMap<Attribute> map;
 	};
 }
+
+
