@@ -20,3 +20,9 @@ namespace DND {
 	}
 
 }
+
+namespace std {
+	template <> struct hash<DND::Currency> {
+		size_t operator() (const DND::Currency& t) const { return size_t(t); }
+	};
+}

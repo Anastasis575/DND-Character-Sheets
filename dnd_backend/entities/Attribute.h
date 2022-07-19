@@ -32,4 +32,12 @@ namespace DND {
 	namespace entity_details {
 		extern const std::vector<Attribute> attributeTypes;
 	}
+
+}
+
+
+namespace std {
+	template <> struct hash<DND::Attribute> {
+		size_t operator() (const DND::Attribute& t) const { return size_t(t); }
+	};
 }
