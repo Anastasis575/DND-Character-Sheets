@@ -1,6 +1,5 @@
 #include "Character.h"
 #include <cmath>
-#include <algorithm> 
 
 using namespace DND;
 
@@ -8,9 +7,9 @@ std::string outOfBoundsErrorMessage(std::string field, int min, int max);
 
 Character::Character(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
 	const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, const AttributeSet& baseStats,
-	const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats, entity_details::EnumMap<Currency> wallet):
-	name(charName), race(race), dndClass(dndClass), dndSubClass(dndSubClass), hdType(hdType), background(background), baseStats(baseStats),
-	backgroundStats(backgroundStats), proficiencyStats(proficiencyStats), wallet(wallet){}
+	const ProficiencySet& proficiencies, entity_details::EnumMap<Currency> wallet):
+	name(charName), race(race), dndClass(dndClass), dndSubClass(dndSubClass), hdType(hdType),
+	background(background), baseStats(baseStats), proficiencies(proficiencies), wallet(wallet){}
 
 
 int Character::getAttributeScore(Attribute attr) const {
@@ -19,8 +18,7 @@ int Character::getAttributeScore(Attribute attr) const {
 	finalAttributes += dndClass.getStats();
 	finalAttributes += dndSubClass.getStats();
 	finalAttributes += baseStats;
-	finalAttributes += backgroundStats;
-	finalAttributes += (AttributeSet(std::min((2 + static_cast<int>(floor((level - 1) / 4))), 6)) + proficiencyStats);
+	finalAttributes += proficiencies.getBonusStats(level);
 
 	return finalAttributes.getAttributeScore(attr);
 }
@@ -121,6 +119,26 @@ void Character::setHP(int amt) {
 		throw std::invalid_argument(outOfBoundsErrorMessage("HP", MIN_HP, MAX_HP));
 
 	hp = amt;
+}
+
+void Character::setProfiency(Attribute attr, bool isProficient) {
+	if (isProficient) 
+		proficiencies.addProficiency(attr);
+	else 
+		proficiencies.removeProficiency(attr);
+}
+
+std::unordered_set<Attribute> Character::getProfiencies() const {
+	std::unordered_set<Attribute> set = std::unordered_set<Attribute>();
+	
+	//this is dumb but I want ProficiencySet to be as generic as it can be
+	for each (Attribute attr in entity_details::attributeTypes) {
+		if (proficiencies.hasProficiency(attr)) {
+			set.insert(attr);
+		}
+	}
+
+	return set;
 }
 
 std::string outOfBoundsErrorMessage(std::string field, int min, int max) {

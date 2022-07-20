@@ -118,6 +118,7 @@
     <ClCompile Include="dnd_backend\entities\Currency.cpp" />
     <ClCompile Include="dnd_backend\entities\StatModifier.cpp" />
     <ClCompile Include="dnd_backend\xmldao\tinyxml2.cpp" />
+    <ClCompile Include="dnd_backend\entities\ProficiencySet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dnd_backend\entities\EnumMap.h" />
@@ -135,6 +136,7 @@
     <ClInclude Include="dnd_backend\idao\IPlayerDao.h" />
     <ClInclude Include="dnd_backend\xmldao\tinyxml2.h" />
     <ClInclude Include="dnd_backend\xmldao\XMLPlayerDao.h" />
+    <ClInclude Include="dnd_backend\entities\ProficiencySet.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

@@ -36,6 +36,9 @@
     <ClCompile Include="dnd_backend\entities\Currency.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dnd_backend\entities\ProficiencySet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dnd_backend\entities\Attribute.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dnd_backend\entities\EnumMap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dnd_backend\entities\ProficiencySet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

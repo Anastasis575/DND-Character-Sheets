@@ -4,6 +4,7 @@
 #include "StatModifier.h"
 #include "Item.h"
 #include "Currency.h"
+#include "ProficiencySet.h"
 #include "EnumMap.h"
 
 #include <string>
@@ -129,6 +130,18 @@ namespace DND {
 		*/
 		void setLevel(int level);
 
+		/**
+		 * @brief Set whether or not the character is proficient to an Attribute.
+		 * @param attr the attribute
+		 * @param isProficient true if the character is proficient, false otherwise
+		*/
+		void setProfiency(Attribute attr, bool isProficient);
+
+		/**
+		 * @brief Get all the Attributes to which the character is proficient with.
+		 * @return a set with all the Attributes the character is proficient with
+		*/
+		std::unordered_set<Attribute> getProfiencies() const;
 
 	private:
 	
@@ -137,8 +150,8 @@ namespace DND {
 		 * @see CharacterBuilder
 		*/
 		Character(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
-			const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, const AttributeSet& baseStats,
-			const AttributeSet& backgroundStats, const AttributeSet& proficiencyStats, entity_details::EnumMap<Currency> wallet);
+			const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, 
+			const AttributeSet& baseStats, const ProficiencySet& proficiencies, entity_details::EnumMap<Currency> wallet);
 
 		friend class CharacterBuilder; //realistically there is no reason for another builder to exist
 
@@ -168,8 +181,7 @@ namespace DND {
 		std::string background;
 
 		AttributeSet baseStats;
-		AttributeSet backgroundStats;
-		AttributeSet proficiencyStats;
+		ProficiencySet proficiencies;
 
 		entity_details::EnumMap<Currency> wallet;
 		std::unordered_set<Item, ItemHasher> items;

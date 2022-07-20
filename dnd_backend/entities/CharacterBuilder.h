@@ -42,9 +42,7 @@ namespace DND {
 
 		CharacterBuilder& setBaseStats(AttributeSet baseStats);
 
-		CharacterBuilder& setBackgroundStats(AttributeSet backgroundStats);
-
-		CharacterBuilder& setProficiencyStats(AttributeSet proficiencyStats);
+		CharacterBuilder& setProficiencyStats(ProficiencySet proficiencies);
 
 
 	private:
@@ -64,8 +62,7 @@ namespace DND {
 		std::string background;
 
 		AttributeSet baseStats;
-		AttributeSet backgroundStats;
-		AttributeSet proficiencyStats;
+		ProficiencySet proficiencies;
 	};
 
 }

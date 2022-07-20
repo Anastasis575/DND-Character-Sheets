@@ -54,19 +54,14 @@ CharacterBuilder& CharacterBuilder::setBaseStats(AttributeSet baseStats) {
 	return *this;
 }
 
-CharacterBuilder& CharacterBuilder::setBackgroundStats(AttributeSet backgroundStats) {
-	this->backgroundStats = backgroundStats;
-	return *this;
-}
-
-CharacterBuilder& CharacterBuilder::setProficiencyStats(AttributeSet proficiencyStats) {
-	this->proficiencyStats = proficiencyStats;
+CharacterBuilder& CharacterBuilder::setProficiencyStats(ProficiencySet proficiencies) {
+	this->proficiencies = proficiencies;
 	return *this;
 }
 
 Character CharacterBuilder::build() const {
 	Character& data = Character(this->name, this->race, this->dndClass, this->dndSubClass,
-		this->hdType, this->background, this->baseStats, this->backgroundStats, this->proficiencyStats, this->wallet);
+		this->hdType, this->background, this->baseStats, this->proficiencies, this->wallet);
 
 	data.setLevel(this->level);
 	data.setHP(this->hp);
