@@ -36,6 +36,10 @@ int Character::getAC() const {
 	return ac;
 }
 
+int Character::getLevel() const {
+	return level;
+}
+
 SpellIterator Character::getSpells() const {
 	return spells.begin();
 }
@@ -70,21 +74,21 @@ std::string Character::getBackground() const {
 
 
 void Character::setSpeed(int speed) {
-	if (this->speed < MIN_SPEED || this->speed > MAX_SPEED)
+	if (getSpeed() < MIN_SPEED || getSpeed() > MAX_SPEED)
 		throw std::invalid_argument(outOfBoundsErrorMessage("Speed", MIN_SPEED, MAX_SPEED));
 
 	this->speed = speed;
 }
 
 void Character::setAC(int ac) {
-	if (this->ac < MIN_AC || this->ac > MAX_AC)
+	if (getAC() < MIN_AC || getAC() > MAX_AC)
 		throw std::invalid_argument(outOfBoundsErrorMessage("Armor Class", MIN_AC, MAX_AC));
 
 	this->ac = ac;
 }
 
 void Character::setLevel(int level) {
-	if (this->level < MIN_LEVEL || this->level > MAX_LEVEL)
+	if (getLevel() < MIN_LEVEL || getLevel() > MAX_LEVEL)
 		throw std::invalid_argument(outOfBoundsErrorMessage("Level", MIN_LEVEL, MAX_LEVEL));
 
 	this->level = level;
@@ -115,10 +119,26 @@ void Character::removeSpell(Spell& original) {
 }
 
 void Character::setHP(int amt) {
-	if (this->hp < MIN_HP || this->hp > MAX_HP)
+	if (getHP() < MIN_HP || getHP() > MAX_HP)
 		throw std::invalid_argument(outOfBoundsErrorMessage("HP", MIN_HP, MAX_HP));
 
 	hp = amt;
+}
+
+void Character::setRace(const StatModifier& race) {
+	this->race = race;
+}
+
+void Character::setClass(const StatModifier& dndClass) {
+	this->dndClass = dndClass;
+}
+
+void Character::setBackground(const std::string background) {
+	this->background = background;
+}
+
+void Character::setSubClass(const StatModifier& dndSubClass) {
+	this->dndSubClass = dndSubClass;
 }
 
 void Character::setProfiency(Attribute attr, bool isProficient) {

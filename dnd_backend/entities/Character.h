@@ -53,6 +53,8 @@ namespace DND {
 
 		int getAC() const;
 
+		int getLevel() const;
+
 		std::string getCharacterName() const;
 
 		std::string getPlayerName() const;
@@ -137,6 +139,14 @@ namespace DND {
 		 * @throws std::invalid_argument if the new level is out of bounds
 		*/
 		void setLevel(int level);
+
+		void setRace(const StatModifier& race);
+
+		void setClass(const StatModifier& dndClass);
+
+		void setBackground(const std::string background);
+
+		void setSubClass(const StatModifier& dndSubClass);
 
 		/**
 		 * @brief Set whether or not the character is proficient to an Attribute.
