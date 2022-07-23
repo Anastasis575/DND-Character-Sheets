@@ -14,8 +14,11 @@
 #include <stdexcept>
 
 namespace DND {
-	typedef std::unordered_set<Item, ItemHasher>::const_iterator ItemIterator;
-	typedef std::unordered_set<Spell, SpellHasher>::const_iterator SpellIterator;
+	typedef std::unordered_set<Item, ItemHasher> Items;
+	typedef std::unordered_set<Spell, SpellHasher> Spells;
+	typedef std::unordered_set<Attribute> Attributes;
+
+	//typedef std::unordered_set<Item, ItemHasher>::end ItemIteratorEnd;
 
 	/**
 	 * @brief An entity class managing all the information about a character's static information. It doesn't necessarily 
@@ -73,19 +76,19 @@ namespace DND {
 		 * @brief Add a new item to the character's inventory.
 		 * @param item the new item
 		*/
-		void addToInventory(Item& item);
+		void addItem(Item& item);
 
 		/**
 		 * @brief Remove an item from the character's inventory.
 		 * @param item the item to be removed
 		*/
-		void removeFromInventory(Item& item);
+		void removeItem(Item& item);
 
 		/**
 		 * @brief Get all the items this character posseses.
 		 * @return a list of all the items
 		*/
-		ItemIterator getItems() const;
+		Items getItems() const;
 
 		/**
 		 * @brief Set the amount of currency this character posseses.
@@ -110,7 +113,7 @@ namespace DND {
 		 * @brief Get all the spells in the character's inventory.
 		 * @return the spells
 		*/
-		SpellIterator getSpells() const;
+		Spells getSpells() const;
 
 		/**
 		 * @brief Sets the hp to the specified amount.
@@ -159,7 +162,7 @@ namespace DND {
 		 * @brief Get all the Attributes to which the character is proficient with.
 		 * @return a set with all the Attributes the character is proficient with
 		*/
-		std::unordered_set<Attribute> getProfiencies() const;
+		Attributes getProfiencies() const;
 
 	private:
 		//limits

@@ -40,8 +40,8 @@ int Character::getLevel() const {
 	return level;
 }
 
-SpellIterator Character::getSpells() const {
-	return spells.begin();
+Spells Character::getSpells() const {
+	return spells;
 }
 
 std::string Character::getCharacterName() const {
@@ -94,16 +94,16 @@ void Character::setLevel(int level) {
 	this->level = level;
 }
 
-void Character::addToInventory(Item& item) {
+void Character::addItem(Item& item) {
 	items.insert(item);
 }
 
-void Character::removeFromInventory(Item& item) {
+void Character::removeItem(Item& item) {
 	items.erase(item);
 }
 
-ItemIterator Character::getItems() const {
-	return items.begin();
+Items Character::getItems() const {
+	return items;
 }
 
 void Character::setAmount(Currency type, int amt) {
