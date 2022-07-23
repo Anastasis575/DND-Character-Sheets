@@ -28,6 +28,12 @@ namespace DND {
 	public:
 
 		/**
+		 * @brief Creates a PlayerData instance by reading the character's name. To be used by a builder object.
+		 * @see CharacterBuilder
+		*/
+		Character(const std::string& charName, const std::string& playerName);
+
+		/**
 		 * @brief Return the score for the specified attribute.
 		 * @param attr The attribute whose score will be returned
 		 * @return The score of the attribute.
@@ -47,7 +53,9 @@ namespace DND {
 
 		int getAC() const;
 
-		std::string getName() const;
+		std::string getCharacterName() const;
+
+		std::string getPlayerName() const;
 
 		StatModifier getRace() const;
 
@@ -144,18 +152,6 @@ namespace DND {
 		std::unordered_set<Attribute> getProfiencies() const;
 
 	private:
-	
-		/**
-		 * @brief Creates a PlayerData instance by reading the character's name. To be used by a builder object.
-		 * @see CharacterBuilder
-		*/
-		Character(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
-			const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, 
-			const AttributeSet& baseStats, const ProficiencySet& proficiencies, entity_details::EnumMap<Currency> wallet);
-
-		friend class CharacterBuilder; //realistically there is no reason for another builder to exist
-
-
 		//limits
 		static const int MIN_LEVEL = 1;
 		static const int MAX_LEVEL = 20;
@@ -172,11 +168,13 @@ namespace DND {
 		int ac = 0;
 		int speed = 1;
 
+		const std::string characterName;
+		const std::string playerName;
+
 		StatModifier race;
 		StatModifier dndClass;
 		StatModifier dndSubClass;
 
-		std::string name;
 		std::string hdType;
 		std::string background;
 

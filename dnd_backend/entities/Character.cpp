@@ -5,11 +5,8 @@ using namespace DND;
 
 std::string outOfBoundsErrorMessage(std::string field, int min, int max);
 
-Character::Character(const std::string& charName, const StatModifier& race, const StatModifier& dndClass,
-	const StatModifier& dndSubClass, const std::string& hdType, const std::string& background, const AttributeSet& baseStats,
-	const ProficiencySet& proficiencies, entity_details::EnumMap<Currency> wallet):
-	name(charName), race(race), dndClass(dndClass), dndSubClass(dndSubClass), hdType(hdType),
-	background(background), baseStats(baseStats), proficiencies(proficiencies), wallet(wallet){}
+Character::Character(const std::string& charName, const std::string& playerName):
+	characterName(charName), playerName(playerName), wallet(entity_details::EnumMap<Currency>(entity_details::currencyTypes)) {}
 
 
 int Character::getAttributeScore(Attribute attr) const {
@@ -24,7 +21,6 @@ int Character::getAttributeScore(Attribute attr) const {
 }
 
 int Character::getAmount(Currency type) const {
-	// should never throw
 	return wallet.getAmount(type);
 }
 
@@ -44,8 +40,12 @@ SpellIterator Character::getSpells() const {
 	return spells.begin();
 }
 
-std::string Character::getName() const {
-	return name;
+std::string Character::getCharacterName() const {
+	return characterName;
+}
+
+std::string Character::getPlayerName() const {
+	return playerName;
 }
 
 StatModifier Character::getRace() const {
