@@ -27,9 +27,6 @@
     <ClCompile Include="dnd_backend\xmldao\tinyxml2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dnd_backend\entities\CharacterBuilder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="dnd_backend\entities\Attribute.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -75,9 +72,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dnd_backend\entities\Item.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dnd_backend\entities\CharacterBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dnd_backend\entities\EnumMap.h">
