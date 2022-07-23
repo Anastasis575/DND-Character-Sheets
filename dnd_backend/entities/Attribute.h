@@ -30,7 +30,7 @@ namespace DND {
 	};
 
 	namespace entity_details {
-		extern const std::vector<Attribute> attributeTypes;
+		extern const std::vector<Attribute> ATTRIBUTE_TYPES;
 	}
 
 }

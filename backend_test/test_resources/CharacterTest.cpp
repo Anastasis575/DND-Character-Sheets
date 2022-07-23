@@ -122,14 +122,14 @@ TEST_F(CharacterTest, SpellTest) {
 }
 
 TEST_F(CharacterTest, TestCurrency) {
-	for each(Currency curr in entity_details::currencyTypes) {
+	for each(Currency curr in entity_details::CURRENCY_TYPES) {
 		EXPECT_EQ(character->getAmount(curr), 0);
 	}
 
-	Currency changed = entity_details::currencyTypes[0];
+	Currency changed = entity_details::CURRENCY_TYPES[0];
 	character->setAmount(changed, 45);
 
-	for each (Currency curr in entity_details::currencyTypes) {
+	for each (Currency curr in entity_details::CURRENCY_TYPES) {
 		if(curr != changed)
 			EXPECT_EQ(character->getAmount(curr), 0);
 	}

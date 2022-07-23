@@ -3,11 +3,11 @@
 #include <string> 
 
 
-DND::AttributeSet::AttributeSet(): map(entity_details::EnumMap<Attribute>(entity_details::attributeTypes) ){}
+DND::AttributeSet::AttributeSet(): map(entity_details::EnumMap<Attribute>(entity_details::ATTRIBUTE_TYPES) ){}
 
 
-DND::AttributeSet::AttributeSet(int amt) : map(entity_details::EnumMap<Attribute>(entity_details::attributeTypes)) {
-	for each (Attribute attribute in entity_details::attributeTypes) {
+DND::AttributeSet::AttributeSet(int amt) : map(entity_details::EnumMap<Attribute>(entity_details::ATTRIBUTE_TYPES)) {
+	for each (Attribute attribute in entity_details::ATTRIBUTE_TYPES) {
 		setAttribute(attribute, amt);
 	}
 }
@@ -20,7 +20,7 @@ DND::AttributeSet& DND::AttributeSet::operator+=(DND::AttributeSet const& other)
 DND::AttributeSet DND::AttributeSet::operator+(DND::AttributeSet const & other) const {
 	AttributeSet newSet(*this);
 
-	for each (Attribute attribute in entity_details::attributeTypes) {
+	for each (Attribute attribute in entity_details::ATTRIBUTE_TYPES) {
 		newSet.setAttribute(attribute, getAttributeScore(attribute) + other.getAttributeScore(attribute));
 	}
 

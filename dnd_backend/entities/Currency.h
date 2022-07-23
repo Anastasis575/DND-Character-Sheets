@@ -16,7 +16,7 @@ namespace DND {
 	};
 
 	namespace entity_details {
-		extern const std::vector<Currency> currencyTypes;
+		extern const std::vector<Currency> CURRENCY_TYPES;
 	}
 
 }
