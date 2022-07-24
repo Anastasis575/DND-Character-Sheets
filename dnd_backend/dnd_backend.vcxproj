@@ -104,6 +104,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)xmldao;$(ProjectDir)idao;$(ProjectDir)entities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <PostBuildEvent>
       <Command>
@@ -117,6 +119,7 @@
     <ClCompile Include="entities\Currency.cpp" />
     <ClCompile Include="entities\ProficiencySet.cpp" />
     <ClCompile Include="entities\StatModifier.cpp" />
+    <ClCompile Include="xmldao\LocalFileResolver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entities\Attribute.h" />
@@ -129,6 +132,9 @@
     <ClInclude Include="entities\ProficiencySet.h" />
     <ClInclude Include="entities\Spell.h" />
     <ClInclude Include="entities\StatModifier.h" />
+    <ClInclude Include="idao\ICharacterDAO.h" />
+    <ClInclude Include="xmldao\LocalFileResolver.h" />
+    <ClInclude Include="xmldao\XMLCharacterDAO.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
