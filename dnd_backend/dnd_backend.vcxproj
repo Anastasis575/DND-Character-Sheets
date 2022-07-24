@@ -112,27 +112,24 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dnd_backend\entities\AttributeSet.cpp" />
-    <ClCompile Include="dnd_backend\entities\Character.cpp" />
-    <ClCompile Include="dnd_backend\entities\Currency.cpp" />
-    <ClCompile Include="dnd_backend\entities\SkillSet.cpp" />
-    <ClCompile Include="dnd_backend\entities\StatModifier.cpp" />
-    <ClCompile Include="dnd_backend\xmldao\tinyxml2.cpp" />
-    <ClCompile Include="dnd_backend\entities\ProficiencySet.cpp" />
+    <ClCompile Include="entities\Attribute.cpp" />
+    <ClCompile Include="entities\AttributeSet.cpp" />
+    <ClCompile Include="entities\Character.cpp" />
+    <ClCompile Include="entities\Currency.cpp" />
+    <ClCompile Include="entities\ProficiencySet.cpp" />
+    <ClCompile Include="entities\StatModifier.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dnd_backend\entities\ObjectCounter.h" />
-    <ClInclude Include="dnd_backend\entities\AttributeSet.h" />
-    <ClInclude Include="dnd_backend\entities\Currency.h" />
-    <ClInclude Include="dnd_backend\entities\Item.h" />
-    <ClInclude Include="dnd_backend\entities\Character.h" />
-    <ClInclude Include="dnd_backend\entities\SkillSet.h" />
-    <ClInclude Include="dnd_backend\entities\Spell.h" />
-    <ClInclude Include="dnd_backend\entities\StatModifier.h" />
-    <ClInclude Include="dnd_backend\idao\IPlayerDao.h" />
-    <ClInclude Include="dnd_backend\xmldao\tinyxml2.h" />
-    <ClInclude Include="dnd_backend\xmldao\XMLPlayerDao.h" />
-    <ClInclude Include="dnd_backend\entities\ProficiencySet.h" />
+    <ClInclude Include="entities\Attribute.h" />
+    <ClInclude Include="entities\AttributeSet.h" />
+    <ClInclude Include="entities\Character.h" />
+    <ClInclude Include="entities\Currency.h" />
+    <ClInclude Include="entities\EnumMap.h" />
+    <ClInclude Include="entities\EnumMap.hpp" />
+    <ClInclude Include="entities\Item.h" />
+    <ClInclude Include="entities\ProficiencySet.h" />
+    <ClInclude Include="entities\Spell.h" />
+    <ClInclude Include="entities\StatModifier.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
