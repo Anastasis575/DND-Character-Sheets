@@ -127,7 +127,6 @@
     <ClInclude Include="entities\Character.h" />
     <ClInclude Include="entities\Currency.h" />
     <ClInclude Include="entities\EnumMap.h" />
-    <ClInclude Include="entities\EnumMap.hpp" />
     <ClInclude Include="entities\Item.h" />
     <ClInclude Include="entities\ProficiencySet.h" />
     <ClInclude Include="entities\Spell.h" />
