@@ -37,8 +37,7 @@ namespace DND {
 		 * @brief Delete a character from persistent storage.
 		 * @param characterName the character's name
 		 * @param playerName the name of the player who created it
-		 * @return true if successful, false otherwise
 		*/
-		bool void deleteCharacter(const std::string& characterName, const std::string& playerName) = 0;
+		virtual void deleteCharacter(const std::string& characterName, const std::string& playerName) = 0;
 	};
 }
