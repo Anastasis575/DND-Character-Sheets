@@ -52,12 +52,12 @@
     <ClCompile Include="test_resources\EnumMapTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DND-Character-Sheets.vcxproj">
-      <Project>{cd084d5b-407e-4905-8aa9-37bb38832237}</Project>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\dnd_backend\dnd_backend.vcxproj">
+      <Project>{cd084d5b-407e-4905-8aa9-37bb38832237}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
