@@ -2,19 +2,25 @@
 #include "AttributeSet.h"
 #include <string>
 
-/// <summary>
-/// An immutable name, stats tuple describing any stats modifier such as a job, the background
-/// or the class / subclass.
-/// </summary>
-class StatModifier {
-private:
-	std::string name;
-	AttributeSet stats;
+namespace DND {
 
-public:
-	StatModifier(std::string& name, AttributeSet& stats);
+	/**
+	 * @brief  An immutable (String, AttributeSet) tuple describing any stats modifier such as the character's job,
+	 * his background or his class / subclass.
+	 * @author Dimitris Tsirmpas
+	*/
+	class StatModifier {
+	public:
+		StatModifier();
 
-	std::string getName() const;
+		StatModifier(const std::string& name, const AttributeSet& stats);
 
-	AttributeSet getStats() const;
-};
+		std::string getName() const;
+
+		AttributeSet getStats() const;
+
+	private:
+		std::string name; // non-const to allow copy constructor to exist
+		AttributeSet stats;
+	};
+}

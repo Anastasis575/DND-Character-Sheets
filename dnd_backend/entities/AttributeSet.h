@@ -1,61 +1,76 @@
 #pragma once
 #include "Attribute.h"
-#include <array>
+#include "EnumMap.h"
 
-/// <summary>
-/// A class representing the basic attributes of each character such as Strength, Charisma, Dexterity etc.
-/// </summary>
-class AttributeSet {
+namespace DND {
 
-public:
-	
-	/// <summary>
-	/// Create an AttributeSet with 0 stats.
-	/// </summary>
-	/// <returns></returns>
-	static AttributeSet createEmpty();
+	/**
+	 * @brief A class representing the basic attributes of each character such as Strength, Charisma, Dexterity etc.
+	 * @see Attribute
+	 * @author Dimitris Tsirmpas
+	*/
+	class AttributeSet {
 
-	/// <summary>
-	/// Creates an AttributeSet inititalizing all the attributes with a default score of 0.
-	/// </summary>
-	AttributeSet(int strengthValue, int dexterityValue, 
-		int constitutionValue, int inteligenceValue, int wisdomValue, int charismaValue);
+	public:
 
-	/// <summary>
-	/// Creates an AttributeSet inititalizing all the attributes with the specified amount.
-	/// </summary>
-	AttributeSet(int amt);
+		/**
+		 * @brief Create an AttributeSet with all-0 stats.
+		*/
+		AttributeSet();
 
-	AttributeSet& operator+=(AttributeSet const&);
+		/**
+		 * @brief Creates an AttributeSet inititalizing all the attributes with the specified amount
+		 * @param amt the value of all stats
+		 * @throws std::invalid_argument if any of the attributes go out of bounds
+		*/
+		AttributeSet(int amt);
 
-	/// <summary>
-	/// Adds the scores for each attribute with that of another AttributeSet.
-	/// </summary>
-	/// <param name="other">The set whose attribute scores will be added.</param>
-	/// <returns></returns>
-	AttributeSet operator+(AttributeSet const&);
+		/**
+		 * @brief Adds the scores for each attribute with that of another AttributeSet.
+		 * @param The set whose attribute scores will be added.
+		 * @return the modified AttributeSet for chaining
+		 * @warning resulting AttributeSets MAY be out of bounds
+		*/
+		AttributeSet& operator+=(AttributeSet const&);
+		
+		/**
+		 * @brief Adds the scores for each attribute with that of another AttributeSet.
+		 * @param The set whose attribute scores will be added.
+		 * @return the modified AttributeSet for chaining
+		 * @warning resulting AttributeSets MAY be out of bounds
+		*/
+		AttributeSet operator+(AttributeSet const&) const;
 
-	/// <summary>
-	/// Adds the scores for each attribute with a constant number each.
-	/// </summary>
-	/// <param name="amt">The amount that will be added to each attribute's score.</param>
-	/// <returns></returns>
-	AttributeSet operator+(int);
+		/**
+		 * @brief Adds the scores for each attribute with a constant number each.
+		 * @param The amount that will be added to each attribute's score.
+		 * @return the modified AttributeSet for chaining
+		 * @warning resulting AttributeSets MAY be out of bounds
+		*/
+		AttributeSet operator+(int) const;
 
-	/// <summary>
-	/// Return the score for the specified attribute.
-	/// </summary>
-	/// <param name="attr">The attribute whose score will be returned.</param>
-	/// <returns>The score of the attribute.</returns>
-	int getAttributeScore(Attribute attr) const;
+		bool operator==(AttributeSet const &) const;
 
-	/// <summary>
-	/// Increase the score of the specified attribute by a constant amount.
-	/// </summary>
-	/// <param name="attr">The attribute whose score will be returned.</param>
-	/// <param name="amt">The amount that will be added to the attribute's score.</param>
-	void increaseAttribute(Attribute attr, int amt);
+		bool operator!=(AttributeSet const&) const;
 
-private:
-	std::array<int, ATTRIBUTES_LENGTH> attributes;
-};
+		/**
+		 * @brief Return the score for the specified attribute.
+		 * @param attr The attribute whose score will be returned.
+		 * @return The score of the attribute.
+		*/
+		int getAttributeScore(Attribute attr) const;
+		
+		/**
+		 * @brief Increase the score of the specified attribute by a constant amount.
+		 * @param attr The attribute whose score will be increased.
+		 * @param amt The amount that will be added to the attribute's score
+		 * @throws std::invalid_argument if any of the attributes go out of bounds
+		*/
+		void setAttribute(Attribute attr, int amt);
+
+	private:
+		entity_details::EnumMap<Attribute> map;
+	};
+}
+
+

@@ -1,47 +1,53 @@
 #include "AttributeSet.h"
+#include <stdexcept>
+#include <string> 
 
-AttributeSet AttributeSet::createEmpty() {
-	return AttributeSet(0, 0, 0, 0, 0, 0);
+
+DND::AttributeSet::AttributeSet(): map(entity_details::EnumMap<Attribute>(entity_details::ATTRIBUTE_TYPES) ){}
+
+
+DND::AttributeSet::AttributeSet(int amt) : map(entity_details::EnumMap<Attribute>(entity_details::ATTRIBUTE_TYPES)) {
+	for each (Attribute attribute in entity_details::ATTRIBUTE_TYPES) {
+		setAttribute(attribute, amt);
+	}
 }
 
-AttributeSet::AttributeSet(int strengthValue, int dexterityValue,
-	int constitutionValue, int inteligenceValue, int wisdomValue, int charismaValue) {
-	attributes[Attribute::Charisma] = charismaValue;
-	attributes[Attribute::Constitution] = constitutionValue;
-	attributes[Attribute::Dexterity] = dexterityValue;
-	attributes[Attribute::Inteligence] = inteligenceValue;
-	attributes[Attribute::Strength] = strengthValue;
-	attributes[Attribute::Wisdom] = wisdomValue;
-}
-
-AttributeSet::AttributeSet(int amt) {
-	for (int i = 0; i <= ATTRIBUTES_LENGTH; i++)
-		attributes[i] = amt;
-}
-
-AttributeSet& AttributeSet::operator+=(AttributeSet const& other) {
-	*this + other;
+DND::AttributeSet& DND::AttributeSet::operator+=(DND::AttributeSet const& other) {
+	*this = *this + other;
 	return *this;
 }
 
-AttributeSet AttributeSet::operator+(AttributeSet const & other) {
-	for (int i = 0; i <= ATTRIBUTES_LENGTH; i++)
-		attributes[i] += other.attributes[i];
+DND::AttributeSet DND::AttributeSet::operator+(DND::AttributeSet const & other) const {
+	AttributeSet newSet(*this);
 
-	return *this;
+	for each (Attribute attribute in entity_details::ATTRIBUTE_TYPES) {
+		newSet.setAttribute(attribute, getAttributeScore(attribute) + other.getAttributeScore(attribute));
+	}
+
+	return newSet;
 }
 
-AttributeSet AttributeSet::operator+(int amt) {
-	for (int i = 0; i <= ATTRIBUTES_LENGTH; i++)
-		attributes[i] += amt;
-
-	return *this;
+DND::AttributeSet DND::AttributeSet::operator+(int amt) const {
+	return *this + AttributeSet(amt);
 }
 
-int AttributeSet::getAttributeScore(Attribute attr) const {
-	return attributes[attr];
+bool DND::AttributeSet::operator==(DND::AttributeSet const& other) const {
+	return other.map == this->map;
 }
 
-void AttributeSet::increaseAttribute(Attribute attr, int amt) {
-	attributes[attr] += amt;
+bool DND::AttributeSet::operator!=(DND::AttributeSet const& other) const {
+	return !( *(this) == other );
+}
+
+int DND::AttributeSet::getAttributeScore(DND::Attribute attr) const {
+	return map.getAmount(attr);
+}
+
+void DND::AttributeSet::setAttribute(DND::Attribute attr, int amt) {
+	if (amt < DND::MIN_ATTRIBUTE_VALUE || amt > MAX_ATTRIBUTE_VALUE) {
+		throw std::invalid_argument("Character attributes must be between " + std::to_string(MIN_ATTRIBUTE_VALUE)
+			+ " and " + std::to_string(MAX_ATTRIBUTE_VALUE));
+	}
+
+	map.setAmount(attr, amt);
 }
