@@ -1,18 +1,22 @@
-#include "..\idao\IPlayerDao.h" //TODO: make this not relative
+#include "IPlayerDao.h"
 
 namespace DND {
 	
 	/**
 	 * @brief A DAO packaging the PlayerData into local XML files.
+	 * @author Dimitris Tsirmpas
 	*/
-	class XMLPlayerDao : IPlayerDao {
+	class XMLCharacterDAO : ICharacterDAO {
 	public:
-		virtual Character createPlayer(std::string name) override;
 
-		virtual Character getPlayer(std::string name) override;
+		virtual Character createCharacter(const std::string& characterName, 
+			const std::string& playerName) override;
 
-		virtual void updatePlayer(Character data) override;
+		virtual Character getCharacter(const std::string& characterName, 
+			const std::string& playerName) override;
 
-		virtual void deletePlayer(std::string name) override;
+		virtual void updateCharacter(Character& data) override;
+
+		bool void deleteCharacter(const std::string& characterName, const std::string& playerName) override;
 	};
 }
