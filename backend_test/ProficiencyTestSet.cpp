@@ -11,7 +11,7 @@ protected:
 		set = ProficiencySet();
 	}
 
-	static const std::vector<Attribute> getAllAttributes() {
+	static const Attributes getAllAttributes() {
 		return DND::AttributeSet::getAllAttributes();
 	}
 };
@@ -22,22 +22,19 @@ TEST_F(ProficiencySetTest, TestProficiencies) {
 		EXPECT_FALSE(set.hasProficiency(attr));
 	}
 
-	Attribute attr1 = getAllAttributes()[0];
-	Attribute attr2 = getAllAttributes()[1];
-
-	set.addProficiency(attr1);
-	set.addProficiency(attr2);
+	set.addProficiency(Attribute::Charisma);
+	set.addProficiency(Attribute::Constitution);
 
 	for each (Attribute attr in  getAllAttributes()) {
-		if (attr != attr1 && attr != attr2) 
+		if (attr != Attribute::Charisma && attr != Attribute::Constitution)
 			EXPECT_FALSE(set.hasProficiency(attr));
 		else 
 			EXPECT_TRUE(set.hasProficiency(attr));
 	}
 
-	set.removeProficiency(attr1);
+	set.removeProficiency(Attribute::Charisma);
 	for each (Attribute attr in getAllAttributes()) {
-		if (attr != attr2)
+		if (attr != Attribute::Constitution)
 			EXPECT_FALSE(set.hasProficiency(attr));
 		else
 			EXPECT_TRUE(set.hasProficiency(attr));
@@ -49,17 +46,15 @@ TEST_F(ProficiencySetTest, TestBonusStats) {
 	EXPECT_EQ(set.getBonusStats(2), AttributeSet());
 	EXPECT_EQ(set.getBonusStats(5), AttributeSet());
 
-	Attribute attr1 = getAllAttributes()[0];
-	Attribute attr2 = getAllAttributes()[1];
-	set.addProficiency(attr1);
-	set.addProficiency(attr2);
+	set.addProficiency(Attribute::Dexterity);
+	set.addProficiency(Attribute::Intelligence);
 	AttributeSet bonus = set.getBonusStats(5);
 
-	EXPECT_EQ(bonus.getAttributeScore(attr1), 3);
-	EXPECT_EQ(bonus.getAttributeScore(attr2), 3);
+	EXPECT_EQ(bonus.getAttributeScore(Attribute::Dexterity), 3);
+	EXPECT_EQ(bonus.getAttributeScore(Attribute::Intelligence), 3);
 	
 	for each (Attribute attr in getAllAttributes()) {
-		if (attr != attr1 && attr != attr2)
+		if (attr != Attribute::Dexterity && attr != Attribute::Intelligence)
 			EXPECT_EQ(bonus.getAttributeScore(attr), 0);
 	}
 }

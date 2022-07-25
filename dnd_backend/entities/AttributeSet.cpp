@@ -2,14 +2,14 @@
 #include <stdexcept>
 #include <string> 
 
-const std::vector<DND::Attribute> DND::AttributeSet::getAllAttributes() {
-	return ATTRIBUTES;
+const DND::Attributes DND::AttributeSet::getAllAttributes() {
+	return Attributes(ATTRIBUTE_VALUES.begin(), ATTRIBUTE_VALUES.end());
 }
 
 DND::AttributeSet::AttributeSet(): map(entity_details::ObjectCounter<Attribute>() ){}
 
 DND::AttributeSet::AttributeSet(int amt) : map(entity_details::ObjectCounter<Attribute>()) {
-	for each (Attribute attribute in ATTRIBUTES) {
+	for each (Attribute attribute in ATTRIBUTE_VALUES) {
 		setAttribute(attribute, amt);
 	}
 }
@@ -22,7 +22,7 @@ DND::AttributeSet& DND::AttributeSet::operator+=(DND::AttributeSet const& other)
 DND::AttributeSet DND::AttributeSet::operator+(DND::AttributeSet const & other) const {
 	AttributeSet newSet(*this);
 
-	for each (Attribute attribute in ATTRIBUTES) {
+	for each (Attribute attribute in ATTRIBUTE_VALUES) {
 		newSet.setAttribute(attribute, getAttributeScore(attribute) + other.getAttributeScore(attribute));
 	}
 
@@ -54,7 +54,7 @@ void DND::AttributeSet::setAttribute(DND::Attribute attr, int amt) {
 	map.setAmount(attr, amt);
 }
 
-const std::vector<DND::Attribute> DND::AttributeSet::ATTRIBUTES = { 
+const std::vector<DND::Attribute> DND::AttributeSet::ATTRIBUTE_VALUES = { 
 		DND::Attribute::Strength,
 		DND::Attribute::Dexterity,
 		DND::Attribute::Constitution,

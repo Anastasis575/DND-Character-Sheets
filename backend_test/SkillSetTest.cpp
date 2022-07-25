@@ -20,23 +20,20 @@ TEST_F(SkillSetTest, TestProficiencies) {
 	for each (Skill skill in allSkills()) {
 		EXPECT_FALSE(set.isSkilledAt(skill));
 	}
-
-	Skill skill1 = allSkills()[0];
-	Skill skill2 = allSkills()[1];
-
-	set.addSkill(skill1);
-	set.addSkill(skill2);
+	
+	set.addSkill(Skill::ANIMAL_HANDLING);
+	set.addSkill(Skill::ACROBATICS);
 
 	for each (Skill skill in  allSkills()) {
-		if (skill != skill1 && skill != skill2)
+		if (skill != Skill::ANIMAL_HANDLING && skill != Skill::ACROBATICS)
 			EXPECT_FALSE(set.isSkilledAt(skill));
 		else
 			EXPECT_TRUE(set.isSkilledAt(skill));
 	}
 
-	set.removeSkill(skill1);
+	set.removeSkill(Skill::ANIMAL_HANDLING);
 	for each (Skill skill in allSkills()) {
-		if (skill != skill2)
+		if (skill != Skill::ACROBATICS)
 			EXPECT_FALSE(set.isSkilledAt(skill));
 		else
 			EXPECT_TRUE(set.isSkilledAt(skill));

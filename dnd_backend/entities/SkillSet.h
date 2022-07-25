@@ -3,7 +3,7 @@
 #include "ProficiencySet.h"
 #include "ObjectCounter.h"
 #include <unordered_map>
-#include <vector>
+#include <unordered_set>
 
 namespace DND {
 	enum class Skill {
@@ -28,7 +28,7 @@ namespace DND {
 		// if you add any value here remember to also add it in the static class collections
 	};
 
-	typedef std::vector<Skill> Skills;
+	typedef std::unordered_set<Skill> Skills;
 
 	/**
 	 * @brief A set holding the Skills of an individual Character

@@ -1,6 +1,6 @@
 #pragma once
 #include "ObjectCounter.h"
-#include <vector>
+#include <unordered_set>
 
 namespace DND {
 	/**
@@ -17,6 +17,7 @@ namespace DND {
 		// if you modify this enum remember to change the vector in the .cpp file
 	};
 
+	typedef std::unordered_set<Attribute> Attributes;
 
 	/**
 	 * @brief A class representing the basic attributes of each character such as Strength, Charisma, Dexterity etc.
@@ -26,7 +27,7 @@ namespace DND {
 	class AttributeSet {
 
 	public:
-		static const ::std::vector<Attribute> getAllAttributes();
+		static const Attributes getAllAttributes();
 
 		/**
 		 * @brief Create an AttributeSet with all-0 stats.
@@ -94,7 +95,7 @@ namespace DND {
 		 * @see Attribute
 		*/
 		static const int MAX_ATTRIBUTE_VALUE = 20;
-		static const ::std::vector<Attribute> ATTRIBUTES;
+		static const ::std::vector<Attribute> ATTRIBUTE_VALUES;
 
 		entity_details::ObjectCounter<Attribute> map;
 	};
