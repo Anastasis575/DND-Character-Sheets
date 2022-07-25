@@ -10,6 +10,7 @@
     <ClCompile Include="test_resources\StatModifierTest.cpp" />
     <ClCompile Include="test_resources\ObjectCounterTest.cpp" />
     <ClCompile Include="ProficiencyTestSet.cpp" />
+    <ClCompile Include="SkillSetTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
