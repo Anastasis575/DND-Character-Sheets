@@ -5,6 +5,7 @@
 #include "Item.h"
 #include "Currency.h"
 #include "ProficiencySet.h"
+#include "SkillSet.h"
 #include "ObjectCounter.h"
 
 #include <string>
@@ -16,7 +17,6 @@
 namespace DND {
 	typedef std::unordered_set<Item, ItemHasher> Items;
 	typedef std::unordered_set<Spell, SpellHasher> Spells;
-	typedef std::unordered_set<Attribute> Attributes;
 
 	//typedef std::unordered_set<Item, ItemHasher>::end ItemIteratorEnd;
 
@@ -164,6 +164,19 @@ namespace DND {
 		*/
 		Attributes getProfiencies() const;
 
+		/**
+		 * @brief Set whether or not the character has a particular skill.
+		 * @param skill the skill
+		 * @param isSkilled true if the character is skilled, false otherwise
+		*/
+		void setSkill(Skill skill, bool isSkilled);
+
+		/**
+		 * @brief Get all the skills the character has
+		 * @return a collection with all the skills of the character
+		*/
+		Skills getSkills() const;
+
 	private:
 		//limits
 		static const int MIN_LEVEL = 1;
@@ -174,7 +187,6 @@ namespace DND {
 		static const int MAX_AC = 32;
 		static const int MIN_SPEED = 1;
 		static const int MAX_SPEED = std::numeric_limits<int>::max();
-
 
 		int level = 1;
 		int hp = 0;
@@ -193,6 +205,7 @@ namespace DND {
 
 		AttributeSet baseStats;
 		ProficiencySet proficiencies;
+		SkillSet skills;
 
 		entity_details::ObjectCounter<Currency> wallet;
 		std::unordered_set<Item, ItemHasher> items;

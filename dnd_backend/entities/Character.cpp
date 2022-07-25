@@ -148,8 +148,8 @@ void Character::setProfiency(Attribute attr, bool isProficient) {
 		proficiencies.removeProficiency(attr);
 }
 
-std::unordered_set<Attribute> Character::getProfiencies() const {
-	std::unordered_set<Attribute> set = std::unordered_set<Attribute>();
+Attributes Character::getProfiencies() const {
+	Attributes set;
 	
 	for each (Attribute attr in AttributeSet::getAllAttributes()) {
 		if (proficiencies.hasProficiency(attr)) {
@@ -158,6 +158,28 @@ std::unordered_set<Attribute> Character::getProfiencies() const {
 	}
 
 	return set;
+}
+
+void Character::setSkill(Skill skill, bool isSkilled) {
+	if (isSkilled)
+		skills.addSkill(skill);
+	else
+		skills.removeSkill(skill);
+}
+
+/**
+ * @brief Get all the skills the character has
+ * @return a collection with all the skills of the character
+*/
+Skills Character::getSkills() const {
+	Skills charSkills; 
+
+	for each (Skill skill in SkillSet::getAllSkills()) {
+		if (skills.isSkilledAt(skill))
+			charSkills.insert(skill);
+	}
+
+	return charSkills;
 }
 
 std::string outOfBoundsErrorMessage(std::string field, int min, int max) {
