@@ -30,12 +30,14 @@ namespace DND {
 
 	typedef std::vector<Skill> Skills;
 
+	/**
+	 * @brief A set holding the Skills of an individual Character
+	 * @author Dimitris Tsirmpas
+	*/
 	class SkillSet {
 	public:
 		static Attribute SkillSet::getSkillDependency(Skill skill);
 		static const Skills getAllSkills();
-
-		SkillSet();
 
 		/**
 		 * @brief Add a new skill to this character.
@@ -58,8 +60,8 @@ namespace DND {
 
 
 	private:
-		static const std::unordered_map<Skill, Attribute> SKILL_DEPENDENCY_MAP;
 		static const Skills SKILLS;
+		static const std::unordered_map<Skill, Attribute> SKILL_DEPENDENCY_MAP;
 
 		static const int YES = 1;
 		static const int NO = 0;

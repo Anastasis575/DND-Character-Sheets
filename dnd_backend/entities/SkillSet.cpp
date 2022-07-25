@@ -13,8 +13,6 @@ const Skills SkillSet::getAllSkills() {
 	return SKILLS;
 }
 
-SkillSet::SkillSet() : skillMap(){}
-
 void SkillSet::addSkill(Skill skill) {
 	skillMap.setAmount(skill, YES);
 }
