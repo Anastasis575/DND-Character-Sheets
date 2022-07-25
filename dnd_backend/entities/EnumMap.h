@@ -1,6 +1,5 @@
 #pragma once
-#include "Currency.h"
-
+#include <stdexcept>
 #include <vector>
 #include <unordered_map>
 #include <utility>
@@ -13,13 +12,13 @@ namespace DND {
 		 * @author Dimitris Tsirmpas
 		*/
 		template<typename T>
-		class EnumMap {
+		class ObjectCounter {
 		public:
 			/**
 			 * @brief Constructs a map by assigning 0 to all values provided.
 			 * @param values all the possible values of the enum
 			*/
-			EnumMap(const std::vector<T>& values);
+			ObjectCounter(const std::vector<T>& values);
 
 			/**
 			 * @brief Sets the enum value's amount to the provided amount.
@@ -35,9 +34,9 @@ namespace DND {
 			*/
 			int getAmount(T type) const;
 
-			bool operator==(EnumMap const&) const;
+			bool operator==(ObjectCounter const&) const;
 
-			bool operator!=(EnumMap const&) const;
+			bool operator!=(ObjectCounter const&) const;
 
 
 		private:
@@ -47,28 +46,36 @@ namespace DND {
 }
 
 template<typename T>
-DND::entity_details::EnumMap<T>::EnumMap(const std::vector<T>& values) {
+DND::entity_details::ObjectCounter<T>::ObjectCounter(const std::vector<T>& values) {
 	for each (const T var in values) {
 		map.insert(std::make_pair(var, 0));
 	}
 }
 
 template<typename T>
-int DND::entity_details::EnumMap<T>::getAmount(T type) const {
-	return map.find(type)->second;
+int DND::entity_details::ObjectCounter<T>::getAmount(T type) const {
+	auto result = map.find(type);
+	if (result == map.end()) {
+		throw std::invalid_argument("Provided type does not exist in the provided values");
+	}
+	return result->second;
 }
 
 template<typename T>
-void DND::entity_details::EnumMap<T>::setAmount(T type, int amt) {
-	map.find(type)->second = amt;
+void DND::entity_details::ObjectCounter<T>::setAmount(T type, int amt) {
+	auto result = map.find(type);
+	if (result == map.end()) {
+		throw std::invalid_argument("Provided type does not exist in the provided values");
+	}
+	result->second = amt;
 }
 
 template<typename T>
-bool DND::entity_details::EnumMap<T>::operator==(EnumMap const& other) const {
+bool DND::entity_details::ObjectCounter<T>::operator==(ObjectCounter const& other) const {
 	return map == other.map;
 }
 
 template<typename T>
-bool DND::entity_details::EnumMap<T>::operator!=(EnumMap const& other) const {
+bool DND::entity_details::ObjectCounter<T>::operator!=(ObjectCounter const& other) const {
 	return !(*this == other)
 }

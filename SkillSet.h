@@ -64,6 +64,6 @@ namespace DND {
 		static const int YES = 1;
 		static const int NO = 0;
 
-		entity_details::EnumMap<Skill> skillMap;
+		entity_details::ObjectCounter<Skill> skillMap;
 	};
 }

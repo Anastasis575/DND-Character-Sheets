@@ -69,7 +69,7 @@ namespace DND {
 		void setAttribute(Attribute attr, int amt);
 
 	private:
-		entity_details::EnumMap<Attribute> map;
+		entity_details::ObjectCounter<Attribute> map;
 	};
 }
 

@@ -6,7 +6,7 @@ using namespace DND;
 std::string outOfBoundsErrorMessage(std::string field, int min, int max);
 
 Character::Character(const std::string& charName, const std::string& playerName):
-	characterName(charName), playerName(playerName), wallet(entity_details::EnumMap<Currency>(entity_details::CURRENCY_TYPES)) {}
+	characterName(charName), playerName(playerName), wallet(entity_details::ObjectCounter<Currency>(entity_details::CURRENCY_TYPES)) {}
 
 
 int Character::getAttributeScore(Attribute attr) const {

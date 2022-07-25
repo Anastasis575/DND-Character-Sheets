@@ -194,7 +194,7 @@ namespace DND {
 		AttributeSet baseStats;
 		ProficiencySet proficiencies;
 
-		entity_details::EnumMap<Currency> wallet;
+		entity_details::ObjectCounter<Currency> wallet;
 		std::unordered_set<Item, ItemHasher> items;
 		std::unordered_set<Spell, SpellHasher> spells;
 	};

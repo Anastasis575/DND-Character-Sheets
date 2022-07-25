@@ -3,10 +3,10 @@
 #include <string> 
 
 
-DND::AttributeSet::AttributeSet(): map(entity_details::EnumMap<Attribute>(entity_details::ATTRIBUTE_TYPES) ){}
+DND::AttributeSet::AttributeSet(): map(entity_details::ObjectCounter<Attribute>(entity_details::ATTRIBUTE_TYPES) ){}
 
 
-DND::AttributeSet::AttributeSet(int amt) : map(entity_details::EnumMap<Attribute>(entity_details::ATTRIBUTE_TYPES)) {
+DND::AttributeSet::AttributeSet(int amt) : map(entity_details::ObjectCounter<Attribute>(entity_details::ATTRIBUTE_TYPES)) {
 	for each (Attribute attribute in entity_details::ATTRIBUTE_TYPES) {
 		setAttribute(attribute, amt);
 	}

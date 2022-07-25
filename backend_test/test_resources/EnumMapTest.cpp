@@ -6,10 +6,10 @@ using namespace DND::entity_details;
 
 class EnumMapTest : public ::testing::Test {
 protected:
-	EnumMap<DND::Currency> wallet = EnumMap<DND::Currency>(CURRENCY_TYPES);
+	ObjectCounter<DND::Currency> wallet = ObjectCounter<DND::Currency>(CURRENCY_TYPES);
 
 	virtual void setUp() {
-		wallet = EnumMap<DND::Currency>(CURRENCY_TYPES);
+		wallet = ObjectCounter<DND::Currency>(CURRENCY_TYPES);
 	}
 };
 
