@@ -15,10 +15,9 @@
 #include <stdexcept>
 
 namespace DND {
-	typedef std::unordered_set<Item, ItemHasher> Items;
-	typedef std::unordered_set<Spell, SpellHasher> Spells;
+	typedef std::unordered_set<Item> Items;
+	typedef std::unordered_set<Spell> Spells;
 
-	//typedef std::unordered_set<Item, ItemHasher>::end ItemIteratorEnd;
 
 	/**
 	 * @brief An entity class managing all the information about a character's static information. It doesn't necessarily 
@@ -208,8 +207,8 @@ namespace DND {
 		SkillSet skills;
 
 		entity_details::ObjectCounter<Currency> wallet;
-		std::unordered_set<Item, ItemHasher> items;
-		std::unordered_set<Spell, SpellHasher> spells;
+		std::unordered_set<Item> items;
+		std::unordered_set<Spell> spells;
 	};
 
 }

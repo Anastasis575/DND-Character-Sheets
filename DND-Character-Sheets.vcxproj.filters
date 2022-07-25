@@ -41,9 +41,6 @@
     <ClInclude Include="dnd_backend\entities\AttributeSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dnd_backend\entities\Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dnd_backend\entities\Character.h">
       <Filter>Header Files</Filter>
     </ClInclude>

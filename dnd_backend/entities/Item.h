@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <iostream>
 
@@ -22,8 +23,11 @@ namespace DND {
 		return (lhs.getName() == rhs.getName());
 	}
 
-	struct ItemHasher {
-		size_t operator()(const Item& item) const {
+}
+
+namespace std {
+	template <> struct hash<DND::Item> {
+		size_t operator() (const DND::Item& item) const {
 			std::hash<std::string> hasher;
 			return hasher(item.getName());
 		}

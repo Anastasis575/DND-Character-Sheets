@@ -123,7 +123,6 @@
     <ClInclude Include="dnd_backend\entities\ObjectCounter.h" />
     <ClInclude Include="dnd_backend\entities\AttributeSet.h" />
     <ClInclude Include="dnd_backend\entities\Currency.h" />
-    <ClInclude Include="dnd_backend\entities\Entity.h" />
     <ClInclude Include="dnd_backend\entities\Item.h" />
     <ClInclude Include="dnd_backend\entities\Character.h" />
     <ClInclude Include="dnd_backend\entities\SkillSet.h" />
