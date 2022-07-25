@@ -1,7 +1,7 @@
 #pragma once
 #include "Attribute.h"
 #include "ProficiencySet.h"
-#include "EnumMap.h"
+#include "ObjectCounter.h"
 #include <unordered_map>
 #include <vector>
 

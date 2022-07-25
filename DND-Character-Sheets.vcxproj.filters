@@ -74,7 +74,7 @@
     <ClInclude Include="dnd_backend\entities\Item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dnd_backend\entities\EnumMap.h">
+    <ClInclude Include="dnd_backend\entities\ObjectCounter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dnd_backend\entities\ProficiencySet.h">

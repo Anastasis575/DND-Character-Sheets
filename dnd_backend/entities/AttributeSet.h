@@ -1,6 +1,6 @@
 #pragma once
 #include "Attribute.h"
-#include "EnumMap.h"
+#include "ObjectCounter.h"
 
 namespace DND {
 

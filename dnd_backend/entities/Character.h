@@ -5,7 +5,7 @@
 #include "Item.h"
 #include "Currency.h"
 #include "ProficiencySet.h"
-#include "EnumMap.h"
+#include "ObjectCounter.h"
 
 #include <string>
 #include <unordered_map>
