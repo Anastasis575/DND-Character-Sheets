@@ -36,7 +36,7 @@
     <ClCompile Include="dnd_backend\entities\ProficiencySet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SkillSet.cpp">
+    <ClCompile Include="dnd_backend\entities\SkillSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +80,7 @@
     <ClInclude Include="dnd_backend\entities\ProficiencySet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SkillSet.h">
+    <ClInclude Include="dnd_backend\entities\SkillSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

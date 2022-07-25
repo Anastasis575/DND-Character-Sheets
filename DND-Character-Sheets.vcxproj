@@ -115,10 +115,10 @@
     <ClCompile Include="dnd_backend\entities\Character.cpp" />
     <ClCompile Include="dnd_backend\entities\Attribute.cpp" />
     <ClCompile Include="dnd_backend\entities\Currency.cpp" />
+    <ClCompile Include="dnd_backend\entities\SkillSet.cpp" />
     <ClCompile Include="dnd_backend\entities\StatModifier.cpp" />
     <ClCompile Include="dnd_backend\xmldao\tinyxml2.cpp" />
     <ClCompile Include="dnd_backend\entities\ProficiencySet.cpp" />
-    <ClCompile Include="SkillSet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dnd_backend\entities\ObjectCounter.h" />
@@ -128,13 +128,13 @@
     <ClInclude Include="dnd_backend\entities\Entity.h" />
     <ClInclude Include="dnd_backend\entities\Item.h" />
     <ClInclude Include="dnd_backend\entities\Character.h" />
+    <ClInclude Include="dnd_backend\entities\SkillSet.h" />
     <ClInclude Include="dnd_backend\entities\Spell.h" />
     <ClInclude Include="dnd_backend\entities\StatModifier.h" />
     <ClInclude Include="dnd_backend\idao\IPlayerDao.h" />
     <ClInclude Include="dnd_backend\xmldao\tinyxml2.h" />
     <ClInclude Include="dnd_backend\xmldao\XMLPlayerDao.h" />
     <ClInclude Include="dnd_backend\entities\ProficiencySet.h" />
-    <ClInclude Include="SkillSet.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
