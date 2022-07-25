@@ -23,6 +23,8 @@ TEST_F(ObjectCounterTest, SetterTest) {
 	ASSERT_NO_THROW(CURRENCY_TYPES[0]);
 	DND::Currency changed = CURRENCY_TYPES[0];
 
+	EXPECT_ANY_THROW(wallet.setAmount(changed, -1));
+
 	wallet.setAmount(changed, 56);
 	EXPECT_EQ(wallet.getAmount(changed), 56);
 
@@ -31,5 +33,8 @@ TEST_F(ObjectCounterTest, SetterTest) {
 			EXPECT_EQ(wallet.getAmount(curr), 0);
 		}
 	}
+
+	wallet.setAmount(changed, 0);
+	EXPECT_EQ(wallet.getAmount(changed), 0);
 }
 

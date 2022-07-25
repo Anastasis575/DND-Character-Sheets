@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include <utility>
+#include <iostream>
 
 namespace DND {
 	namespace entity_details {
@@ -51,10 +52,12 @@ int DND::entity_details::ObjectCounter<T>::getAmount(T type) const {
 
 template<typename T>
 void DND::entity_details::ObjectCounter<T>::setAmount(T type, int amt) {
-	if (map.count(type) == 0)
-		map.insert(std::make_pair(type, amt));
+	if (amt < 0)
+		throw std::invalid_argument("Object counter can't be less than 0");
+	else if (amt == 0) 
+		map.erase(type);
 	else
-		map[type] = amt;
+		map[type] = amt;		
 }
 
 template<typename T>
