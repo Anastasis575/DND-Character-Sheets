@@ -49,7 +49,7 @@
     <ClCompile Include="test_resources\ItemTest.cpp" />
     <ClCompile Include="test_resources\SpellTest.cpp" />
     <ClCompile Include="test_resources\StatModifierTest.cpp" />
-    <ClCompile Include="test_resources\EnumMapTest.cpp" />
+    <ClCompile Include="test_resources\ObjectCounterTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DND-Character-Sheets.vcxproj">

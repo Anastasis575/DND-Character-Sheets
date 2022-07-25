@@ -4,7 +4,7 @@
 
 using namespace DND::entity_details;
 
-class EnumMapTest : public ::testing::Test {
+class ObjectCounterTest : public ::testing::Test {
 protected:
 	ObjectCounter<DND::Currency> wallet = ObjectCounter<DND::Currency>();
 
@@ -13,13 +13,13 @@ protected:
 	}
 };
 
-TEST_F(EnumMapTest, ConstructorTest) {
+TEST_F(ObjectCounterTest, ConstructorTest) {
 	for each (DND::Currency curr in CURRENCY_TYPES) {
 		EXPECT_EQ(wallet.getAmount(curr), 0);
 	}
 }
 
-TEST_F(EnumMapTest, SetterTest) {
+TEST_F(ObjectCounterTest, SetterTest) {
 	ASSERT_NO_THROW(CURRENCY_TYPES[0]);
 	DND::Currency changed = CURRENCY_TYPES[0];
 

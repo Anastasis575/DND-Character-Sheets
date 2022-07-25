@@ -8,7 +8,7 @@
     <ClCompile Include="test_resources\ItemTest.cpp" />
     <ClCompile Include="test_resources\SpellTest.cpp" />
     <ClCompile Include="test_resources\StatModifierTest.cpp" />
-    <ClCompile Include="test_resources\EnumMapTest.cpp" />
+    <ClCompile Include="test_resources\ObjectCounterTest.cpp" />
     <ClCompile Include="ProficiencyTestSet.cpp" />
   </ItemGroup>
   <ItemGroup>
