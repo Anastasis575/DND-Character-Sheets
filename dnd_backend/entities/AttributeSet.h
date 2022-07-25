@@ -1,8 +1,22 @@
 #pragma once
-#include "Attribute.h"
 #include "ObjectCounter.h"
+#include <vector>
 
 namespace DND {
+	/**
+	 * @brief An enum describing the basic stats of a character.
+	 * @author Dimitris Tsirmpas
+	*/
+	enum class Attribute {
+		Strength,
+		Dexterity,
+		Constitution,
+		Intelligence,
+		Wisdom,
+		Charisma
+		// if you modify this enum remember to change the vector in the .cpp file
+	};
+
 
 	/**
 	 * @brief A class representing the basic attributes of each character such as Strength, Charisma, Dexterity etc.
@@ -12,6 +26,7 @@ namespace DND {
 	class AttributeSet {
 
 	public:
+		static const ::std::vector<Attribute> getAllAttributes();
 
 		/**
 		 * @brief Create an AttributeSet with all-0 stats.
@@ -69,8 +84,18 @@ namespace DND {
 		void setAttribute(Attribute attr, int amt);
 
 	private:
+		/**
+		 * @brief The minimum accepted value for any Attribute.
+		 * @see Attribute
+		*/
+		static const int MIN_ATTRIBUTE_VALUE = 0;
+		/**
+		 * @brief The maximum accepted value for any Attribute.
+		 * @see Attribute
+		*/
+		static const int MAX_ATTRIBUTE_VALUE = 20;
+		static const ::std::vector<Attribute> ATTRIBUTES;
+
 		entity_details::ObjectCounter<Attribute> map;
 	};
 }
-
-

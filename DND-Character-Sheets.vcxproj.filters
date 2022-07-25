@@ -27,9 +27,6 @@
     <ClCompile Include="dnd_backend\xmldao\tinyxml2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dnd_backend\entities\Attribute.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="dnd_backend\entities\Currency.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -41,9 +38,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dnd_backend\entities\Attribute.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dnd_backend\entities\AttributeSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>

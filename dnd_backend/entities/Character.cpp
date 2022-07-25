@@ -151,8 +151,7 @@ void Character::setProfiency(Attribute attr, bool isProficient) {
 std::unordered_set<Attribute> Character::getProfiencies() const {
 	std::unordered_set<Attribute> set = std::unordered_set<Attribute>();
 	
-	//this is dumb but I want ProficiencySet to be as generic as it can be
-	for each (Attribute attr in entity_details::ATTRIBUTE_TYPES) {
+	for each (Attribute attr in AttributeSet::getAllAttributes()) {
 		if (proficiencies.hasProficiency(attr)) {
 			set.insert(attr);
 		}

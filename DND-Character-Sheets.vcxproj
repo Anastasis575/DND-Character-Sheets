@@ -113,7 +113,6 @@
   <ItemGroup>
     <ClCompile Include="dnd_backend\entities\AttributeSet.cpp" />
     <ClCompile Include="dnd_backend\entities\Character.cpp" />
-    <ClCompile Include="dnd_backend\entities\Attribute.cpp" />
     <ClCompile Include="dnd_backend\entities\Currency.cpp" />
     <ClCompile Include="dnd_backend\entities\SkillSet.cpp" />
     <ClCompile Include="dnd_backend\entities\StatModifier.cpp" />
@@ -122,7 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dnd_backend\entities\ObjectCounter.h" />
-    <ClInclude Include="dnd_backend\entities\Attribute.h" />
     <ClInclude Include="dnd_backend\entities\AttributeSet.h" />
     <ClInclude Include="dnd_backend\entities\Currency.h" />
     <ClInclude Include="dnd_backend\entities\Entity.h" />
