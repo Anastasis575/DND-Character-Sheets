@@ -72,7 +72,6 @@ std::string Character::getBackground() const {
 	return background;
 }
 
-
 void Character::setSpeed(int speed) {
 	if (getSpeed() < MIN_SPEED || getSpeed() > MAX_SPEED)
 		throw std::invalid_argument(outOfBoundsErrorMessage("Speed", MIN_SPEED, MAX_SPEED));
@@ -94,11 +93,11 @@ void Character::setLevel(int level) {
 	this->level = level;
 }
 
-void Character::addItem(Item& item) {
+void Character::addItem(const Item& item) {
 	items.insert(item);
 }
 
-void Character::removeItem(Item& item) {
+void Character::removeItem(const Item& item) {
 	items.erase(item);
 }
 
@@ -110,11 +109,11 @@ void Character::setAmount(Currency type, int amt) {
 	wallet.setAmount(type, amt);
 }
 
-void Character::addSpell(Spell& original) {
+void Character::addSpell(const Spell& original) {
 	spells.insert(original);
 }
 
-void Character::removeSpell(Spell& original) {
+void Character::removeSpell(const Spell& original) {
 	spells.erase(original);
 }
 

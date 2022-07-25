@@ -75,13 +75,13 @@ namespace DND {
 		 * @brief Add a new item to the character's inventory.
 		 * @param item the new item
 		*/
-		void addItem(Item& item);
+		void addItem(const Item& item);
 
 		/**
 		 * @brief Remove an item from the character's inventory.
 		 * @param item the item to be removed
 		*/
-		void removeItem(Item& item);
+		void removeItem(const Item& item);
 
 		/**
 		 * @brief Get all the items this character posseses.
@@ -100,13 +100,13 @@ namespace DND {
 		 * @brief Add a new spell to the character's inventory.
 		 * @param spell the new spell
 		*/
-		void addSpell(Spell& original);
+		void addSpell(const Spell& original);
 
 		/**
 		 * @brief Remove a spell from the character's inventory.
 		 * @param spell the spell to be removed
 		*/
-		void removeSpell(Spell& original);
+		void removeSpell(const Spell& original);
 
 		/**
 		 * @brief Get all the spells in the character's inventory.
