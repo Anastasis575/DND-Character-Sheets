@@ -1,6 +1,6 @@
 #pragma once
 #include <stdexcept>
-#include <vector>
+#include <list>
 #include <unordered_map>
 #include <utility>
 #include <iostream>
@@ -31,10 +31,15 @@ namespace DND {
 			*/
 			int getAmount(T object) const;
 
+			/**
+			 * @brief Get all the objects with their corresponding count.
+			 * @return a list of <object, amount> stored in the collection
+			*/
+			std::list<std::pair<T, int>> getAll() const;
+
 			bool operator==(ObjectCounter const&) const;
 
 			bool operator!=(ObjectCounter const&) const;
-
 
 		private:
 			std::unordered_map<T, int> map;
@@ -67,5 +72,16 @@ bool DND::entity_details::ObjectCounter<T>::operator==(ObjectCounter const& othe
 
 template<typename T>
 bool DND::entity_details::ObjectCounter<T>::operator!=(ObjectCounter const& other) const {
-	return !(*this == other)
+	return !(*this == other);
+}
+
+template<typename T>
+std::list<std::pair<T, int>> DND::entity_details::ObjectCounter<T>::getAll() const {
+	std::list<std::pair<T, int>> items;
+
+	for each (auto object in map) {
+		items.push_back(std::make_pair(object.first, object.second));
+	}
+
+	return items;
 }
