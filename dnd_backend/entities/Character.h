@@ -14,6 +14,7 @@
 #include <unordered_set>
 #include <limits>
 #include <stdexcept>
+#include <optional>
 
 namespace DND {
 	typedef std::vector<std::pair<Item, int>> Items;
@@ -72,6 +73,24 @@ namespace DND {
 
 		std::string getBackground() const;
 
+		/**
+		 * @brief Get the icon the player has chosen for this player. Note that this method doesn't
+		 * check if the path itself is valid.
+		 * 
+		 * @return an optional containing a path to the icon if an icon has been selected
+		*/
+		std::optional<std::string> getIcon() const;
+
+		/**
+		 * @brief Remove the previously selected icon.
+		*/
+		void removeIcon();
+
+		/**
+		 * @brief Set the character's icon.
+		 * @param iconPath the path to the new icon.
+		*/
+		void setIcon(std::string iconPath);
 		/**
 		 * @brief Add a new item to the character's inventory.
 		 * @param item the new item
@@ -147,7 +166,7 @@ namespace DND {
 
 		void setClass(const StatModifier& dndClass);
 
-		void setBackground(const std::string background);
+		void setBackground(std::string background);
 
 		void setSubClass(const StatModifier& dndSubClass);
 
@@ -202,6 +221,7 @@ namespace DND {
 
 		std::string hdType;
 		std::string background;
+		std::optional<std::string> charIconPath;
 
 		AttributeSet baseStats;
 		ProficiencySet proficiencies;

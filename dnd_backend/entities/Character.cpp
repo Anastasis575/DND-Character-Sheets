@@ -185,6 +185,18 @@ Skills Character::getSkills() const {
 	return charSkills;
 }
 
+std::optional<std::string> Character::getIcon() const {
+	return charIconPath;
+}
+
+void Character::removeIcon() {
+	charIconPath.reset();
+}
+
+void Character::setIcon(std::string iconPath) {
+	charIconPath.emplace(iconPath);
+}
+
 std::string outOfBoundsErrorMessage(std::string field, int min, int max) {
 	return field + " can only be between " + std::to_string(min) + " and " + std::to_string(max);
 }

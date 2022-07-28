@@ -173,6 +173,23 @@ TEST_F(CharacterTest, TestSkills) {
 	EXPECT_TRUE(skills.find(Skill::INSIGHT) != skills.end());
 }
 
+TEST_F(CharacterTest, TestIcon) {
+	EXPECT_FALSE(character->getIcon());
+
+	std::string newIcon = "icon.ico";
+	std::string altIcon = "icon.ico";
+
+	character->setIcon(newIcon);
+	EXPECT_EQ(newIcon, character->getIcon());
+
+	character->removeIcon();
+	EXPECT_FALSE(character->getIcon());
+
+	character->setIcon(newIcon);
+	character->setIcon(altIcon);
+	EXPECT_EQ(altIcon, character->getIcon());
+}
+
 bool contains(const Items& items, const Item& item, int amount) {
 	return std::find(items.begin(), items.end(), std::make_pair(item, amount)) != items.end();
 }
