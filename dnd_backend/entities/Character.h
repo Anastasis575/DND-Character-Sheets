@@ -10,12 +10,13 @@
 
 #include <string>
 #include <unordered_map>
+#include <vector>
 #include <unordered_set>
 #include <limits>
 #include <stdexcept>
 
 namespace DND {
-	typedef std::unordered_set<Item> Items;
+	typedef std::vector<std::pair<Item, int>> Items;
 	typedef std::unordered_set<Spell> Spells;
 
 
@@ -207,7 +208,7 @@ namespace DND {
 		SkillSet skills;
 
 		entity_details::ObjectCounter<Currency> wallet;
-		std::unordered_set<Item> items;
+		entity_details::ObjectCounter<Item> items;
 		std::unordered_set<Spell> spells;
 	};
 

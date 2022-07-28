@@ -94,15 +94,19 @@ void Character::setLevel(int level) {
 }
 
 void Character::addItem(const Item& item) {
-	items.insert(item);
+	int prev = items.getAmount(item);
+	items.setAmount(item, prev+1);
 }
 
 void Character::removeItem(const Item& item) {
-	items.erase(item);
+	int prev = items.getAmount(item);
+	if(prev > 0)
+		items.setAmount(item, prev - 1);
 }
 
 Items Character::getItems() const {
-	return items;
+	auto charItems = items.getAll();
+	return Items(charItems.begin(), charItems.end());
 }
 
 void Character::setAmount(Currency type, int amt) {

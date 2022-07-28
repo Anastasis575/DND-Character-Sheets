@@ -33,6 +33,8 @@ protected:
 	}
 };
 
+bool contains(const Items& items, const Item& item, int amount);
+
 TEST_F(CharacterTest, TestConstructor) {
 	EXPECT_EQ(character->getPlayerName(), PLAYER_NAME);
 	EXPECT_EQ(character->getCharacterName(), CHAR_NAME);
@@ -83,20 +85,22 @@ TEST_F(CharacterTest, ItemTest) {
 	EXPECT_EQ(character->getItems().size(), 0);
 	Item item1 = Item("TEST_ITEM1", "does stuff");
 	Item item2 = Item("TEST_ITEM2", "does other stuff");
+	Item item1_copy = Item(item1);
 
 	character->addItem(item1);
 	character->addItem(item2);
+	character->addItem(item1_copy);
 	Items items = character->getItems();
 
 	EXPECT_EQ(items.size(), 2);
-	EXPECT_NE(items.find(item1), items.end());
-	EXPECT_NE(items.find(item2), items.end());
+	EXPECT_TRUE(contains(items, item1, 2));
+	EXPECT_TRUE(contains(items, item2, 1));
 
-	character->removeItem(item1);
+	character->removeItem(item2);
 	items = character->getItems();
 
-	EXPECT_EQ(items.find(item1), items.end());
-	EXPECT_NE(items.find(item2), items.end());
+	EXPECT_TRUE(contains(items, item1, 2));
+	EXPECT_FALSE(contains(items, item2, 1));
 	EXPECT_EQ(items.size(), 1);
 }
 
@@ -167,4 +171,8 @@ TEST_F(CharacterTest, TestSkills) {
 	EXPECT_TRUE(skills.find(Skill::ACROBATICS) == skills.end());
 	EXPECT_TRUE(skills.find(Skill::HISTORY) != skills.end());
 	EXPECT_TRUE(skills.find(Skill::INSIGHT) != skills.end());
+}
+
+bool contains(const Items& items, const Item& item, int amount) {
+	return std::find(items.begin(), items.end(), std::make_pair(item, amount)) != items.end();
 }
