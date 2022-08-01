@@ -177,7 +177,7 @@ TEST_F(CharacterTest, TestIcon) {
 	EXPECT_FALSE(character->getIcon());
 
 	std::string newIcon = "icon.ico";
-	std::string altIcon = "icon.ico";
+	std::string altIcon = "icon2.ico";
 
 	character->setIcon(newIcon);
 	EXPECT_EQ(newIcon, character->getIcon());
