@@ -112,31 +112,31 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="entities\Attribute.cpp" />
+    <None Include=".gitignore" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="entities\AttributeSet.cpp" />
     <ClCompile Include="entities\Character.cpp" />
     <ClCompile Include="entities\Currency.cpp" />
     <ClCompile Include="entities\ProficiencySet.cpp" />
+    <ClCompile Include="entities\SkillSet.cpp" />
     <ClCompile Include="entities\StatModifier.cpp" />
     <ClCompile Include="xmldao\LocalFileResolver.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="entities\Attribute.h" />
     <ClInclude Include="entities\AttributeSet.h" />
     <ClInclude Include="entities\Character.h" />
     <ClInclude Include="entities\Currency.h" />
-    <ClInclude Include="entities\EnumMap.h" />
     <ClInclude Include="entities\Item.h" />
+    <ClInclude Include="entities\ObjectCounter.h" />
     <ClInclude Include="entities\ProficiencySet.h" />
+    <ClInclude Include="entities\SkillSet.h" />
     <ClInclude Include="entities\Spell.h" />
     <ClInclude Include="entities\StatModifier.h" />
     <ClInclude Include="idao\ICharacterDAO.h" />
     <ClInclude Include="xmldao\LocalFileResolver.h" />
     <ClInclude Include="xmldao\XMLCharacterDAO.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include=".gitignore" />
-    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
