@@ -4,6 +4,12 @@
 #include "ObjectCounter.h"
 #include <unordered_map>
 #include <unordered_set>
+/*
+* Straight up include this because implementing the save/load procedures
+* without the access would need to implement setters to all classes and break
+* encapsulation
+*/
+#include <boost/serialization/access.hpp>
 
 namespace DND {
 	enum class Skill {
@@ -69,3 +75,5 @@ namespace DND {
 		entity_details::ObjectCounter<Skill> skillMap;
 	};
 }
+
+

@@ -1,6 +1,12 @@
 #pragma once
 #include <string>
 #include <iostream>
+/*	
+* Straight up include this because implementing the save/load procedures 
+* without the access would need to implement setters to all classes and break
+* encapsulation
+*/
+#include <boost/serialization/access.hpp>
 
 namespace DND {
 	/**
@@ -17,6 +23,8 @@ namespace DND {
 	private:
 		const std::string name;
 		const std::string description;
+
+		friend class boost::serialization::access;
 	};
 
 	inline bool operator == (Item const& lhs, Item const& rhs) {
@@ -32,4 +40,16 @@ namespace std {
 			return hasher(item.getName());
 		}
 	};
+}
+
+namespace boost {
+	namespace serialization {
+
+		template<class Archive>
+		void serialize(Archive& ar, DND::Item& item, const unsigned int version) {
+			ar& item.description;
+			ar& item.name;
+		}
+
+	} 
 }

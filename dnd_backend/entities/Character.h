@@ -15,6 +15,12 @@
 #include <limits>
 #include <stdexcept>
 #include <optional>
+/*
+* Straight up include this because implementing the save/load procedures
+* without the access would need to implement setters to all classes and break
+* encapsulation
+*/
+#include <boost/serialization/access.hpp>
 
 namespace DND {
 	typedef std::vector<std::pair<Item, int>> Items;
@@ -230,6 +236,30 @@ namespace DND {
 		entity_details::ObjectCounter<Currency> wallet;
 		entity_details::ObjectCounter<Item> items;
 		std::unordered_set<Spell> spells;
+
+		friend class boost::serialization::access;
 	};
 
+}
+
+namespace boost {
+	namespace serialization {
+		template<class Archive>
+		void serialize(Archive& ar, DND::Character& character, const unsigned int file_version) {
+			ar& character.ac;
+			ar& character.background;
+			ar& character.baseStats;
+			ar& character.characterName;
+			ar& character.charIconPath;
+			ar& character.dndClass;
+			ar& character.dndSubClass;
+			ar& character.hdType;
+			ar& character.hp;
+			ar& character.items;
+			ar& character.level;
+			ar& character.playerName;
+			ar& character.proficiencies;
+			ar& character.race;
+		}
+	}
 }

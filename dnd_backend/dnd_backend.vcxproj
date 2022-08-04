@@ -125,7 +125,6 @@
     <ClCompile Include="entities\ProficiencySet.cpp" />
     <ClCompile Include="entities\SkillSet.cpp" />
     <ClCompile Include="entities\StatModifier.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="xmldao\LocalFileResolver.cpp" />
   </ItemGroup>
   <ItemGroup>
