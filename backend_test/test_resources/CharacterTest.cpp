@@ -190,6 +190,20 @@ TEST_F(CharacterTest, TestIcon) {
 	EXPECT_EQ(altIcon, character->getIcon());
 }
 
+TEST_F(CharacterTest, TestSerialization) {
+	testSerialization<Character>(*character,
+		[](const Character& a, const Character& b) {
+			/* 
+			* There's little point in checking every field individually, as the 
+			* test would need to be refactored every time someone added / removed one
+			* Realistically at some point someone will forget and the whole test will
+			* be rendered obsolete.
+			*/
+			return a.getCharacterName() == b.getCharacterName() &&
+				a.getPlayerName() == b.getPlayerName();
+		});
+}
+
 bool contains(const Items& items, const Item& item, int amount) {
 	return std::find(items.begin(), items.end(), std::make_pair(item, amount)) != items.end();
 }

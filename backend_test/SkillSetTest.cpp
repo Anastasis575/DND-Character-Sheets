@@ -39,3 +39,15 @@ TEST_F(SkillSetTest, TestProficiencies) {
 			EXPECT_TRUE(set.isSkilledAt(skill));
 	}
 }
+
+TEST_F(SkillSetTest, TestSerialization) {
+	testSerialization<SkillSet>(set,
+		[](const SkillSet& a, const SkillSet& b) {
+			for each (Skill skill in SkillSet::getAllSkills()){
+				if (a.isSkilledAt(skill) != b.isSkilledAt(skill)) {
+					return false;
+				}
+			}
+			return true;
+		});
+}

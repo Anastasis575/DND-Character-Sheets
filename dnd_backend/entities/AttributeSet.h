@@ -90,6 +90,11 @@ namespace DND {
 		*/
 		void setAttribute(Attribute attr, int amt);
 
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version) {
+			ar& map;
+		}
+
 	private:
 		/**
 		 * @brief The minimum accepted value for any Attribute.
@@ -107,13 +112,4 @@ namespace DND {
 
 		friend class boost::serialization::access;
 	};
-}
-
-namespace boost {
-	namespace serialization {
-		template<class Archive>
-		void serialize(Archive& ar, DND::AttributeSet& stats, const unsigned int file_version) {
-			ar& stats.map;
-		}
-	}
 }

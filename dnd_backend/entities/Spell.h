@@ -18,14 +18,26 @@ namespace DND {
 		Spell(const std::string& name, const std::string& description, int level) 
 			: name(name), description(description), level(level) {}
 
+		Spell(): level(-1){}
+
 		std::string getName() const { return name; }
 		std::string getDescription() const { return description; }
 		int getLevel() const { return level; }
 
 	private:
-		const std::string name;
-		const std::string description;
-		const int level;
+		//must be non-const for the serialization library
+		std::string name;
+		std::string description;
+		int level;
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version) {
+			ar& name;
+			ar& description;
+			ar& level;
+		}
 	};
 
 	inline bool operator == (Spell const& lhs, Spell const& rhs) {
@@ -40,16 +52,4 @@ namespace std {
 			return hasher(spell.getName());
 		}
 	};
-}
-
-namespace boost {
-	namespace serialization {
-
-		template<class Archive>
-		void serialize(Archive& ar, DND::Spell& spell, const unsigned int version) {
-			ar& spell.description;
-			ar& spell.name;
-		}
-
-	}
 }

@@ -29,16 +29,11 @@ namespace DND {
 		std::string name; // non-const to allow copy constructor to exist
 		AttributeSet stats;
 
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version) {
+			ar& name;
+			ar& stats;
+		}
 		friend class boost::serialization::access;
 	};
-}
-
-namespace boost {
-	namespace serialization {
-		template<class Archive>
-		void serialize(Archive& ar, DND::StatModifier& stats, const unsigned int file_version) {
-			ar& stats.name;
-			ar& stats.stats;
-		}
-	}
 }

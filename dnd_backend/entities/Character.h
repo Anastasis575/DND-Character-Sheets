@@ -14,13 +14,14 @@
 #include <unordered_set>
 #include <limits>
 #include <stdexcept>
-#include <optional>
+#include <boost/optional.hpp> //serializable
 /*
 * Straight up include this because implementing the save/load procedures
 * without the access would need to implement setters to all classes and break
 * encapsulation
 */
 #include <boost/serialization/access.hpp>
+#include <boost/serialization/optional.hpp>
 
 namespace DND {
 	typedef std::vector<std::pair<Item, int>> Items;
@@ -38,10 +39,14 @@ namespace DND {
 	public:
 
 		/**
-		 * @brief Creates a PlayerData instance by reading the character's name. To be used by a builder object.
-		 * @see CharacterBuilder
+		 * @brief Creates a new Character instance.
 		*/
 		Character(const std::string& charName, const std::string& playerName);
+
+		/**
+		 * @brief Used only by the serialization library, do NOT use.
+		*/
+		Character();
 
 		/**
 		 * @brief Return the score for the specified attribute.
@@ -85,7 +90,7 @@ namespace DND {
 		 * 
 		 * @return an optional containing a path to the icon if an icon has been selected
 		*/
-		std::optional<std::string> getIcon() const;
+		boost::optional<std::string> getIcon() const;
 
 		/**
 		 * @brief Remove the previously selected icon.
@@ -218,8 +223,8 @@ namespace DND {
 		int ac = 0;
 		int speed = 1;
 
-		const std::string characterName;
-		const std::string playerName;
+		std::string characterName;
+		std::string playerName;
 
 		StatModifier race;
 		StatModifier dndClass;
@@ -227,7 +232,7 @@ namespace DND {
 
 		std::string hdType;
 		std::string background;
-		std::optional<std::string> charIconPath;
+		boost::optional<std::string> charIconPath;
 
 		AttributeSet baseStats;
 		ProficiencySet proficiencies;
@@ -238,28 +243,24 @@ namespace DND {
 		std::unordered_set<Spell> spells;
 
 		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version) {
+			ar& ac;
+			ar& background;
+			ar& baseStats;
+			ar& characterName;
+			ar& charIconPath;
+			ar& dndClass;
+			ar& dndSubClass;
+			ar& hdType;
+			ar& hp;
+			ar& items;
+			ar& level;
+			ar& playerName;
+			ar& proficiencies;
+			ar& race;
+		}
 	};
 
-}
-
-namespace boost {
-	namespace serialization {
-		template<class Archive>
-		void serialize(Archive& ar, DND::Character& character, const unsigned int file_version) {
-			ar& character.ac;
-			ar& character.background;
-			ar& character.baseStats;
-			ar& character.characterName;
-			ar& character.charIconPath;
-			ar& character.dndClass;
-			ar& character.dndSubClass;
-			ar& character.hdType;
-			ar& character.hp;
-			ar& character.items;
-			ar& character.level;
-			ar& character.playerName;
-			ar& character.proficiencies;
-			ar& character.race;
-		}
-	}
 }

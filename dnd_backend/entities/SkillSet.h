@@ -43,6 +43,7 @@ namespace DND {
 	class SkillSet {
 	public:
 		static Attribute SkillSet::getSkillDependency(Skill skill);
+
 		static const Skills getAllSkills();
 
 		/**
@@ -73,7 +74,12 @@ namespace DND {
 		static const int NO = 0;
 
 		entity_details::ObjectCounter<Skill> skillMap;
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version) {
+			ar& skillMap;
+		}
 	};
 }
-
-

@@ -54,16 +54,12 @@ namespace DND {
 		static const int YES_PROF = 1;
 		
 		AttributeSet set;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version) {
+			ar& set;
+		}
 		friend class boost::serialization::access;
 	};
-}
-
-namespace boost {
-	namespace serialization {
-		template<class Archive>
-		void serialize(Archive& ar, DND::ProficiencySet& set, const unsigned int file_version) {
-			ar& set.set;
-		}
-	}
 }
 

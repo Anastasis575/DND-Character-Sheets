@@ -13,9 +13,6 @@ protected:
 		original = AttributeSet(2);
 	}
 
-	virtual void TearDown() {
-
-	}
 };
 
 void expectAllEqualTo(const AttributeSet& set, int strengthValue, int dexterityValue,
@@ -80,6 +77,13 @@ TEST_F(AttributeSetTest, TestEqualsOperator) {
 TEST_F(AttributeSetTest, TestNotEqualsOperator) {
 	EXPECT_FALSE(original != AttributeSet(original));
 	EXPECT_TRUE(original != (original + 2));
+}
+
+TEST_F(AttributeSetTest, TestSerialization) {
+	testSerialization<AttributeSet>(original,
+		[](const AttributeSet& a, const AttributeSet& b) {
+			return a == b;
+		});
 }
 
 void expectAllEqualTo(const AttributeSet& set, int amt) {

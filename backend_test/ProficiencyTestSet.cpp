@@ -58,3 +58,18 @@ TEST_F(ProficiencySetTest, TestBonusStats) {
 			EXPECT_EQ(bonus.getAttributeScore(attr), 0);
 	}
 }
+
+TEST_F(ProficiencySetTest, TestSerialization) {
+	testSerialization<ProficiencySet>(set,
+		[](const ProficiencySet& a, const ProficiencySet& b) {
+
+			for each (DND::Attribute attr in AttributeSet::getAllAttributes()){
+				if (a.hasProficiency(attr) != b.hasProficiency(attr)) {
+					return false;
+				}
+			}
+			return true;
+
+		}
+	);
+}
