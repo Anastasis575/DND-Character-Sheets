@@ -4,7 +4,7 @@
 #include <filesystem>
 
 namespace DND {
-	namespace Serialization {
+	namespace serialization_details {
 
 		typedef std::filesystem::path Path;
 
@@ -26,23 +26,23 @@ namespace DND {
 			 * @brief Get the path to the file that holds the character's data.
 			 * @param character the character
 			 * @return the path to the character's file
-			 * @throws std::invalid_argument if the file doesn't exist
+			 * @throws std::invalid_argument if the file doesn't exist or if the player name is blank
 			*/
-			const Path getCharacterFile(const Character& character) const;
+			const Path getCharacterFile(const std::string& characterName, const std::string& playerName) const;
 
 			/**
 			 * @brief Create a new file for the character.
 			 * @param character the character who is to be written in the file system
 			 * @return the path to the newly created file
-			 * @throws std::invalid_argument if the file already exist
+			 * @throws std::invalid_argument if the file already exists or if the player name is blank
 			*/
-			const Path createCharacterFile(const Character& character) const;
+			const Path createCharacterFile(const std::string& characterName, const std::string& playerName) const;
 
 		private:
 			static const std::string EXTENSION;
 
 			const Path root;
-			Path resolve(const Character&) const;
+			Path resolve(const std::string& characterName, const std::string& playerName) const;
 		};
 	}
 }

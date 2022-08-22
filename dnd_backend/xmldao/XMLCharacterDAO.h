@@ -1,22 +1,26 @@
 #include "ICharacterDao.h"
+#include "LocalFileResolver.h"
 
 namespace DND {
 	
 	/**
-	 * @brief A DAO packaging the PlayerData into local XML files.
+	 * @brief A DAO packaging the Character objects into local XML files.
 	 * @author Dimitris Tsirmpas
 	*/
 	class XMLCharacterDAO : ICharacterDAO {
 	public:
 
-		virtual Character createCharacter(const std::string& characterName, 
-			const std::string& playerName) override;
+		void saveCharacter(const Character& updated) const override;
 
-		virtual Character getCharacter(const std::string& characterName, 
-			const std::string& playerName) override;
+		std::unique_ptr<Character> loadCharacter(const std::string& characterName, const std::string& playerName) const override;
 
-		virtual void updateCharacter(Character& data) override;
+		void deleteCharacter(const Character& character) const override;
 
-		bool void deleteCharacter(const std::string& characterName, const std::string& playerName) override;
+	private:
+		serialization_details::LocalFileResolver resolver;
+
+		void XMLCharacterDAO::createCharacter(const std::string& characterName, const std::string& playerName) const;
+
+		void XMLCharacterDAO::updateCharacter(const Character& character) const;
 	};
 }

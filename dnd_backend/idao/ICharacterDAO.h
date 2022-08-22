@@ -1,6 +1,6 @@
+#include "Character.h"
 #include <string>
-
-class Character;
+#include <memory>
 
 namespace DND {
 	
@@ -10,34 +10,28 @@ namespace DND {
 	*/
 	class ICharacterDAO {
 	public:
-		
+
 		/**
-		 * @brief Create a character with the specified name and default parameters.
-		 * @param characterName the character's name
-		 * @param playerName the name of the player who created it
-		 * @return an empty, initialized Character object
+		 * @brief Write the contents of the characters to persistent storage.
+		 * @param data the character
+		 * @throw if an IO error occurs
 		*/
-		virtual Character createCharacter(const std::string& characterName, const std::string& playerName) = 0;
+		virtual void saveCharacter(const Character& updated) const = 0;
 
 		/**
 		 * @brief Retrieve the data of the character with the specified name from persistent storage.
 		 * @param characterName the character's name
 		 * @param playerName the name of the player who created it
-		 * @return a character object initialized with all the saved data
+		 * @return a pointer to a character object initialized with all the saved data
+		 * @throw if the player hasn't created a player with that name or if an IO error occurs 
 		*/
-		virtual Character getCharacter(const std::string& characterName, const std::string& playerName) = 0;
-		
-		/**
-		 * @brief Write the contents of the characters with an XML file with the character's name as filename.
-		 * @param data the character's data
-		*/
-		virtual void updateCharacter(Character& data) = 0;
+		virtual std::unique_ptr<Character> loadCharacter(const std::string& characterName, const std::string& playerName) const = 0;
 		
 		/**
 		 * @brief Delete a character from persistent storage.
 		 * @param characterName the character's name
 		 * @param playerName the name of the player who created it
 		*/
-		virtual void deleteCharacter(const std::string& characterName, const std::string& playerName) = 0;
+		virtual void deleteCharacter(const Character& character) const = 0;
 	};
 }

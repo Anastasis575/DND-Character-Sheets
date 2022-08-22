@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <fstream>
 
-using namespace DND::Serialization;
+using namespace DND::serialization_details;
 namespace fs = std::filesystem;
 
 const std::string LocalFileResolver::EXTENSION = ".chr";
@@ -13,16 +13,16 @@ LocalFileResolver::LocalFileResolver(const Path& dataDirectory) :root(dataDirect
 	}
 }
 
-const Path LocalFileResolver::getCharacterFile(const Character& character) const {
-	Path charPath = resolve(character);
+const Path LocalFileResolver::getCharacterFile(const std::string& characterName, const std::string& playerName) const {
+	Path charPath = resolve(characterName, playerName);
 	if (!fs::exists(charPath)) {
 		throw std::invalid_argument("Directory " + charPath.string() + " does not exist");
 	}
 	return charPath;
 }
 
-const Path LocalFileResolver::createCharacterFile(const Character& character) const {
-	Path charPath = resolve(character);
+const Path LocalFileResolver::createCharacterFile(const std::string& characterName, const std::string& playerName) const {
+	Path charPath = resolve(characterName, playerName);
 	
 	if (fs::exists(charPath)) {
 		throw std::invalid_argument("File " + charPath.string() + " already exists");
@@ -39,6 +39,12 @@ const Path LocalFileResolver::createCharacterFile(const Character& character) co
 	return charPath;
 }
 
-Path LocalFileResolver::resolve(const Character& character) const {
-	return root / Path(character.getPlayerName()) / Path(character.getCharacterName()) / Path(EXTENSION);
+Path LocalFileResolver::resolve(const std::string& characterName, const std::string& playerName) const {
+	bool whiteSpacesOnly = std::all_of(playerName.cbegin(), playerName.cend(), [](char c) { return std::isspace(c); });
+	
+	if (whiteSpacesOnly) {
+		throw std::invalid_argument("Cannot save character for a blank user name");
+	}
+
+	return root / playerName / characterName / EXTENSION;
 }
