@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <functional>
-#include <stdio.h>
+#include <cstdio>
 #include <fstream>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -29,24 +29,21 @@ void testSerialization(const T & object, std::function<bool (const T&, const T&)
 	{
 		std::ofstream ofs;
 		ofs.open(SERIALIZATION_FILE_NAME);
-		ofs << std::endl; // create file for archive objects
 		boost::archive::text_oarchive oa(ofs);
 		oa << object;
-		//ofs.close();
 	}
 	
 
-	T other; //this does require a default constructor, but otherwise fails upon DEBUG assertions
+	T other; //this does require a default constructor sadly
 	{
 		std::ifstream ifs;
 		ifs.open(SERIALIZATION_FILE_NAME);
 		boost::archive::text_iarchive ia(ifs);
 		ia >> other;
-		//ifs.close();
 	}
 	
 
 	EXPECT_TRUE(comparator(object, other));
 
-	remove(SERIALIZATION_FILE_NAME.c_str());
+	std::remove(SERIALIZATION_FILE_NAME.c_str());
 }

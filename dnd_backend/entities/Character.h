@@ -14,7 +14,7 @@
 #include <unordered_set>
 #include <limits>
 #include <stdexcept>
-#include <boost/optional.hpp> //serializable
+#include <boost/optional.hpp> //serializable unlike std::optional
 /*
 * Straight up include this because implementing the save/load procedures
 * without the access would need to implement setters to all classes and break
