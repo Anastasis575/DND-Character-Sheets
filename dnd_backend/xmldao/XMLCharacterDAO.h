@@ -19,8 +19,8 @@ namespace DND {
 	private:
 		serialization_details::LocalFileResolver resolver;
 
-		void XMLCharacterDAO::createCharacter(const std::string& characterName, const std::string& playerName) const;
+		void createCharacter(const std::string& characterName, const std::string& playerName) const;
 
-		void XMLCharacterDAO::updateCharacter(const Character& character) const;
+		void updateCharacter(const Character& character) const;
 	};
 }

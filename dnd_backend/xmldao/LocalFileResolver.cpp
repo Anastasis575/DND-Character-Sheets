@@ -46,5 +46,5 @@ Path LocalFileResolver::resolve(const std::string& characterName, const std::str
 		throw std::invalid_argument("Cannot save character for a blank user name");
 	}
 
-	return root / playerName / characterName / EXTENSION;
+	return root / playerName / (characterName + EXTENSION);
 }

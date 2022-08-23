@@ -11,6 +11,7 @@
     <ClCompile Include="test_resources\ProficiencyTestSet.cpp" />
     <ClCompile Include="test_resources\SkillSetTest.cpp" />
     <ClCompile Include="test_resources\test.cpp" />
+    <ClCompile Include="LocalFileResolverTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
