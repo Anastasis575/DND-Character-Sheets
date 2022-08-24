@@ -43,3 +43,10 @@ TEST_F(StatModifierTest, TestImmutability) {
 	EXPECT_EQ(s.getName(), "TEST_NAME");
 	expectEqualStats(original.getStats(), AttributeSet(6));
 }
+
+TEST_F(StatModifierTest, TestSerialization) {
+	testSerialization<StatModifier>(original,
+		[](const StatModifier& a, const StatModifier& b) {
+			return a.getName() == b.getName() && a.getStats() == b.getStats();
+		});
+}

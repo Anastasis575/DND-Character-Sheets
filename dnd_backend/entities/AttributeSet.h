@@ -1,6 +1,12 @@
 #pragma once
 #include "ObjectCounter.h"
 #include <unordered_set>
+/*
+* Straight up include this because implementing the save/load procedures
+* without the access would need to implement setters to all classes and break
+* encapsulation
+*/
+#include <boost/serialization/access.hpp>
 
 namespace DND {
 	/**
@@ -84,6 +90,11 @@ namespace DND {
 		*/
 		void setAttribute(Attribute attr, int amt);
 
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version) {
+			ar& map;
+		}
+
 	private:
 		/**
 		 * @brief The minimum accepted value for any Attribute.
@@ -98,5 +109,7 @@ namespace DND {
 		static const ::std::vector<Attribute> ATTRIBUTE_VALUES;
 
 		entity_details::ObjectCounter<Attribute> map;
+
+		friend class boost::serialization::access;
 	};
 }

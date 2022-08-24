@@ -3,13 +3,14 @@
 #include "Currency.h"
 
 using namespace DND::entity_details;
+typedef ObjectCounter<DND::Currency> CurrencyCounter;
 
 class ObjectCounterTest : public ::testing::Test {
 protected:
-	ObjectCounter<DND::Currency> wallet = ObjectCounter<DND::Currency>();
+	CurrencyCounter wallet = CurrencyCounter();
 
 	virtual void setUp() {
-		wallet = ObjectCounter<DND::Currency>();
+		wallet = CurrencyCounter();
 	}
 };
 
@@ -60,4 +61,11 @@ TEST_F(ObjectCounterTest, GetAllTest) {
 	EXPECT_EQ(all.size(), 2);
 	EXPECT_TRUE(contains(all, DND::Currency::ELECTRUM, 4));
 	EXPECT_TRUE(contains(all, DND::Currency::GOLD, 2));
+}
+
+TEST_F(ObjectCounterTest, TestSerialization) {
+	testSerialization<CurrencyCounter>(wallet,
+		[](const CurrencyCounter & a, const CurrencyCounter & b) {
+			return a == b;
+		});
 }

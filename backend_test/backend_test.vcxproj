@@ -33,32 +33,29 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
-    <ClInclude Include="pch.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="ProficiencyTestSet.cpp" />
-    <ClCompile Include="SkillSetTest.cpp" />
-    <ClCompile Include="test.cpp" />
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="test_resources\AttributeSetTest.cpp" />
     <ClCompile Include="test_resources\CharacterTest.cpp" />
     <ClCompile Include="test_resources\ItemTest.cpp" />
+    <ClCompile Include="test_resources\LocalFileResolverTest.cpp" />
+    <ClCompile Include="test_resources\pch.cpp" />
+    <ClCompile Include="test_resources\ProficiencyTestSet.cpp" />
+    <ClCompile Include="test_resources\SkillSetTest.cpp" />
     <ClCompile Include="test_resources\SpellTest.cpp" />
     <ClCompile Include="test_resources\StatModifierTest.cpp" />
     <ClCompile Include="test_resources\ObjectCounterTest.cpp" />
+    <ClCompile Include="test_resources\test.cpp" />
+    <ClCompile Include="test_resources\XMLDAOTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DND-Character-Sheets.vcxproj">
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dnd_backend\dnd_backend.vcxproj">
       <Project>{cd084d5b-407e-4905-8aa9-37bb38832237}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ClInclude Include="test_resources\pch.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
@@ -74,6 +71,8 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)dnd_backend\idao;$(SolutionDir)dnd_backend\xmldao;$(ProjectDir);$(SolutionDir)dnd_backend\entities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -89,7 +88,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)dnd_backend\entities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dnd_backend\idao;$(SolutionDir)dnd_backend\xmldao;$(ProjectDir);$(SolutionDir)dnd_backend\entities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>

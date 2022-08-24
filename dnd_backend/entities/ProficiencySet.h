@@ -1,5 +1,11 @@
 #pragma once
 #include "AttributeSet.h"
+/*
+* Straight up include this because implementing the save/load procedures
+* without the access would need to implement setters to all classes and break
+* encapsulation
+*/
+#include <boost/serialization/access.hpp>
 
 namespace DND {
 
@@ -48,6 +54,12 @@ namespace DND {
 		static const int YES_PROF = 1;
 		
 		AttributeSet set;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version) {
+			ar& set;
+		}
+		friend class boost::serialization::access;
 	};
 }
 

@@ -8,6 +8,7 @@ std::string outOfBoundsErrorMessage(std::string field, int min, int max);
 Character::Character(const std::string& charName, const std::string& playerName):
 	characterName(charName), playerName(playerName), wallet(entity_details::ObjectCounter<Currency>()) {}
 
+Character::Character() : characterName("N/A"), playerName("NON INITIALIZED CHARACTER") {}
 
 int Character::getAttributeScore(Attribute attr) const {
 	AttributeSet& finalAttributes = race.getStats();
@@ -185,7 +186,7 @@ Skills Character::getSkills() const {
 	return charSkills;
 }
 
-std::optional<std::string> Character::getIcon() const {
+boost::optional<std::string> Character::getIcon() const {
 	return charIconPath;
 }
 

@@ -3,7 +3,13 @@
 #include <list>
 #include <unordered_map>
 #include <utility>
-#include <iostream>
+/*
+* Straight up include this because implementing the save/load procedures
+* without the access would need to implement setters to all classes and break
+* encapsulation
+*/
+#include <boost/serialization/access.hpp>
+#include <boost/serialization/unordered_map.hpp>
 
 namespace DND {
 	namespace entity_details {
@@ -41,8 +47,14 @@ namespace DND {
 
 			bool operator!=(ObjectCounter const&) const;
 
+			template<class Archive>
+			void serialize(Archive& ar, const unsigned int file_version) {
+				ar& map;
+			}
+
 		private:
 			std::unordered_map<T, int> map;
+			friend class boost::serialization::access;
 		};
 	}
 }
@@ -58,7 +70,7 @@ int DND::entity_details::ObjectCounter<T>::getAmount(T type) const {
 template<typename T>
 void DND::entity_details::ObjectCounter<T>::setAmount(T type, int amt) {
 	if (amt < 0)
-		throw std::invalid_argument("Object counter can't be less than 0");
+		throw std::invalid_argument("Object's count can't be less than 0");
 	else if (amt == 0) 
 		map.erase(type);
 	else
