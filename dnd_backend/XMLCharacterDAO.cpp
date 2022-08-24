@@ -2,18 +2,23 @@
 #include <cstdio>
 #include <fstream>
 #include <filesystem>
+#include <iostream>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
 using namespace DND;
 
-void XMLCharacterDAO::saveCharacter(const Character& updated) const {
-	serialization_details::Path file = resolver.getCharacterFile(updated.getCharacterName(), updated.getPlayerName());
+XMLCharacterDAO::XMLCharacterDAO(const std::string& root): resolver(root){}
+
+void XMLCharacterDAO::saveCharacter(const Character& character) const {
+	serialization_details::Path file = resolver.getCharacterFile(character.getCharacterName(), character.getPlayerName());
 
 	if (std::filesystem::exists(file)) {
-		updateCharacter(updated);
+		std::cout << "updated" << std::endl;
+		updateCharacter(character);
 	} else {
-		createCharacter(updated.getCharacterName(), updated.getPlayerName());
+		std::cout << "created" << std::endl;
+		createCharacter(character);
 	}
 }
 
@@ -33,9 +38,9 @@ std::unique_ptr<Character> XMLCharacterDAO::loadCharacter(const std::string& cha
 }
 
 
-void XMLCharacterDAO::deleteCharacter(const Character& character) const {
+bool XMLCharacterDAO::deleteCharacter(const Character& character) const {
 	serialization_details::Path file = resolver.getCharacterFile(character.getCharacterName(), character.getPlayerName());
-	std::remove(file.string().c_str()); // path::c_str doesn't actually return a c_str lol
+	return std::remove(file.string().c_str()) == 0; // path::c_str doesn't actually return a c_str lol
 }
 
 
@@ -49,6 +54,7 @@ void XMLCharacterDAO::updateCharacter(const Character& character) const {
 }
 
 
-void XMLCharacterDAO::createCharacter(const std::string& characterName, const std::string& playerName) const {
-	resolver.createCharacterFile(characterName, playerName);
+void XMLCharacterDAO::createCharacter(const Character& character) const {
+	resolver.createCharacterFile(character.getCharacterName(), character.getPlayerName());
+	updateCharacter(character);
 }
