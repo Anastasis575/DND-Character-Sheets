@@ -31,7 +31,10 @@ namespace DND {
 		 * @brief Delete a character from persistent storage.
 		 * @param characterName the character's name
 		 * @param playerName the name of the player who created it
+		 * @return true if the file was deleted successfully
 		*/
-		virtual void deleteCharacter(const Character& character) const = 0;
+		virtual bool deleteCharacter(const Character& character) const = 0;
+
+		virtual ~ICharacterDAO(){}
 	};
 }
