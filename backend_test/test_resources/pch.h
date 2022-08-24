@@ -2,13 +2,35 @@
 #include <string>
 #include <functional>
 #include <cstdio>
+#include <filesystem>
 #include <fstream>
+
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
 #include "gtest/gtest.h"
 
+typedef std::filesystem::path Path;
+
+const Path ROOT = Path(__FILE__).parent_path() / "temp_dir";
+
+/**
+ * @brief Generate a random string
+*/
 std::string randomStr();
+
+/**
+ * @brief Delete temporary files used by a test case.
+ * @return 1 if successfull
+*/
+int cleanUpTempDir();
+
+
+/**
+ * @brief Creates a new temp directory in ROOT to be used by a test case.
+*/
+void setUpTempDir();
+
 
 /**
  * @brief Write an object to a file, then read it back and assert that their values are identical.

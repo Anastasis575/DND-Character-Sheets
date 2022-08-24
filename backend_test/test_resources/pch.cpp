@@ -12,3 +12,14 @@ std::string randomStr() {
     }
     return newstr;
 }
+
+int cleanUpTempDir() {
+    return std::filesystem::remove_all(ROOT.string().c_str());
+}
+
+void setUpTempDir() {
+    //delete dir if last test run here was interrupted
+    cleanUpTempDir();
+
+    std::filesystem::create_directory(ROOT);
+}
