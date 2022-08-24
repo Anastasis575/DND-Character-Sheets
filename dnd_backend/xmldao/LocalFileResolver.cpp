@@ -15,9 +15,6 @@ LocalFileResolver::LocalFileResolver(const Path& dataDirectory) :root(dataDirect
 
 const Path LocalFileResolver::getCharacterFile(const std::string& characterName, const std::string& playerName) const {
 	Path charPath = resolve(characterName, playerName);
-	if (!fs::exists(charPath)) {
-		throw std::invalid_argument("Directory " + charPath.string() + " does not exist");
-	}
 	return charPath;
 }
 
@@ -33,7 +30,8 @@ const Path LocalFileResolver::createCharacterFile(const std::string& characterNa
 
 	// create empty file
 	std::ofstream file;
-	file.open(charPath.string()); 
+	file.open(charPath.string());
+	file << std::endl;
 	file.close();
 
 	return charPath;

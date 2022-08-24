@@ -23,11 +23,12 @@ namespace DND {
 			LocalFileResolver(const Path& dataDirectory);
 
 			/**
-			 * @brief Get the path to the file that holds the character's data.
+			 * @brief Get the path to the file that should hold the character's data. This method does
+			 * NOT check if the path is actually valid.
+			 * 
 			 * @param character the character
 			 * @return the path to the character's file
-			 * @throws std::invalid_argument if the file doesn't exist or if the player name is blank
-			*/
+			 */
 			const Path getCharacterFile(const std::string& characterName, const std::string& playerName) const;
 
 			/**
