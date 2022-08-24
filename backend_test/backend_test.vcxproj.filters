@@ -1,23 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="test_resources\AttributeSetTest.cpp" />
-    <ClCompile Include="test_resources\CharacterTest.cpp" />
-    <ClCompile Include="test_resources\ItemTest.cpp" />
-    <ClCompile Include="test_resources\SpellTest.cpp" />
-    <ClCompile Include="test_resources\StatModifierTest.cpp" />
-    <ClCompile Include="test_resources\ObjectCounterTest.cpp" />
-    <ClCompile Include="test_resources\ProficiencyTestSet.cpp" />
-    <ClCompile Include="test_resources\SkillSetTest.cpp" />
-    <ClCompile Include="test_resources\test.cpp" />
     <ClCompile Include="test_resources\pch.cpp" />
-    <ClCompile Include="test_resources\XMLDAOTest.cpp" />
-    <ClCompile Include="test_resources\LocalFileResolverTest.cpp" />
+    <ClCompile Include="test_resources\AttributeSetTest.cpp">
+      <Filter>Unit Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_resources\CharacterTest.cpp">
+      <Filter>Unit Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_resources\ItemTest.cpp">
+      <Filter>Unit Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_resources\LocalFileResolverTest.cpp">
+      <Filter>Unit Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_resources\ObjectCounterTest.cpp">
+      <Filter>Unit Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_resources\ProficiencyTestSet.cpp">
+      <Filter>Unit Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_resources\SkillSetTest.cpp">
+      <Filter>Unit Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_resources\SpellTest.cpp">
+      <Filter>Unit Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_resources\test.cpp">
+      <Filter>Unit Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_resources\XMLDAOTest.cpp">
+      <Filter>Unit Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_resources\StatModifierTest.cpp">
+      <Filter>Unit Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_resources\pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Unit Tests">
+      <UniqueIdentifier>{dc554c2d-4e78-46b6-88eb-f73aa929c9ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
