@@ -36,41 +36,7 @@ AttributesPage::AttributesPage(wxWindow* parent):wxPanel(parent,wxID_ANY)
 	attribute_sizer->Add(charisma_panel, 1, wxEXPAND | wxALL, 5);
 
 	//Add to specific Class
-	wxPanel* prof_panel = new wxPanel(this,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxBORDER_SIMPLE);
-	
-	wxBoxSizer* prof_sizer = new wxBoxSizer(wxVERTICAL);
-	wxStaticText* prof_label = new wxStaticText(prof_panel,wxID_ANY,"Proficiency Bonus");
-	wxTextCtrl* prof_edit = new wxTextCtrl(prof_panel,wxID_ANY);
-	prof_edit->SetEditable(false);
-	prof_sizer->Add(prof_label,1,wxEXPAND);
-	prof_sizer->Add(prof_edit,1, wxEXPAND);
-
-	wxBoxSizer* inspi_sizer = new wxBoxSizer(wxVERTICAL);
-	wxStaticText* inspi_label = new wxStaticText(prof_panel, wxID_ANY, "Inspiration");
-	wxTextCtrl* inspi_edit = new wxTextCtrl(prof_panel, wxID_ANY);
-	inspi_edit->SetEditable(false);
-	inspi_sizer->Add(inspi_label,1, wxEXPAND);
-	inspi_sizer->Add(inspi_edit,1, wxEXPAND);
-
-	wxBoxSizer* prof_inspi_sizer = new wxBoxSizer(wxHORIZONTAL);
-	prof_inspi_sizer->Add(prof_sizer,1, wxEXPAND);
-	prof_inspi_sizer->Add(inspi_sizer,1, wxEXPAND);
-	
-	wxBoxSizer* prof_sav_sizer = new wxBoxSizer(wxVERTICAL);
-	prof_sav_sizer->Add(prof_inspi_sizer, 1, wxEXPAND);
-	wxPanel* strength_sav_panel = new SavingThrows(prof_panel,"Strength");
-	wxPanel* dexterity_sav_panel = new SavingThrows(prof_panel,"Dexterity");
-	wxPanel* constitution_sav_panel = new SavingThrows(prof_panel,"Constitution");
-	wxPanel* wisdom_sav_panel = new SavingThrows(prof_panel,"wisdom");
-	wxPanel* intelligence_sav_panel = new SavingThrows(prof_panel,"Intelligence");
-	wxPanel* charisma_sav_panel = new SavingThrows(prof_panel,"Charisma");
-	prof_sav_sizer->Add(strength_sav_panel, 1, wxEXPAND);
-	prof_sav_sizer->Add(dexterity_sav_panel, 1, wxEXPAND);
-	prof_sav_sizer->Add(constitution_sav_panel, 1, wxEXPAND);
-	prof_sav_sizer->Add(wisdom_sav_panel, 1, wxEXPAND);
-	prof_sav_sizer->Add(intelligence_sav_panel, 1, wxEXPAND);
-	prof_sav_sizer->Add(charisma_sav_panel, 1, wxEXPAND);
-	prof_panel->SetSizer(prof_sav_sizer);
+	wxPanel* prof_panel = new ProfAndSav(this);
 
 
 
@@ -128,34 +94,36 @@ AttributesPage::AttributesPage(wxWindow* parent):wxPanel(parent,wxID_ANY)
 	level_experience_sizer->Add(level_sizer, 1, wxEXPAND);
 	level_experience_sizer->Add(experience_sizer, 1, wxEXPAND);
 
-	////allignment
-	//wxArrayString choices;
-	//choices.Add("Lawful Good");
-	//choices.Add("Lawful Neutral");
-	//choices.Add("Lawful Evil");
-	//choices.Add("Neutral Good");
-	//choices.Add("True Neutral");
-	//choices.Add("Neutral Evil");
-	//choices.Add("Chaotic Good");
-	//choices.Add("Chaotic Neutral");
-	//choices.Add("Chaotic Evil");
+	//allignment
+	wxArrayString choices;
+	choices.Add("Lawful Good");
+	choices.Add("Lawful Neutral");
+	choices.Add("Lawful Evil");
+	choices.Add("Neutral Good");
+	choices.Add("True Neutral");
+	choices.Add("Neutral Evil");
+	choices.Add("Chaotic Good");
+	choices.Add("Chaotic Neutral");
+	choices.Add("Chaotic Evil");
 
-	//wxStaticText* allignment_label = new wxStaticText(this, wxID_ANY, "allignment");
-	//allignment_label->SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-	//wxComboBox* allignment_entry = new wxComboBox(this, wxID_ANY, _("Lawful Good"), wxDefaultPosition, wxDefaultSize, choices);
-	//allignment_entry->SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+	wxStaticText* allignment_label = new wxStaticText(this, wxID_ANY, "allignment");
+	allignment_label->SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+	wxComboBox* allignment_entry = new wxComboBox(this, wxID_ANY, _("Lawful Good"), wxDefaultPosition, wxDefaultSize, choices);
+	allignment_entry->SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
 
-	//wxBoxSizer* allignment_sizer = new wxBoxSizer(wxVERTICAL);
-	//allignment_sizer->Add(allignment_label, 0.3f, wxEXPAND);
-	//allignment_sizer->Add(allignment_entry, 0.7f, wxEXPAND);
+	wxBoxSizer* allignment_sizer = new wxBoxSizer(wxVERTICAL);
+	allignment_sizer->Add(allignment_label, 0.3f, wxEXPAND);
+	allignment_sizer->Add(allignment_entry, 0.7f, wxEXPAND);
 
-	
+	wxPanel* skill_list = new SkillPanel(this);
 
 
-	main_grid->Add(subclass_subrace_sizer,wxGBPosition(0,4));
-	main_grid->Add(level_experience_sizer,wxGBPosition(0,5));
+	main_grid->Add(subclass_subrace_sizer,wxGBPosition(0,3));
+	main_grid->Add(level_experience_sizer,wxGBPosition(0,4));
+	main_grid->Add(allignment_sizer,wxGBPosition(0,5));
 	main_grid->Add(attribute_sizer, wxGBPosition(0, 0),wxGBSpan(4,1),wxEXPAND);
-	main_grid->Add(prof_sav_sizer, wxGBPosition(0, 1),wxGBSpan(2,1),wxEXPAND);
+	main_grid->Add(prof_panel, wxGBPosition(0, 1),wxGBSpan(1,1),wxEXPAND);
+	main_grid->Add(skill_list, wxGBPosition(1, 1),wxGBSpan(3,1),wxEXPAND);
 	main_grid->AddGrowableCol(0, 1);
 	main_grid->AddGrowableCol(1, 1);
 	main_grid->AddGrowableCol(2, 1);

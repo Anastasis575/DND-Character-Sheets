@@ -9,16 +9,17 @@
 
 class CharacterWindow :public wxFrame{
 	wxStatusBar* stb;
-	std::shared_ptr<PageManager> manager;
+	PageManager* manager;
 public:
 	CharacterWindow();
 	~CharacterWindow();
 
+	void OnClose(wxCloseEvent cls);
 	/**
 	 * @brief Sets the page manager to facilitate page switching.
 	 * @param pageManager the PageManager object.
 	 * @return the augmented object.
 	*/
-	CharacterWindow* SetManager(std::shared_ptr<PageManager> pageManager);
+	CharacterWindow* SetManager(PageManager* pageManager);
 };
 

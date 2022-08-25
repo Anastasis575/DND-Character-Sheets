@@ -3,7 +3,9 @@
 #include <wx/spinctrl.h>
 #include <wx/gbsizer.h>
 #include "AttributePanel.h"
-#include "SavingThrows.h"
+#include "ProfAndSav.h"
+#include "SkillPanel.h"
+
 class AttributesPage :
     public wxPanel
 {

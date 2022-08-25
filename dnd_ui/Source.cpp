@@ -7,21 +7,23 @@
 class DndUi :
     public wxApp
 {
-    std::shared_ptr<PageManager> manager;
+    PageManager* manager;
 public:
     ~DndUi() {};
-    bool virtual OnInit();
+    virtual bool OnInit();
+    virtual int OnExit();
 };
 
 bool DndUi::OnInit()
 {
-    std::shared_ptr<PageManager> manager = std::make_shared<PageManager>();
+    PageManager* manager = new PageManager();
     TitleScreen* ts = new TitleScreen();
     CharacterWindow* cw = new CharacterWindow();
     manager->Add(Pages::MAIN, ts);
     manager->Add(Pages::CHARACTER, cw);
     ts->SetManager(manager);
     cw->SetManager(manager);
+    SetTopWindow(cw);
     if (!manager->ChangePage(Pages::MAIN))
     {
         wxMessageBox("Get up!Get Hydrated", "Friendly Reminder");
@@ -29,5 +31,9 @@ bool DndUi::OnInit()
     return true;
 }
 
+int DndUi::OnExit() {
+    if (manager)delete manager;
+    return 0;
+}
 
 wxIMPLEMENT_APP(DndUi);

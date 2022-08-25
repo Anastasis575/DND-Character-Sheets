@@ -9,6 +9,15 @@ PageManager::~PageManager()
 {
 }
 
+void PageManager::clear()
+{
+    wxFrame* cw = pages[Pages::CHARACTER];
+    Remove(Pages::CHARACTER);
+    Remove(Pages::MAIN);
+    cw->Destroy();
+
+}
+
 bool PageManager::Add(Pages pageId, wxFrame* page)
 {
     if (pages.find(pageId) != pages.end()) {

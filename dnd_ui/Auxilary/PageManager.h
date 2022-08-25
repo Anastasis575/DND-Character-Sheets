@@ -8,6 +8,8 @@ class PageManager {
 public:
     PageManager();
     ~PageManager();
+
+    void clear();
     /**
      * @brief Inserts a page to be managed and facilitate traversal from and to with its pageId.
      * @param pageId The integer value of the corresponding page in the enumerator Pages.

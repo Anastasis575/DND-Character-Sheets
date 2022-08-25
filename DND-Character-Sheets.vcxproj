@@ -17,6 +17,14 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="ui|Win32">
+      <Configuration>ui</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ui|x64">
+      <Configuration>ui</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -30,12 +38,22 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ui|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ui|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
@@ -53,10 +71,16 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ui|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ui|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -66,13 +90,36 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ui|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\user\source\repos\DND-Character-Sheets\dnd_backend\xmldao;C:\Users\user\source\repos\DND-Character-Sheets\dnd_backend\idao;C:\Users\user\source\repos\DND-Character-Sheets\dnd_backend;C:\Users\user\source\repos\DND-Character-Sheets\dnd_backend\entities;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)dnd_backend\xmldao;$(ProjectDir)dnd_backend\idao;$(ProjectDir)dnd_backend;$(ProjectDir)dnd_backend\entities;$(ProjectDir)dnd_ui\TitlePage;$(ProjectDir)dnd_ui\MainPage;$(ProjectDir)dnd_ui\Auxilary;$(ProjectDir)dnd_ui\MainPage\MainPagePanels\Headers;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ui|x64'">
+    <IncludePath>$(ProjectDir)dnd_backend\xmldao;$(ProjectDir)dnd_backend\idao;$(ProjectDir)dnd_backend;$(ProjectDir)dnd_backend\entities;$(ProjectDir)dnd_ui\TitlePage;$(ProjectDir)dnd_ui\MainPage;$(ProjectDir)dnd_ui\Auxilary;$(ProjectDir)dnd_ui\MainPage\MainPagePanels\Headers;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir)dnd_ui\TitlePage;$(ProjectDir)dnd_ui\MainPage;$(ProjectDir)dnd_ui\Auxilary;$(ProjectDir)dnd_ui\MainPage\MainPagePanels\Headers;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ui|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -110,6 +157,20 @@
       </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ui|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)xmldao;$(ProjectDir)idao;$(ProjectDir)entities;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dnd_backend\entities\AttributeSet.cpp" />
     <ClCompile Include="dnd_backend\entities\Character.cpp" />
@@ -118,6 +179,20 @@
     <ClCompile Include="dnd_backend\entities\StatModifier.cpp" />
     <ClCompile Include="dnd_backend\xmldao\tinyxml2.cpp" />
     <ClCompile Include="dnd_backend\entities\ProficiencySet.cpp" />
+    <ClCompile Include="dnd_ui\Auxilary\PageManager.cpp" />
+    <ClCompile Include="dnd_ui\MainPage\CharacterWindow.cpp" />
+    <ClCompile Include="dnd_ui\MainPage\MainPagePanels\src\AttributePanel.cpp" />
+    <ClCompile Include="dnd_ui\MainPage\MainPagePanels\src\AttributesPage.cpp" />
+    <ClCompile Include="dnd_ui\MainPage\MainPagePanels\src\ProfAndSav.cpp" />
+    <ClCompile Include="dnd_ui\MainPage\MainPagePanels\src\SavingThrows.cpp" />
+    <ClCompile Include="dnd_ui\MainPage\MainPagePanels\src\SkillPanel.cpp" />
+    <ClCompile Include="dnd_ui\MainPage\MainPagePanels\src\SpellPage.cpp" />
+    <ClCompile Include="dnd_ui\Source.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ui|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="dnd_ui\TitlePage\TitleScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dnd_backend\entities\EnumMap.h" />
@@ -135,6 +210,16 @@
     <ClInclude Include="dnd_backend\xmldao\tinyxml2.h" />
     <ClInclude Include="dnd_backend\xmldao\XMLPlayerDao.h" />
     <ClInclude Include="dnd_backend\entities\ProficiencySet.h" />
+    <ClInclude Include="dnd_ui\Auxilary\Auxilary.h" />
+    <ClInclude Include="dnd_ui\Auxilary\PageManager.h" />
+    <ClInclude Include="dnd_ui\MainPage\CharacterWindow.h" />
+    <ClInclude Include="dnd_ui\MainPage\MainPagePanels\Headers\AttributePanel.h" />
+    <ClInclude Include="dnd_ui\MainPage\MainPagePanels\Headers\AttributesPage.h" />
+    <ClInclude Include="dnd_ui\MainPage\MainPagePanels\Headers\ProfAndSav.h" />
+    <ClInclude Include="dnd_ui\MainPage\MainPagePanels\Headers\SavingThrows.h" />
+    <ClInclude Include="dnd_ui\MainPage\MainPagePanels\Headers\SkillPanel.h" />
+    <ClInclude Include="dnd_ui\MainPage\MainPagePanels\Headers\SpellPage.h" />
+    <ClInclude Include="dnd_ui\TitlePage\TitleScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

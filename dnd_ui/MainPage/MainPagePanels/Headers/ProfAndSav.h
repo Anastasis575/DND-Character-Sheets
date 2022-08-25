@@ -1,9 +1,12 @@
 #pragma once
 #include <wx/wx.h>
+#include "SavingThrows.h"
 class ProfAndSav :
     public wxPanel
 {
-    ProfAndSav(wxWindow* parent,);
+public:
+    ProfAndSav(wxWindow* parent);
+    ~ProfAndSav();
 
 };
 

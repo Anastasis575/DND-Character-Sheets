@@ -1,6 +1,6 @@
 #include "TitleScreen.h"
 
-TitleScreen::TitleScreen() : wxFrame(NULL, wxID_ANY, "DND Sheet Handler")
+TitleScreen::TitleScreen(/*wxApp* parent*/) : wxFrame(NULL, wxID_ANY, "DND Sheet Handler")/*, parent(parent)*/
 {
 	//TODO: add Icon in later version
 	//TODO: add Menu options(after their corresponding options have been developed)
@@ -54,7 +54,20 @@ TitleScreen::~TitleScreen()
 {
 }
 
-TitleScreen* TitleScreen::SetManager(std::shared_ptr<PageManager> pageManager)
+
+void TitleScreen::OnClose(wxCloseEvent& cls)
+{
+	wxMessageBox("TitleScreen Destroy");
+	this->manager->clear();
+}
+
+void TitleScreen::OnQuit(wxCommandEvent& cls)
+{
+	wxMessageBox("TitleScreen Quit");
+	Close();
+}
+
+TitleScreen* TitleScreen::SetManager(PageManager* pageManager)
 {
 	this->manager = pageManager;
 	return this;

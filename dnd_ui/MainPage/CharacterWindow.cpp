@@ -89,7 +89,12 @@ CharacterWindow::~CharacterWindow()
 {
 }
 
-CharacterWindow* CharacterWindow::SetManager(std::shared_ptr<PageManager> pageManager)
+void CharacterWindow::OnClose(wxCloseEvent cls)
+{
+	this->manager->clear();
+}
+
+CharacterWindow* CharacterWindow::SetManager(PageManager* pageManager)
 {
 	this->manager = pageManager;
 	return this;
