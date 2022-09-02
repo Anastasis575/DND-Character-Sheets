@@ -1,0 +1,48 @@
+--- 
+Attribute: 
+  details_namespace: entity_details
+  namespace: DND
+  strings: true
+  type: enum
+  values:
+    - Strength
+    - Dexterity
+    - Constitution
+    - Intelligence
+    - Wisdom
+    - Charisma
+
+Currency: 
+  details_namespace: entity_details
+  namespace: DND
+  strings: true
+  type: enum
+  values: 
+    - GOLD
+    - ELECTRUM
+    - SILVER
+    - COPPER
+Skill: 
+  details_namespace: entity_details
+  namespace: DND
+  strings: true
+  type: enum
+  values: 
+    - ATHLETICS
+    - ACROBATICS
+    - SLEIGHT_OF_HAND
+    - STEALTH
+    - ARCANA
+    - HISTORY
+    - INVESTIGATION
+    - NATURE
+    - RELIGION
+    - ANIMAL_HANDLING
+    - INSIGHT
+    - MEDICINE
+    - PERCEPTION
+    - SURVIVAL
+    - DECEPTION
+    - INTIMIDATION
+    - PERFORMANCE
+    - PERSUASION
