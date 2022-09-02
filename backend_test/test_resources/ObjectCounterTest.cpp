@@ -19,21 +19,20 @@ bool contains(const std::list<std::pair<DND::Currency, int>>& items, const DND::
 }
 
 TEST_F(ObjectCounterTest, ConstructorTest) {
-	for each (DND::Currency curr in CURRENCY_TYPES) {
+	for each (DND::Currency curr in DND::currencyValues()) {
 		EXPECT_EQ(wallet.getAmount(curr), 0);
 	}
 }
 
 TEST_F(ObjectCounterTest, SetterTest) {
-	ASSERT_NO_THROW(CURRENCY_TYPES[0]);
-	DND::Currency changed = CURRENCY_TYPES[0];
+	DND::Currency changed = DND::Currency::ELECTRUM;
 
 	EXPECT_ANY_THROW(wallet.setAmount(changed, -1));
 
 	wallet.setAmount(changed, 56);
 	EXPECT_EQ(wallet.getAmount(changed), 56);
 
-	for each (DND::Currency curr in CURRENCY_TYPES) {
+	for each (DND::Currency curr in DND::currencyValues()) {
 		if (curr != changed) {
 			EXPECT_EQ(wallet.getAmount(curr), 0);
 		}

@@ -20,13 +20,16 @@
     <ClCompile Include="entities\ProficiencySet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="entities\SkillSet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="entities\StatModifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="xmldao\XMLCharacterDAO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Skill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Attribute.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -55,9 +58,6 @@
     <ClInclude Include="entities\ProficiencySet.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="entities\SkillSet.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="entities\Spell.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -65,6 +65,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="xmldao\XMLCharacterDAO.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Skill.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Attribute.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

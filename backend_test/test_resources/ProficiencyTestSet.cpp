@@ -11,14 +11,14 @@ protected:
 		set = ProficiencySet();
 	}
 
-	static const Attributes getAllAttributes() {
-		return DND::AttributeSet::getAllAttributes();
+	static const std::vector<Attribute> getAllAttributes() {
+		return attributeValues();
 	}
 };
 
 TEST_F(ProficiencySetTest, TestProficiencies) {
 
-	for each (Attribute attr in AttributeSet::getAllAttributes()) {
+	for each (Attribute attr in getAllAttributes()) {
 		EXPECT_FALSE(set.hasProficiency(attr));
 	}
 
@@ -63,7 +63,7 @@ TEST_F(ProficiencySetTest, TestSerialization) {
 	testSerialization<ProficiencySet>(set,
 		[](const ProficiencySet& a, const ProficiencySet& b) {
 
-			for each (DND::Attribute attr in AttributeSet::getAllAttributes()){
+			for each (DND::Attribute attr in getAllAttributes()){
 				if (a.hasProficiency(attr) != b.hasProficiency(attr)) {
 					return false;
 				}

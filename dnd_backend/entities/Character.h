@@ -1,11 +1,11 @@
 #pragma once
+#include "Skill.h"
 #include "AttributeSet.h"
 #include "Spell.h"
 #include "StatModifier.h"
 #include "Item.h"
 #include "Currency.h"
 #include "ProficiencySet.h"
-#include "SkillSet.h"
 #include "ObjectCounter.h"
 
 #include <string>
@@ -194,18 +194,6 @@ namespace DND {
 		*/
 		Attributes getProfiencies() const;
 
-		/**
-		 * @brief Set whether or not the character has a particular skill.
-		 * @param skill the skill
-		 * @param isSkilled true if the character is skilled, false otherwise
-		*/
-		void setSkill(Skill skill, bool isSkilled);
-
-		/**
-		 * @brief Get all the skills the character has
-		 * @return a collection with all the skills of the character
-		*/
-		Skills getSkills() const;
 
 	private:
 		//limits
@@ -236,7 +224,6 @@ namespace DND {
 
 		AttributeSet baseStats;
 		ProficiencySet proficiencies;
-		SkillSet skills;
 
 		entity_details::ObjectCounter<Currency> wallet;
 		entity_details::ObjectCounter<Item> items;

@@ -155,35 +155,13 @@ void Character::setProfiency(Attribute attr, bool isProficient) {
 Attributes Character::getProfiencies() const {
 	Attributes set;
 	
-	for each (Attribute attr in AttributeSet::getAllAttributes()) {
+	for each (Attribute attr in attributeValues()) {
 		if (proficiencies.hasProficiency(attr)) {
 			set.insert(attr);
 		}
 	}
 
 	return set;
-}
-
-void Character::setSkill(Skill skill, bool isSkilled) {
-	if (isSkilled)
-		skills.addSkill(skill);
-	else
-		skills.removeSkill(skill);
-}
-
-/**
- * @brief Get all the skills the character has
- * @return a collection with all the skills of the character
-*/
-Skills Character::getSkills() const {
-	Skills charSkills; 
-
-	for each (Skill skill in SkillSet::getAllSkills()) {
-		if (skills.isSkilledAt(skill))
-			charSkills.insert(skill);
-	}
-
-	return charSkills;
 }
 
 boost::optional<std::string> Character::getIcon() const {
