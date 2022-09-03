@@ -1,16 +1,12 @@
-import os.path
+from generator import Code
+import generator
 import sys
-import yaml
 from typing import Optional, Any
 
-YAML_TYPE: str = "type"
 TYPE_ENUM = "enum"
 DETAILS_NAMESPACE: str = "details_namespace"
 NAMESPACE: str = "namespace"
 VALUES: str = "values"
-
-HEADER_COMMENT: str = "/*File generated automatically by auto-enum.py" \
-                      "https://github.com/dimits-exe/CppAutomationTools*/ "
 
 
 class Enum:
@@ -27,60 +23,38 @@ class Enum:
 
     def set_values(self, values: list[str]):
         if values is None or len(values) == 0:
-            raise ValueError("No values provided for enum " + self.name)
+            raise AttributeError("No values provided for enum " + self.name)
         self.values = values
-
-
-class Code:
-    def __init__(self, original: str = ""):
-        self.output = original
-        self.indentation = 0
-
-    def start_block(self, statement: str) -> None:
-        self.add_statement(statement + " {")
-        self.indentation += 1
-
-    def end_block(self, statement_end: bool = False) -> None:
-        self.indentation -= 1
-        self.add_statement("}" + (";" if statement_end else ""))
-
-    def add_statement(self, statement: str = "") -> None:
-        self.output += self.indentation * "\t" + statement + "\n"
-
-    def to_string(self) -> str:
-        while self.indentation > 0:
-            self.end_block()
-        return self.output
 
 
 def main(input_file_path: str, directory: str):
     try:
-        with open(input_file_path, "r") as stream:
-            file_contents: dict = yaml.safe_load(stream)
+        file_contents = generator.import_yaml_file(input_file_path)
 
-            enums: list[Enum] = []
-            for enum_contents in file_contents.items():
-                enums.append(parse_enum(enum_contents[0], enum_contents[1]))
+        enums: list[Enum] = []
+        for enum_contents in file_contents.items():
+            if generator.group_type(enum_contents) == TYPE_ENUM:
 
-            for enum in enums:
-                if enum is not None:
-                    print("Producing files for enum " + enum.name + "...")
-                    write_to_file(generate_header_str(enum), enum.name + ".h", directory)
-                    write_to_file(generate_source_str(enum), enum.name + ".cpp", directory)
+                # In case of error, keep trying to parse the rest like a normal compiler
+                # The generator will refuse to produce files after we flag any error
+                try:
+                    enums.append(parse_enum(enum_contents[0], enum_contents[1]))
+                except Exception as exc:
+                    generator.error(exc)
 
-    except IOError as ioe:
-        error(ioe)
-    except yaml.YAMLError as ye:
-        error(ye)
+        for enum in enums:
+            print("Producing files for enum " + enum.name + "...")
+            generator.write_to_file(generate_header_str(enum), enum.name + ".h", directory)
+            generator.write_to_file(generate_source_str(enum), enum.name + ".cpp", directory)
+
+    # catch fatal errors
+    except Exception as exc:
+        generator.error(exc)
 
 
 def parse_enum(enum_name: str, enum_descr: Any) -> Optional[Enum]:
     name: str = enum_name
     e_dict: dict[str] = enum_descr
-
-    # instruct caller to ignore non-enums
-    if e_dict[YAML_TYPE] != TYPE_ENUM:
-        return None
 
     if name is None or name.isspace():
         raise ValueError("Enum provided with no name. Please check that all enums have an appropriate name.")
@@ -90,10 +64,11 @@ def parse_enum(enum_name: str, enum_descr: Any) -> Optional[Enum]:
     values: list[str] = e_dict[VALUES]
 
     if namespace is None:
-        warning("No namespace provided for enum {0}, assuming global namespace.".format(name))
+        generator.warning("No namespace provided for enum {0}, assuming global namespace.".format(name))
 
     if details_namespace is None:
-        warning("No namespace provided for the details of enum {0}, assuming enum definition namespace.".format(name))
+        generator.warning("No namespace provided for the details of enum {0}, assuming enum definition namespace."
+                          .format(name))
 
     return Enum(name, values, namespace, details_namespace)
 
@@ -115,7 +90,7 @@ def cpp_access_func_def(enum: Enum) -> str:
 
 
 def cpp_iter_func_def(enum: Enum) -> str:
-    return "std::vector<{0}> {1}_VALUES()".format(enum.name, enum.name.upper())
+    return "std::vector<{0}> {1}Values()".format(enum.name, enum.name.lower())
 
 
 def generate_header_str(enum: Enum) -> str:
@@ -125,7 +100,7 @@ def generate_header_str(enum: Enum) -> str:
     uses_details_namespace: bool = enum.details_namespace is not None
 
     code.add_statement("#pragma once")
-    code.add_statement(HEADER_COMMENT)
+    code.add_statement(generator.HEADER_COMMENT)
     code.add_statement("#include <unordered_map>")
     code.add_statement()
 
@@ -204,22 +179,11 @@ def generate_source_str(enum: Enum) -> str:
     return code.to_string()
 
 
-def write_to_file(contents: str, file_name: str, directory: str) -> None:
-    with open(os.path.join(directory, file_name), "w+") as stream:
-        stream.write(contents)
-
-
-def error(e: Exception):
-    print("Error while parsing: ", e)
-
-
-def warning(message: str):
-    print("Warning: ", message)
-
-
 if __name__ == '__main__':
     if len(sys.argv) < 3:
         print("Usage: python <program> <input file> <output directory>")
         sys.exit(-1)
 
     main(sys.argv[1], sys.argv[2])
+    # set termination flag
+    sys.exit(-1 if generator.error_occurred() else 0)
