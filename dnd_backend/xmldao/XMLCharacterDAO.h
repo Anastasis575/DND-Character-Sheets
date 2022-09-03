@@ -1,3 +1,4 @@
+#pragma once
 #include "ICharacterDAO.h"
 #include "LocalFileResolver.h"
 
