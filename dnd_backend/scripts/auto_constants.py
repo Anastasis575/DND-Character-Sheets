@@ -78,7 +78,7 @@ def generate_cpp_str(group: ConstantGroup) -> str:
             const_type = "std::string"
             value = '\"' + value + '\"'
 
-        return "{0} {1} = {2}".format(const_type, constant.name, value)
+        return "{0} {1} = {2};".format(const_type, constant.name, value)
 
     code = generator.Code("#pragma once")
 
