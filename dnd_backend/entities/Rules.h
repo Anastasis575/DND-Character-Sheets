@@ -18,6 +18,6 @@ namespace DND {
 		const int DEFAULT_HP = 1;
 		const int DEFAULT_AC = 0;
 		const int DEFAULT_SPEED = 0;
-		inline const std::string EXTENTION = ".chr";
+		inline const std::string EXTENSION = ".chr";
 	}
 }

@@ -16,3 +16,4 @@ Rules:
     default_hp : 1
     default_ac : 0
     default_speed : 0
+    extension: .chr 
