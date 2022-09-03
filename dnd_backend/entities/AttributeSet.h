@@ -1,6 +1,7 @@
 #pragma once
 #include "ObjectCounter.h"
 #include "Attribute.h"
+#include "Rules.h" // include here so as to avoid linking errors
 #include <unordered_set>
 /*
 * Straight up include this because implementing the save/load procedures
@@ -83,16 +84,6 @@ namespace DND {
 		}
 
 	private:
-		/**
-		 * @brief The minimum accepted value for any Attribute.
-		 * @see Attribute
-		*/
-		static const int MIN_ATTRIBUTE_VALUE = 0;
-		/**
-		 * @brief The maximum accepted value for any Attribute.
-		 * @see Attribute
-		*/
-		static const int MAX_ATTRIBUTE_VALUE = 20;
 
 		entity_details::ObjectCounter<Attribute> map;
 

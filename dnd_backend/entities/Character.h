@@ -196,20 +196,11 @@ namespace DND {
 
 
 	private:
-		//limits
-		static const int MIN_LEVEL = 1;
-		static const int MAX_LEVEL = 20;
-		static const int MIN_HP = 0;
-		static const int MAX_HP = std::numeric_limits<int>::max();
-		static const int MIN_AC = -5;
-		static const int MAX_AC = 32;
-		static const int MIN_SPEED = 1;
-		static const int MAX_SPEED = std::numeric_limits<int>::max();
 
-		int level = 1;
-		int hp = 0;
-		int ac = 0;
-		int speed = 1;
+		int level = entity_details::DEFAULT_LEVEL;
+		int hp = entity_details::DEFAULT_HP;
+		int ac = entity_details::DEFAULT_AC;
+		int speed = entity_details::DEFAULT_SPEED;
 
 		std::string characterName;
 		std::string playerName;
