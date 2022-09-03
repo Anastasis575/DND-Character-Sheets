@@ -65,20 +65,20 @@ def generate_cpp_str(group: ConstantGroup) -> str:
         value: str = const.value
 
         if const.is_type(int):
-            const_type = "int"
+            type_of_constant = "const int"
         elif const.is_type(str):
-            const_type = "std::string"
+            type_of_constant = "inline const std::string"
             value = '\"' + value + '\"'
         elif const.is_type(float):
-            const_type = "float"
+            type_of_constant = "const float"
         elif const.is_type(bool):
-            const_type = "bool"
+            type_of_constant = "const bool"
         else:
             generator.warning("No suitable type for constant {0}, string assumed".format(constant.name))
-            const_type = "std::string"
+            type_of_constant = "inline const std::string"
             value = '\"' + value + '\"'
 
-        return "{0} {1} = {2};".format(const_type, constant.name, value)
+        return "{0} {1} = {2};".format(type_of_constant, constant.name, value)
 
     code = generator.Code("#pragma once")
 
