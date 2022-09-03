@@ -73,6 +73,9 @@
     <ClInclude Include="entities\Attribute.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="entities\Rules.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">

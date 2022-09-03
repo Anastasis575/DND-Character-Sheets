@@ -145,6 +145,7 @@
     <ClInclude Include="entities\Item.h" />
     <ClInclude Include="entities\ObjectCounter.h" />
     <ClInclude Include="entities\ProficiencySet.h" />
+    <ClInclude Include="entities\Rules.h" />
     <ClInclude Include="entities\Skill.h" />
     <ClInclude Include="entities\Spell.h" />
     <ClInclude Include="entities\StatModifier.h" />
