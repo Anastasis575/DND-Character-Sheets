@@ -7,14 +7,17 @@ TYPE_ENUM = "enum"
 DETAILS_NAMESPACE: str = "details_namespace"
 NAMESPACE: str = "namespace"
 VALUES: str = "values"
+DOCUMENTATION = "documentation"
 
 
 class Enum:
-    def __init__(self, name: str, values: list[str], namespace: str = None, details_namespace: str = None):
+    def __init__(self, name: str, values: list[str], namespace: Optional[str] = None,
+                 details_namespace: Optional[str] = None, documentation: Optional[str] = None):
         self.name = name
         self.namespace = namespace
         self.details_namespace = details_namespace
         self.values = values
+        self.documentation = documentation
 
     def set_name(self, name: str):
         if name is None or name.isspace():
@@ -27,20 +30,20 @@ class Enum:
         self.values = values
 
 
-def main(input_file_path: str, directory: str):
+def main2(input_file_path: str, directory: str):
     try:
         file_contents = generator.import_yaml_file(input_file_path)
 
         enums: list[Enum] = []
         for enum_contents in file_contents.items():
             if generator.group_type(enum_contents) == TYPE_ENUM:
-
                 # In case of error, keep trying to parse the rest like a normal compiler
                 # The generator will refuse to produce files after we flag any error
-                try:
-                    enums.append(parse_enum(enum_contents[0], enum_contents[1]))
-                except Exception as exc:
-                    generator.error(exc)
+                # try:
+                # enums.append(parse_enum(enum_contents[0], enum_contents[1]))
+                # except Exception as exc:
+                # generator.error(exc)
+                enums.append(parse_enum(enum_contents[0], enum_contents[1]))
 
         for enum in enums:
             print("Producing files for enum " + enum.name + "...")
@@ -52,16 +55,43 @@ def main(input_file_path: str, directory: str):
         generator.error(exc)
 
 
+def main(input_file_path: str, directory: str):
+    file_contents = generator.import_yaml_file(input_file_path)
+
+    enums: list[Enum] = []
+    for enum_contents in file_contents.items():
+        if generator.group_type(enum_contents) == TYPE_ENUM:
+            # In case of error, keep trying to parse the rest like a normal compiler
+            # The generator will refuse to produce files after we flag any error
+            # try:
+            # enums.append(parse_enum(enum_contents[0], enum_contents[1]))
+            # except Exception as exc:
+            # generator.error(exc)
+            enums.append(parse_enum(enum_contents[0], enum_contents[1]))
+
+    for enum in enums:
+        print("Producing files for enum " + enum.name + "...")
+        generator.write_to_file(generate_header_str(enum), enum.name + ".h", directory)
+        generator.write_to_file(generate_source_str(enum), enum.name + ".cpp", directory)
+
+
 def parse_enum(enum_name: str, enum_descr: Any) -> Optional[Enum]:
+    def try_get_value(key: str) -> Optional[Any]:
+        try:
+            return e_dict[key]
+        except KeyError:
+            return None
+
     name: str = enum_name
     e_dict: dict[str] = enum_descr
 
     if name is None or name.isspace():
         raise ValueError("Enum provided with no name. Please check that all enums have an appropriate name.")
 
-    namespace: str = e_dict[NAMESPACE]
-    details_namespace: str = e_dict[DETAILS_NAMESPACE]
-    values: list[str] = e_dict[VALUES]
+    namespace: str = try_get_value(NAMESPACE)
+    details_namespace: str = try_get_value(DETAILS_NAMESPACE)
+    values: list[str] = try_get_value(VALUES)
+    documentation: str = try_get_value(DOCUMENTATION)
 
     if namespace is None:
         generator.warning("No namespace provided for enum {0}, assuming global namespace.".format(name))
@@ -70,7 +100,7 @@ def parse_enum(enum_name: str, enum_descr: Any) -> Optional[Enum]:
         generator.warning("No namespace provided for the details of enum {0}, assuming enum definition namespace."
                           .format(name))
 
-    return Enum(name, values, namespace, details_namespace)
+    return Enum(name, values, namespace, details_namespace, documentation)
 
 
 def cpp_map_def(enum: Enum) -> str:
@@ -98,6 +128,7 @@ def generate_header_str(enum: Enum) -> str:
 
     in_namespace: bool = enum.namespace is not None
     uses_details_namespace: bool = enum.details_namespace is not None
+    has_doc: bool = enum.documentation is not None
 
     code.add_statement("#pragma once")
     code.add_statement(generator.HEADER_COMMENT)
@@ -107,7 +138,7 @@ def generate_header_str(enum: Enum) -> str:
     if in_namespace:
         code.start_block("namespace " + enum.namespace)
 
-    code.start_block("enum class " + enum.name)
+    code.start_block("{0}enum class {1}".format(enum.documentation.replace("\n", "\n\t") if has_doc else "", enum.name))
 
     for value in enum.values:
         code.add_statement(value + ",")
