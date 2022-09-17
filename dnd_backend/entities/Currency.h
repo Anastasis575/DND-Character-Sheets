@@ -1,8 +1,13 @@
+
 #pragma once
-/*File generated automatically by auto-enum.pyhttps://github.com/dimits-exe/CppAutomationTools*/ 
+/*File generated automatically by auto_enum.py https://github.com/dimits-exe/CppAutomationTools*/ 
 #include <unordered_map>
 
 namespace DND {
+	/**
+	* @brief The currency types used in the DND economy.
+	* @author Dimitris Tsirmpas
+	*/
 	enum class Currency {
 		GOLD,
 		ELECTRUM,
