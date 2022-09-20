@@ -126,51 +126,18 @@ TEST_F(CharacterTest, SpellTest) {
 }
 
 TEST_F(CharacterTest, TestCurrency) {
-	for each(Currency curr in entity_details::CURRENCY_TYPES) {
+	for each(Currency curr in currencyValues()) {
 		EXPECT_EQ(character->getAmount(curr), 0);
 	}
 
-	Currency changed = entity_details::CURRENCY_TYPES[0];
+	Currency changed = Currency::COPPER;
 	character->setAmount(changed, 45);
 
-	for each (Currency curr in entity_details::CURRENCY_TYPES) {
+	for each (Currency curr in currencyValues()) {
 		if(curr != changed)
 			EXPECT_EQ(character->getAmount(curr), 0);
 	}
 	EXPECT_EQ(character->getAmount(changed), 45);
-}
-
-TEST_F(CharacterTest, TestSkills) {
-	Skills skills;
-	EXPECT_EQ(character->getSkills().size(), 0);
-
-	character->setSkill(Skill::ACROBATICS, true);
-	character->setSkill(Skill::HISTORY, true);
-	character->setSkill(Skill::INSIGHT, true);
-	character->setSkill(Skill::ACROBATICS, true);
-
-	skills = character->getSkills();
-
-	EXPECT_EQ(skills.size(), 3);
-	EXPECT_TRUE(skills.find(Skill::ACROBATICS) != skills.end());
-	EXPECT_TRUE(skills.find(Skill::HISTORY) != skills.end());
-	EXPECT_TRUE(skills.find(Skill::INSIGHT) != skills.end());
-
-	character->setSkill(Skill::DECEPTION, false);
-	skills = character->getSkills();
-
-	EXPECT_EQ(skills.size(), 3);
-	EXPECT_TRUE(skills.find(Skill::ACROBATICS) != skills.end());
-	EXPECT_TRUE(skills.find(Skill::HISTORY) != skills.end());
-	EXPECT_TRUE(skills.find(Skill::INSIGHT) != skills.end());
-
-	character->setSkill(Skill::ACROBATICS, false);
-	skills = character->getSkills();
-
-	EXPECT_EQ(skills.size(), 2);
-	EXPECT_TRUE(skills.find(Skill::ACROBATICS) == skills.end());
-	EXPECT_TRUE(skills.find(Skill::HISTORY) != skills.end());
-	EXPECT_TRUE(skills.find(Skill::INSIGHT) != skills.end());
 }
 
 TEST_F(CharacterTest, TestIcon) {

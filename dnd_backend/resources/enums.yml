@@ -1,0 +1,57 @@
+--- 
+Attribute: 
+  details_namespace: entity_details
+  namespace: DND
+  type: enum
+  documentation: |
+    /**
+    * @brief An enum describing the basic stats of a character.
+    * @author Dimitris Tsirmpas
+    */
+  values:
+    - Strength
+    - Dexterity
+    - Constitution
+    - Intelligence
+    - Wisdom
+    - Charisma
+
+Currency: 
+  details_namespace: entity_details
+  namespace: DND
+  strings: true
+  type: enum
+  documentation: |
+    /**
+    * @brief The currency types used in the DND economy.
+    * @author Dimitris Tsirmpas
+    */
+  values: 
+    - GOLD
+    - ELECTRUM
+    - SILVER
+    - COPPER
+Skill: 
+  details_namespace: entity_details
+  namespace: DND
+  strings: true
+  type: enum
+  values: 
+    - ATHLETICS
+    - ACROBATICS
+    - SLEIGHT_OF_HAND
+    - STEALTH
+    - ARCANA
+    - HISTORY
+    - INVESTIGATION
+    - NATURE
+    - RELIGION
+    - ANIMAL_HANDLING
+    - INSIGHT
+    - MEDICINE
+    - PERCEPTION
+    - SURVIVAL
+    - DECEPTION
+    - INTIMIDATION
+    - PERFORMANCE
+    - PERSUASION

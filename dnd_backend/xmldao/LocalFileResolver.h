@@ -1,5 +1,5 @@
 #pragma once
-#include "Character.h"
+#include "Rules.h"
 #include <string>
 #include <filesystem>
 
@@ -40,8 +40,6 @@ namespace DND {
 			const Path createCharacterFile(const std::string& characterName, const std::string& playerName) const;
 
 		private:
-			static const std::string EXTENSION;
-
 			const Path root;
 			Path resolve(const std::string& characterName, const std::string& playerName) const;
 		};

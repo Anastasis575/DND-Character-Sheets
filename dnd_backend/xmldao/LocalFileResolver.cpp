@@ -5,8 +5,6 @@
 using namespace DND::serialization_details;
 namespace fs = std::filesystem;
 
-const std::string LocalFileResolver::EXTENSION = ".chr";
-
 LocalFileResolver::LocalFileResolver(const Path& dataDirectory) :root(dataDirectory) {
 	if (!fs::exists(dataDirectory)) {
 		throw std::invalid_argument("Directory " + dataDirectory.string() + " does not exist");
@@ -44,5 +42,5 @@ Path LocalFileResolver::resolve(const std::string& characterName, const std::str
 		throw std::invalid_argument("Cannot save character for a blank user name");
 	}
 
-	return root / playerName / (characterName + EXTENSION);
+	return root / playerName / (characterName + entity_details::EXTENSION);
 }
