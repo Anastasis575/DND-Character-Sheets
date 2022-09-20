@@ -2,7 +2,6 @@
 Attribute: 
   details_namespace: entity_details
   namespace: DND
-  strings: true
   type: enum
   documentation: |
     /**
