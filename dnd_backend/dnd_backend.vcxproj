@@ -157,6 +157,7 @@
     <ClCompile Include="entities\Currency.cpp" />
     <ClCompile Include="entities\ProficiencySet.cpp" />
     <ClCompile Include="entities\Skill.cpp" />
+    <ClCompile Include="entities\SkillDepedencies.cpp" />
     <ClCompile Include="entities\StatModifier.cpp" />
     <ClCompile Include="xmldao\LocalFileResolver.cpp" />
     <ClCompile Include="xmldao\XMLCharacterDAO.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="entities\ProficiencySet.h" />
     <ClInclude Include="entities\Rules.h" />
     <ClInclude Include="entities\Skill.h" />
+    <ClInclude Include="entities\SkillDepedencies.h" />
     <ClInclude Include="entities\Spell.h" />
     <ClInclude Include="entities\StatModifier.h" />
     <ClInclude Include="idao\ICharacterDAO.h" />

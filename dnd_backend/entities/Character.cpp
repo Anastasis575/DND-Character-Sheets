@@ -21,6 +21,17 @@ int Character::getAttributeScore(Attribute attr) const {
 	return finalAttributes.getAttributeScore(attr);
 }
 
+int Character::getAttributeModifier(Attribute attr) const {
+	return (getAttributeScore(attr) - 10) / 2;
+}
+
+int Character::getSkillModifier(Skill skill) const {
+	// modifier + proficiency if proficient
+	Attribute relatedAttribute = getSkillDependency(skill);
+	int bonus = proficiencies.getBonusStats(level).getAttributeScore(relatedAttribute);
+	return getAttributeModifier(relatedAttribute) + bonus;
+}
+
 int Character::getAmount(Currency type) const {
 	return wallet.getAmount(type);
 }

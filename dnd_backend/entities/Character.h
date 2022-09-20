@@ -7,6 +7,7 @@
 #include "Currency.h"
 #include "ProficiencySet.h"
 #include "ObjectCounter.h"
+#include "SkillDepedencies.h"
 
 #include <string>
 #include <unordered_map>
@@ -54,6 +55,20 @@ namespace DND {
 		 * @return The score of the attribute.
 		*/
 		int getAttributeScore(Attribute attr) const;
+
+		/**
+		 * @brief Return the attribute modifier derived from the attribute score.
+		 * @param attr the attribute
+		 * @return the modifier
+		*/
+		int getAttributeModifier(Attribute attr) const;
+
+		/**
+		 * @brief Get the roll modifier for a particular skill.
+		 * @param skill the skill
+		 * @return the value added to / subtracted from the roll
+		*/
+		int getSkillModifier(Skill skill) const;
 
 		/**
 		 * @brief Get the amount of a specific currency currently held by the character.
