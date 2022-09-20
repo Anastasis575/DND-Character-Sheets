@@ -1,5 +1,7 @@
 #pragma once
 #include "ObjectCounter.h"
+#include "Attribute.h"
+#include "Rules.h" // include here so as to avoid linking errors
 #include <unordered_set>
 /*
 * Straight up include this because implementing the save/load procedures
@@ -9,19 +11,6 @@
 #include <boost/serialization/access.hpp>
 
 namespace DND {
-	/**
-	 * @brief An enum describing the basic stats of a character.
-	 * @author Dimitris Tsirmpas
-	*/
-	enum class Attribute {
-		Strength,
-		Dexterity,
-		Constitution,
-		Intelligence,
-		Wisdom,
-		Charisma
-		// if you modify this enum remember to change the vector in the .cpp file
-	};
 
 	typedef std::unordered_set<Attribute> Attributes;
 
@@ -33,7 +22,6 @@ namespace DND {
 	class AttributeSet {
 
 	public:
-		static const Attributes getAllAttributes();
 
 		/**
 		 * @brief Create an AttributeSet with all-0 stats.
@@ -96,17 +84,6 @@ namespace DND {
 		}
 
 	private:
-		/**
-		 * @brief The minimum accepted value for any Attribute.
-		 * @see Attribute
-		*/
-		static const int MIN_ATTRIBUTE_VALUE = 0;
-		/**
-		 * @brief The maximum accepted value for any Attribute.
-		 * @see Attribute
-		*/
-		static const int MAX_ATTRIBUTE_VALUE = 20;
-		static const ::std::vector<Attribute> ATTRIBUTE_VALUES;
 
 		entity_details::ObjectCounter<Attribute> map;
 

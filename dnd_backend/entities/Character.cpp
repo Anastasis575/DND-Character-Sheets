@@ -74,22 +74,25 @@ std::string Character::getBackground() const {
 }
 
 void Character::setSpeed(int speed) {
-	if (getSpeed() < MIN_SPEED || getSpeed() > MAX_SPEED)
-		throw std::invalid_argument(outOfBoundsErrorMessage("Speed", MIN_SPEED, MAX_SPEED));
+	if (getSpeed() < entity_details::MIN_SPEED || getSpeed() > entity_details::MAX_SPEED)
+		throw std::invalid_argument(
+			outOfBoundsErrorMessage("Speed", entity_details::MIN_SPEED, entity_details::MAX_SPEED));
 
 	this->speed = speed;
 }
 
 void Character::setAC(int ac) {
-	if (getAC() < MIN_AC || getAC() > MAX_AC)
-		throw std::invalid_argument(outOfBoundsErrorMessage("Armor Class", MIN_AC, MAX_AC));
+	if (getAC() < entity_details::MIN_AC || getAC() > entity_details::MAX_AC)
+		throw std::invalid_argument(
+			outOfBoundsErrorMessage("Armor Class", entity_details::MIN_AC, entity_details::MAX_AC));
 
 	this->ac = ac;
 }
 
 void Character::setLevel(int level) {
-	if (getLevel() < MIN_LEVEL || getLevel() > MAX_LEVEL)
-		throw std::invalid_argument(outOfBoundsErrorMessage("Level", MIN_LEVEL, MAX_LEVEL));
+	if (getLevel() < entity_details::MIN_LEVEL || getLevel() > entity_details::MAX_LEVEL)
+		throw std::invalid_argument(
+			outOfBoundsErrorMessage("Level", entity_details::MIN_LEVEL, entity_details::MAX_LEVEL));
 
 	this->level = level;
 }
@@ -123,8 +126,9 @@ void Character::removeSpell(const Spell& original) {
 }
 
 void Character::setHP(int amt) {
-	if (getHP() < MIN_HP || getHP() > MAX_HP)
-		throw std::invalid_argument(outOfBoundsErrorMessage("HP", MIN_HP, MAX_HP));
+	if (getHP() < entity_details::MIN_HP || getHP() > entity_details::MAX_HP)
+		throw std::invalid_argument(
+			outOfBoundsErrorMessage("HP", entity_details::MIN_HP, entity_details::MAX_HP));
 
 	hp = amt;
 }
@@ -155,35 +159,13 @@ void Character::setProfiency(Attribute attr, bool isProficient) {
 Attributes Character::getProfiencies() const {
 	Attributes set;
 	
-	for each (Attribute attr in AttributeSet::getAllAttributes()) {
+	for each (Attribute attr in attributeValues()) {
 		if (proficiencies.hasProficiency(attr)) {
 			set.insert(attr);
 		}
 	}
 
 	return set;
-}
-
-void Character::setSkill(Skill skill, bool isSkilled) {
-	if (isSkilled)
-		skills.addSkill(skill);
-	else
-		skills.removeSkill(skill);
-}
-
-/**
- * @brief Get all the skills the character has
- * @return a collection with all the skills of the character
-*/
-Skills Character::getSkills() const {
-	Skills charSkills; 
-
-	for each (Skill skill in SkillSet::getAllSkills()) {
-		if (skills.isSkilledAt(skill))
-			charSkills.insert(skill);
-	}
-
-	return charSkills;
 }
 
 boost::optional<std::string> Character::getIcon() const {

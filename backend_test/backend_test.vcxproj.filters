@@ -20,9 +20,6 @@
     <ClCompile Include="test_resources\ProficiencyTestSet.cpp">
       <Filter>Unit Tests</Filter>
     </ClCompile>
-    <ClCompile Include="test_resources\SkillSetTest.cpp">
-      <Filter>Unit Tests</Filter>
-    </ClCompile>
     <ClCompile Include="test_resources\SpellTest.cpp">
       <Filter>Unit Tests</Filter>
     </ClCompile>

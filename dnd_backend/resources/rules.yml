@@ -1,0 +1,19 @@
+---
+Rules:
+    type: constants
+    namespace: DND::entity_details
+    min_attribute_value : 0
+    max_attribute_value : 20
+    min_level : 1
+    max_level : 20
+    min_hp : 0
+    max_hp : 9999
+    min_ac : -5
+    max_ac : 32
+    min_speed : 1
+    max_speed : 9999
+    default_level : 1
+    default_hp : 1
+    default_ac : 0
+    default_speed : 0
+    extension: .chr 
