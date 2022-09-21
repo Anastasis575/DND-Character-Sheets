@@ -45,7 +45,7 @@ namespace DND {
 		Character(const std::string& charName, const std::string& playerName);
 
 		/**
-		 * @brief Used only by the serialization library, do NOT use.
+		 * @brief Used only by the serialization library, do NOT use otherwise.
 		*/
 		Character();
 
@@ -98,6 +98,12 @@ namespace DND {
 		std::string getHdType() const;
 
 		std::string getBackground() const;
+
+		/**
+		 * @brief Set the base stats of the character.
+		 * @param newStats the new stats of the character
+		*/
+		void setBaseStats(const AttributeSet& newStats);
 
 		/**
 		 * @brief Get the icon the player has chosen for this player. Note that this method doesn't
@@ -209,7 +215,6 @@ namespace DND {
 		*/
 		Attributes getProfiencies() const;
 
-
 	private:
 
 		int level = entity_details::DEFAULT_LEVEL;
@@ -221,11 +226,11 @@ namespace DND {
 		std::string playerName;
 		std::string dndClass;
 		std::string dndSubClass;
+		std::string hdType;
+		std::string background;
 
 		Race race;
 
-		std::string hdType;
-		std::string background;
 		boost::optional<std::string> charIconPath;
 
 		AttributeSet baseStats;

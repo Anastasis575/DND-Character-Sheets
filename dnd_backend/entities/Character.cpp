@@ -82,6 +82,10 @@ std::string Character::getBackground() const {
 	return background;
 }
 
+void Character::setBaseStats(const AttributeSet& newStats) {
+	baseStats = newStats;
+}
+
 void Character::setSpeed(int speed) {
 	if (getSpeed() < entity_details::MIN_SPEED || getSpeed() > entity_details::MAX_SPEED)
 		throw std::invalid_argument(
