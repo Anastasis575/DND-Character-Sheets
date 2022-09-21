@@ -100,10 +100,11 @@ namespace DND {
 		std::string getBackground() const;
 
 		/**
-		 * @brief Set the base stats of the character.
-		 * @param newStats the new stats of the character
+		 * @brief Set the base stats for a specific attribute
+		 * @param attr the attribute
+		 * @param amt the amount
 		*/
-		void setBaseStats(const AttributeSet& newStats);
+		void setBaseStats(Attribute attr, int amt);
 
 		/**
 		 * @brief Get the icon the player has chosen for this player. Note that this method doesn't

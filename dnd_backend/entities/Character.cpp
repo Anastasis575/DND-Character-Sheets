@@ -82,8 +82,8 @@ std::string Character::getBackground() const {
 	return background;
 }
 
-void Character::setBaseStats(const AttributeSet& newStats) {
-	baseStats = newStats;
+void Character::setBaseStats(Attribute attr, int amt) {
+	baseStats.setAttribute(attr, amt);
 }
 
 void Character::setSpeed(int speed) {
