@@ -40,7 +40,7 @@
     <ClCompile Include="test_resources\pch.cpp" />
     <ClCompile Include="test_resources\ProficiencyTestSet.cpp" />
     <ClCompile Include="test_resources\SpellTest.cpp" />
-    <ClCompile Include="test_resources\StatModifierTest.cpp" />
+    <ClCompile Include="test_resources\RaceTest.cpp" />
     <ClCompile Include="test_resources\ObjectCounterTest.cpp" />
     <ClCompile Include="test_resources\test.cpp" />
     <ClCompile Include="test_resources\XMLDAOTest.cpp" />

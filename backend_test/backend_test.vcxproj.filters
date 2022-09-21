@@ -29,7 +29,7 @@
     <ClCompile Include="test_resources\XMLDAOTest.cpp">
       <Filter>Unit Tests</Filter>
     </ClCompile>
-    <ClCompile Include="test_resources\StatModifierTest.cpp">
+    <ClCompile Include="test_resources\RaceTest.cpp">
       <Filter>Unit Tests</Filter>
     </ClCompile>
   </ItemGroup>
