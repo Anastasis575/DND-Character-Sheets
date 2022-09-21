@@ -6,11 +6,12 @@ using namespace DND;
 class CharacterTest : public ::testing::Test {
 
 protected:
-	const std::string CHAR_NAME = "PANOS";
-	const std::string PLAYER_NAME = "SEX FROG";
-	const StatModifier RACE = StatModifier("LAMROUPOULI", AttributeSet(3)); //todo: make meaningful
-	const StatModifier CLASS = StatModifier("WORKING", AttributeSet(4));
-	const StatModifier SUBCLASS = StatModifier("KOMMOUNISTIS", AttributeSet(5));
+	const AttributeSet& BASE_STATS = AttributeSet(2);
+	const std::string& CHAR_NAME = "PANOS";
+	const std::string& PLAYER_NAME = "SEX FROG";
+	const Race& RACE = Race("LAMROUPOULI", AttributeSet(3));
+	const std::string& CLASS = "WORKING";
+	const std::string& SUBCLASS = "KOMMOUNISTIS";
 
 	Character* character = createCharacter();
 
@@ -24,7 +25,10 @@ protected:
 
 	Character * createCharacter() {
 		character = new Character(CHAR_NAME, PLAYER_NAME);
-	
+		
+		for each (Attribute attr in attributeValues()) {
+			character->setBaseStats(attr, BASE_STATS.getAttributeScore(attr));
+		}
 		character->setRace(RACE);
 		character->setClass(CLASS);
 		character->setSubClass(SUBCLASS);
@@ -42,11 +46,9 @@ TEST_F(CharacterTest, TestConstructor) {
 	EXPECT_EQ(character->getRace().getName(), RACE.getName());
 	EXPECT_EQ(character->getRace().getStats(), RACE.getStats());
 
-	EXPECT_EQ(character->getClass().getName(), CLASS.getName());
-	EXPECT_EQ(character->getClass().getStats(), CLASS.getStats());
+	EXPECT_EQ(character->getClass(), CLASS);
 
-	EXPECT_EQ(character->getSubclass().getName(), SUBCLASS.getName());
-	EXPECT_EQ(character->getSubclass().getStats(), SUBCLASS.getStats());
+	EXPECT_EQ(character->getSubclass(), SUBCLASS);
 }
 
 TEST_F(CharacterTest, ProficiencyTest) {
@@ -73,14 +75,33 @@ TEST_F(CharacterTest, GetAttributeScoreTest) {
 	character->setProfiency(Attribute::Constitution, true);
 	character->setLevel(1);
 
-	EXPECT_EQ(character->getAttributeScore(Attribute::Charisma), 12);
-	EXPECT_EQ(character->getAttributeScore(Attribute::Constitution), 14);
+	EXPECT_EQ(character->getAttributeScore(Attribute::Charisma), 5);
+	EXPECT_EQ(character->getAttributeScore(Attribute::Constitution), 7);
 
 	character->setLevel(5);
-	EXPECT_EQ(character->getAttributeScore(Attribute::Charisma), 12);
-	EXPECT_EQ(character->getAttributeScore(Attribute::Constitution), 15);
+	EXPECT_EQ(character->getAttributeScore(Attribute::Charisma), 5);
+	EXPECT_EQ(character->getAttributeScore(Attribute::Constitution), 8);
 }
 
+TEST_F(CharacterTest, SetBaseStatsTest) {
+	Attribute changed = Attribute::Charisma;
+	character->setBaseStats(changed, 12);
+	EXPECT_EQ(character->getAttributeScore(changed), 12 + RACE.getStats().getAttributeScore(changed));
+}
+
+TEST_F(CharacterTest, GetAttributeModifierTest) {
+	Attribute changed = Attribute::Constitution;
+	character->setBaseStats(changed, 12);
+	EXPECT_EQ(character->getAttributeModifier(changed), 2);
+}
+
+TEST_F(CharacterTest, GetSkillTest) {
+	Skill skill= Skill::ACROBATICS;
+	EXPECT_EQ(character->getSkillModifier(skill), -2);
+
+	character->setProfiency(getSkillDependency(skill), true);
+	EXPECT_EQ(character->getSkillModifier(skill), 1);
+}
 TEST_F(CharacterTest, ItemTest) {
 	EXPECT_EQ(character->getItems().size(), 0);
 	Item item1 = Item("TEST_ITEM1", "does stuff");
