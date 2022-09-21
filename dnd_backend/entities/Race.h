@@ -11,15 +11,15 @@
 namespace DND {
 
 	/**
-	 * @brief  An immutable (String, AttributeSet) tuple describing any stats modifier such as the character's job,
-	 * his background or his class / subclass.
+	 * @brief A class representing a DND race, including its name and any Attribute changes 
+	 * it brings about.
 	 * @author Dimitris Tsirmpas
 	*/
-	class StatModifier {
+	class Race {
 	public:
-		StatModifier();
+		Race();
 
-		StatModifier(const std::string& name, const AttributeSet& stats);
+		Race(const std::string& name, const AttributeSet& stats);
 
 		std::string getName() const;
 

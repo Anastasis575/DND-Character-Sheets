@@ -20,7 +20,7 @@
     <ClCompile Include="entities\ProficiencySet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="entities\StatModifier.cpp">
+    <ClCompile Include="entities\Race.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="xmldao\XMLCharacterDAO.cpp">
@@ -64,7 +64,7 @@
     <ClInclude Include="entities\Spell.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="entities\StatModifier.h">
+    <ClInclude Include="entities\Race.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="xmldao\XMLCharacterDAO.h">

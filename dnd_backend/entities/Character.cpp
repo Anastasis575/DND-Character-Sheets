@@ -11,11 +11,9 @@ Character::Character(const std::string& charName, const std::string& playerName)
 Character::Character() : characterName("N/A"), playerName("NON INITIALIZED CHARACTER") {}
 
 int Character::getAttributeScore(Attribute attr) const {
-	AttributeSet& finalAttributes = race.getStats();
+	AttributeSet finalAttributes = baseStats;
 
-	finalAttributes += dndClass.getStats();
-	finalAttributes += dndSubClass.getStats();
-	finalAttributes += baseStats;
+	finalAttributes += race.getStats();
 	finalAttributes += proficiencies.getBonusStats(level);
 
 	return finalAttributes.getAttributeScore(attr);
@@ -64,15 +62,15 @@ std::string Character::getPlayerName() const {
 	return playerName;
 }
 
-StatModifier Character::getRace() const {
+Race Character::getRace() const {
 	return race;
 }
 
-StatModifier Character::getClass() const {
+std::string Character::getClass() const {
 	return dndClass;
 }
 
-StatModifier Character::getSubclass() const {
+std::string Character::getSubclass() const {
 	return dndSubClass;
 }
 
@@ -144,11 +142,11 @@ void Character::setHP(int amt) {
 	hp = amt;
 }
 
-void Character::setRace(const StatModifier& race) {
+void Character::setRace(const Race& race) {
 	this->race = race;
 }
 
-void Character::setClass(const StatModifier& dndClass) {
+void Character::setClass(const std::string& dndClass) {
 	this->dndClass = dndClass;
 }
 
@@ -156,7 +154,7 @@ void Character::setBackground(const std::string background) {
 	this->background = background;
 }
 
-void Character::setSubClass(const StatModifier& dndSubClass) {
+void Character::setSubClass(const std::string& dndSubClass) {
 	this->dndSubClass = dndSubClass;
 }
 

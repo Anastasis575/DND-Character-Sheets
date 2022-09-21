@@ -158,7 +158,7 @@
     <ClCompile Include="entities\ProficiencySet.cpp" />
     <ClCompile Include="entities\Skill.cpp" />
     <ClCompile Include="entities\SkillDepedencies.cpp" />
-    <ClCompile Include="entities\StatModifier.cpp" />
+    <ClCompile Include="entities\Race.cpp" />
     <ClCompile Include="xmldao\LocalFileResolver.cpp" />
     <ClCompile Include="xmldao\XMLCharacterDAO.cpp" />
   </ItemGroup>
@@ -174,7 +174,7 @@
     <ClInclude Include="entities\Skill.h" />
     <ClInclude Include="entities\SkillDepedencies.h" />
     <ClInclude Include="entities\Spell.h" />
-    <ClInclude Include="entities\StatModifier.h" />
+    <ClInclude Include="entities\Race.h" />
     <ClInclude Include="idao\ICharacterDAO.h" />
     <ClInclude Include="xmldao\LocalFileResolver.h" />
     <ClInclude Include="xmldao\XMLCharacterDAO.h" />

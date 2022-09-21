@@ -2,7 +2,7 @@
 #include "Skill.h"
 #include "AttributeSet.h"
 #include "Spell.h"
-#include "StatModifier.h"
+#include "Race.h"
 #include "Item.h"
 #include "Currency.h"
 #include "ProficiencySet.h"
@@ -89,11 +89,11 @@ namespace DND {
 
 		std::string getPlayerName() const;
 
-		StatModifier getRace() const;
+		Race getRace() const;
 
-		StatModifier getClass() const;
+		std::string getClass() const;
 
-		StatModifier getSubclass() const;
+		std::string getSubclass() const;
 
 		std::string getHdType() const;
 
@@ -188,13 +188,13 @@ namespace DND {
 		*/
 		void setLevel(int level);
 
-		void setRace(const StatModifier& race);
+		void setRace(const Race& race);
 
-		void setClass(const StatModifier& dndClass);
+		void setClass(const std::string& dndClass);
 
 		void setBackground(std::string background);
 
-		void setSubClass(const StatModifier& dndSubClass);
+		void setSubClass(const std::string& dndSubClass);
 
 		/**
 		 * @brief Set whether or not the character is proficient to an Attribute.
@@ -219,10 +219,10 @@ namespace DND {
 
 		std::string characterName;
 		std::string playerName;
+		std::string dndClass;
+		std::string dndSubClass;
 
-		StatModifier race;
-		StatModifier dndClass;
-		StatModifier dndSubClass;
+		Race race;
 
 		std::string hdType;
 		std::string background;
