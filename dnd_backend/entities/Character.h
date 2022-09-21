@@ -23,6 +23,7 @@
 */
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/optional.hpp>
+#include <boost/serialization/version.hpp>
 
 namespace DND {
 	typedef std::vector<std::pair<Item, int>> Items;
@@ -263,3 +264,5 @@ namespace DND {
 	};
 
 }
+
+BOOST_CLASS_VERSION(DND::Character, 1)
