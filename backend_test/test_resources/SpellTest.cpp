@@ -46,3 +46,10 @@ TEST_F(SpellTest, TestImmutability) {
 	EXPECT_EQ(spell.getDescription(), "Original");
 	EXPECT_EQ(spell.getLevel(), 3);
 }
+
+TEST_F(SpellTest, TestSerialization) {
+	testSerialization<Spell>(*original,
+		[](const Spell& a, const Spell& b) {
+			return a == b;
+		});
+}

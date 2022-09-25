@@ -1,23 +1,12 @@
+
 #pragma once
-#include <vector>
+/*File generated automatically by auto_enum.py https://github.com/dimits-exe/CppAutomationTools*/ 
+#include <unordered_map>
 
 namespace DND {
-	
 	/**
-	 * @brief The minimum accepted value for any Attribute.
-	 * @see Attribute
-	*/
-	const int MIN_ATTRIBUTE_VALUE = 0;
-
-	/**
-	 * @brief The maximum accepted value for any Attribute.
-	 * @see Attribute
-	*/
-	const int MAX_ATTRIBUTE_VALUE = 20;
-
-	/**
-	 * @brief An enum describing the basic stats of a character.
-	 * @author Dimitris Tsirmpas
+	* @brief An enum describing the basic stats of a character.
+	* @author Dimitris Tsirmpas
 	*/
 	enum class Attribute {
 		Strength,
@@ -25,19 +14,16 @@ namespace DND {
 		Constitution,
 		Intelligence,
 		Wisdom,
-		Charisma
-		// if you modify this enum remember to change the vector in the .hpp file
+		Charisma,
 	};
-
+	
+	
+	std::string attributeToString(DND::Attribute attribute);
+	
+	
+	std::vector<Attribute> attributeValues();
+	
 	namespace entity_details {
-		extern const std::vector<Attribute> ATTRIBUTE_TYPES;
+		extern const std::unordered_map<Attribute, std::string> ATTRIBUTE_MAP;
 	}
-
-}
-
-
-namespace std {
-	template <> struct hash<DND::Attribute> {
-		size_t operator() (const DND::Attribute& t) const { return size_t(t); }
-	};
 }

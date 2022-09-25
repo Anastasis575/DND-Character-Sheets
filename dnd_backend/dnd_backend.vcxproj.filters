@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="entities\AttributeSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Character.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Currency.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xmldao\LocalFileResolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\ProficiencySet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Race.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xmldao\XMLCharacterDAO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Skill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Attribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\SkillDepedencies.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="entities\AttributeSet.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Character.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="idao\ICharacterDAO.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Currency.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Item.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="xmldao\LocalFileResolver.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\ObjectCounter.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\ProficiencySet.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Spell.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Race.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="xmldao\XMLCharacterDAO.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Skill.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Attribute.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Rules.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\SkillDepedencies.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{ea0ae0ec-ac11-45e4-b89a-30bed03c85f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{b8d49cc5-28bb-4484-9c0d-f22fd7bbdfcc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

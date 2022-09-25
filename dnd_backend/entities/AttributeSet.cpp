@@ -2,12 +2,10 @@
 #include <stdexcept>
 #include <string> 
 
+DND::AttributeSet::AttributeSet(): map(entity_details::ObjectCounter<Attribute>() ){}
 
-DND::AttributeSet::AttributeSet(): map(entity_details::EnumMap<Attribute>(entity_details::ATTRIBUTE_TYPES) ){}
-
-
-DND::AttributeSet::AttributeSet(int amt) : map(entity_details::EnumMap<Attribute>(entity_details::ATTRIBUTE_TYPES)) {
-	for each (Attribute attribute in entity_details::ATTRIBUTE_TYPES) {
+DND::AttributeSet::AttributeSet(int amt) : map(entity_details::ObjectCounter<Attribute>()) {
+	for each (Attribute attribute in attributeValues()) {
 		setAttribute(attribute, amt);
 	}
 }
@@ -20,7 +18,7 @@ DND::AttributeSet& DND::AttributeSet::operator+=(DND::AttributeSet const& other)
 DND::AttributeSet DND::AttributeSet::operator+(DND::AttributeSet const & other) const {
 	AttributeSet newSet(*this);
 
-	for each (Attribute attribute in entity_details::ATTRIBUTE_TYPES) {
+	for each (Attribute attribute in attributeValues()) {
 		newSet.setAttribute(attribute, getAttributeScore(attribute) + other.getAttributeScore(attribute));
 	}
 
@@ -44,9 +42,10 @@ int DND::AttributeSet::getAttributeScore(DND::Attribute attr) const {
 }
 
 void DND::AttributeSet::setAttribute(DND::Attribute attr, int amt) {
-	if (amt < DND::MIN_ATTRIBUTE_VALUE || amt > MAX_ATTRIBUTE_VALUE) {
-		throw std::invalid_argument("Character attributes must be between " + std::to_string(MIN_ATTRIBUTE_VALUE)
-			+ " and " + std::to_string(MAX_ATTRIBUTE_VALUE));
+	if (amt < entity_details::MIN_ATTRIBUTE_VALUE || amt > entity_details::MAX_ATTRIBUTE_VALUE) {
+		throw std::invalid_argument("Character attributes must be between " + 
+			::std::to_string(entity_details::MIN_ATTRIBUTE_VALUE) + " and " + 
+			::std::to_string(entity_details::MAX_ATTRIBUTE_VALUE));
 	}
 
 	map.setAmount(attr, amt);

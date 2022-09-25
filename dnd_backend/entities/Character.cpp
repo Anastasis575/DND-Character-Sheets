@@ -6,18 +6,28 @@ using namespace DND;
 std::string outOfBoundsErrorMessage(std::string field, int min, int max);
 
 Character::Character(const std::string& charName, const std::string& playerName):
-	characterName(charName), playerName(playerName), wallet(entity_details::EnumMap<Currency>(entity_details::CURRENCY_TYPES)) {}
+	characterName(charName), playerName(playerName), wallet(entity_details::ObjectCounter<Currency>()) {}
 
+Character::Character() : characterName("N/A"), playerName("NON INITIALIZED CHARACTER") {}
 
 int Character::getAttributeScore(Attribute attr) const {
-	AttributeSet& finalAttributes = race.getStats();
+	AttributeSet finalAttributes = baseStats;
 
-	finalAttributes += dndClass.getStats();
-	finalAttributes += dndSubClass.getStats();
-	finalAttributes += baseStats;
+	finalAttributes += race.getStats();
 	finalAttributes += proficiencies.getBonusStats(level);
 
 	return finalAttributes.getAttributeScore(attr);
+}
+
+int Character::getAttributeModifier(Attribute attr) const {
+	return (getAttributeScore(attr) - 10) / 2;
+}
+
+int Character::getSkillModifier(Skill skill) const {
+	// modifier + proficiency if proficient
+	Attribute relatedAttribute = getSkillDependency(skill);
+	int bonus = proficiencies.getBonusStats(level).getAttributeScore(relatedAttribute);
+	return getAttributeModifier(relatedAttribute) + bonus;
 }
 
 int Character::getAmount(Currency type) const {
@@ -52,15 +62,15 @@ std::string Character::getPlayerName() const {
 	return playerName;
 }
 
-StatModifier Character::getRace() const {
+Race Character::getRace() const {
 	return race;
 }
 
-StatModifier Character::getClass() const {
+std::string Character::getClass() const {
 	return dndClass;
 }
 
-StatModifier Character::getSubclass() const {
+std::string Character::getSubclass() const {
 	return dndSubClass;
 }
 
@@ -72,64 +82,75 @@ std::string Character::getBackground() const {
 	return background;
 }
 
+void Character::setBaseStats(Attribute attr, int amt) {
+	baseStats.setAttribute(attr, amt);
+}
 
 void Character::setSpeed(int speed) {
-	if (getSpeed() < MIN_SPEED || getSpeed() > MAX_SPEED)
-		throw std::invalid_argument(outOfBoundsErrorMessage("Speed", MIN_SPEED, MAX_SPEED));
+	if (getSpeed() < entity_details::MIN_SPEED || getSpeed() > entity_details::MAX_SPEED)
+		throw std::invalid_argument(
+			outOfBoundsErrorMessage("Speed", entity_details::MIN_SPEED, entity_details::MAX_SPEED));
 
 	this->speed = speed;
 }
 
 void Character::setAC(int ac) {
-	if (getAC() < MIN_AC || getAC() > MAX_AC)
-		throw std::invalid_argument(outOfBoundsErrorMessage("Armor Class", MIN_AC, MAX_AC));
+	if (getAC() < entity_details::MIN_AC || getAC() > entity_details::MAX_AC)
+		throw std::invalid_argument(
+			outOfBoundsErrorMessage("Armor Class", entity_details::MIN_AC, entity_details::MAX_AC));
 
 	this->ac = ac;
 }
 
 void Character::setLevel(int level) {
-	if (getLevel() < MIN_LEVEL || getLevel() > MAX_LEVEL)
-		throw std::invalid_argument(outOfBoundsErrorMessage("Level", MIN_LEVEL, MAX_LEVEL));
+	if (getLevel() < entity_details::MIN_LEVEL || getLevel() > entity_details::MAX_LEVEL)
+		throw std::invalid_argument(
+			outOfBoundsErrorMessage("Level", entity_details::MIN_LEVEL, entity_details::MAX_LEVEL));
 
 	this->level = level;
 }
 
-void Character::addItem(Item& item) {
-	items.insert(item);
+void Character::addItem(const Item& item) {
+	int prev = items.getAmount(item);
+	items.setAmount(item, prev+1);
 }
 
-void Character::removeItem(Item& item) {
-	items.erase(item);
+void Character::removeItem(const Item& item) {
+	int prev = items.getAmount(item);
+	if(prev > 0)
+		items.setAmount(item, prev - 1);
 }
 
 Items Character::getItems() const {
-	return items;
+	auto charItems = items.getAll();
+	return Items(charItems.begin(), charItems.end());
 }
 
 void Character::setAmount(Currency type, int amt) {
 	wallet.setAmount(type, amt);
 }
 
-void Character::addSpell(Spell& original) {
+void Character::addSpell(const Spell& original) {
 	spells.insert(original);
 }
 
-void Character::removeSpell(Spell& original) {
+void Character::removeSpell(const Spell& original) {
 	spells.erase(original);
 }
 
 void Character::setHP(int amt) {
-	if (getHP() < MIN_HP || getHP() > MAX_HP)
-		throw std::invalid_argument(outOfBoundsErrorMessage("HP", MIN_HP, MAX_HP));
+	if (getHP() < entity_details::MIN_HP || getHP() > entity_details::MAX_HP)
+		throw std::invalid_argument(
+			outOfBoundsErrorMessage("HP", entity_details::MIN_HP, entity_details::MAX_HP));
 
 	hp = amt;
 }
 
-void Character::setRace(const StatModifier& race) {
+void Character::setRace(const Race& race) {
 	this->race = race;
 }
 
-void Character::setClass(const StatModifier& dndClass) {
+void Character::setClass(const std::string& dndClass) {
 	this->dndClass = dndClass;
 }
 
@@ -137,7 +158,7 @@ void Character::setBackground(const std::string background) {
 	this->background = background;
 }
 
-void Character::setSubClass(const StatModifier& dndSubClass) {
+void Character::setSubClass(const std::string& dndSubClass) {
 	this->dndSubClass = dndSubClass;
 }
 
@@ -148,17 +169,28 @@ void Character::setProfiency(Attribute attr, bool isProficient) {
 		proficiencies.removeProficiency(attr);
 }
 
-std::unordered_set<Attribute> Character::getProfiencies() const {
-	std::unordered_set<Attribute> set = std::unordered_set<Attribute>();
+Attributes Character::getProfiencies() const {
+	Attributes set;
 	
-	//this is dumb but I want ProficiencySet to be as generic as it can be
-	for each (Attribute attr in entity_details::ATTRIBUTE_TYPES) {
+	for each (Attribute attr in attributeValues()) {
 		if (proficiencies.hasProficiency(attr)) {
 			set.insert(attr);
 		}
 	}
 
 	return set;
+}
+
+boost::optional<std::string> Character::getIcon() const {
+	return charIconPath;
+}
+
+void Character::removeIcon() {
+	charIconPath.reset();
+}
+
+void Character::setIcon(std::string iconPath) {
+	charIconPath.emplace(iconPath);
 }
 
 std::string outOfBoundsErrorMessage(std::string field, int min, int max) {

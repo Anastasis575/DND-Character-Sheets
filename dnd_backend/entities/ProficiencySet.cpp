@@ -22,10 +22,10 @@ AttributeSet ProficiencySet::getBonusStats(int level) const {
 	}
 
 	//1 + (total level/4), rounded up
-	int bonusPoints = 1 + std::ceil(level / 4.0);
+	int bonusPoints = 1 + static_cast<int>(std::ceil(level / 4.0));
 	AttributeSet bonus;
 	
-	for each (Attribute attr in entity_details::ATTRIBUTE_TYPES) {
+	for each (Attribute attr in attributeValues()) {
 		if (hasProficiency(attr)) {
 			bonus.setAttribute(attr, bonusPoints);
 		}

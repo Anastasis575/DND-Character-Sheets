@@ -1,24 +1,34 @@
 #pragma once
+#include "Skill.h"
 #include "AttributeSet.h"
 #include "Spell.h"
-#include "StatModifier.h"
+#include "Race.h"
 #include "Item.h"
 #include "Currency.h"
 #include "ProficiencySet.h"
-#include "EnumMap.h"
+#include "ObjectCounter.h"
+#include "SkillDepedencies.h"
 
 #include <string>
 #include <unordered_map>
+#include <vector>
 #include <unordered_set>
 #include <limits>
 #include <stdexcept>
+#include <boost/optional.hpp> //serializable unlike std::optional
+/*
+* Straight up include this because implementing the save/load procedures
+* without the access would need to implement setters to all classes and break
+* encapsulation
+*/
+#include <boost/serialization/access.hpp>
+#include <boost/serialization/optional.hpp>
+#include <boost/serialization/version.hpp>
 
 namespace DND {
-	typedef std::unordered_set<Item, ItemHasher> Items;
-	typedef std::unordered_set<Spell, SpellHasher> Spells;
-	typedef std::unordered_set<Attribute> Attributes;
+	typedef std::vector<std::pair<Item, int>> Items;
+	typedef std::unordered_set<Spell> Spells;
 
-	//typedef std::unordered_set<Item, ItemHasher>::end ItemIteratorEnd;
 
 	/**
 	 * @brief An entity class managing all the information about a character's static information. It doesn't necessarily 
@@ -31,10 +41,14 @@ namespace DND {
 	public:
 
 		/**
-		 * @brief Creates a PlayerData instance by reading the character's name. To be used by a builder object.
-		 * @see CharacterBuilder
+		 * @brief Creates a new Character instance.
 		*/
 		Character(const std::string& charName, const std::string& playerName);
+
+		/**
+		 * @brief Used only by the serialization library, do NOT use otherwise.
+		*/
+		Character();
 
 		/**
 		 * @brief Return the score for the specified attribute.
@@ -42,6 +56,20 @@ namespace DND {
 		 * @return The score of the attribute.
 		*/
 		int getAttributeScore(Attribute attr) const;
+
+		/**
+		 * @brief Return the attribute modifier derived from the attribute score.
+		 * @param attr the attribute
+		 * @return the modifier
+		*/
+		int getAttributeModifier(Attribute attr) const;
+
+		/**
+		 * @brief Get the roll modifier for a particular skill.
+		 * @param skill the skill
+		 * @return the value added to / subtracted from the roll
+		*/
+		int getSkillModifier(Skill skill) const;
 
 		/**
 		 * @brief Get the amount of a specific currency currently held by the character.
@@ -62,27 +90,52 @@ namespace DND {
 
 		std::string getPlayerName() const;
 
-		StatModifier getRace() const;
+		Race getRace() const;
 
-		StatModifier getClass() const;
+		std::string getClass() const;
 
-		StatModifier getSubclass() const;
+		std::string getSubclass() const;
 
 		std::string getHdType() const;
 
 		std::string getBackground() const;
 
 		/**
+		 * @brief Set the base stats for a specific attribute
+		 * @param attr the attribute
+		 * @param amt the amount
+		*/
+		void setBaseStats(Attribute attr, int amt);
+
+		/**
+		 * @brief Get the icon the player has chosen for this player. Note that this method doesn't
+		 * check if the path itself is valid.
+		 * 
+		 * @return an optional containing a path to the icon if an icon has been selected
+		*/
+		boost::optional<std::string> getIcon() const;
+
+		/**
+		 * @brief Remove the previously selected icon.
+		*/
+		void removeIcon();
+
+		/**
+		 * @brief Set the character's icon.
+		 * @param iconPath the path to the new icon.
+		*/
+		void setIcon(std::string iconPath);
+		/**
 		 * @brief Add a new item to the character's inventory.
 		 * @param item the new item
 		*/
-		void addItem(Item& item);
+		void addItem(const Item& item);
 
 		/**
 		 * @brief Remove an item from the character's inventory.
 		 * @param item the item to be removed
 		*/
-		void removeItem(Item& item);
+		void removeItem(const Item& item);
 
 		/**
 		 * @brief Get all the items this character posseses.
@@ -101,13 +154,13 @@ namespace DND {
 		 * @brief Add a new spell to the character's inventory.
 		 * @param spell the new spell
 		*/
-		void addSpell(Spell& original);
+		void addSpell(const Spell& original);
 
 		/**
 		 * @brief Remove a spell from the character's inventory.
 		 * @param spell the spell to be removed
 		*/
-		void removeSpell(Spell& original);
+		void removeSpell(const Spell& original);
 
 		/**
 		 * @brief Get all the spells in the character's inventory.
@@ -143,13 +196,13 @@ namespace DND {
 		*/
 		void setLevel(int level);
 
-		void setRace(const StatModifier& race);
+		void setRace(const Race& race);
 
-		void setClass(const StatModifier& dndClass);
+		void setClass(const std::string& dndClass);
 
-		void setBackground(const std::string background);
+		void setBackground(std::string background);
 
-		void setSubClass(const StatModifier& dndSubClass);
+		void setSubClass(const std::string& dndSubClass);
 
 		/**
 		 * @brief Set whether or not the character is proficient to an Attribute.
@@ -165,38 +218,51 @@ namespace DND {
 		Attributes getProfiencies() const;
 
 	private:
-		//limits
-		static const int MIN_LEVEL = 1;
-		static const int MAX_LEVEL = 20;
-		static const int MIN_HP = 0;
-		static const int MAX_HP = std::numeric_limits<int>::max();
-		static const int MIN_AC = -5;
-		static const int MAX_AC = 32;
-		static const int MIN_SPEED = 1;
-		static const int MAX_SPEED = std::numeric_limits<int>::max();
 
+		int level = entity_details::DEFAULT_LEVEL;
+		int hp = entity_details::DEFAULT_HP;
+		int ac = entity_details::DEFAULT_AC;
+		int speed = entity_details::DEFAULT_SPEED;
 
-		int level = 1;
-		int hp = 0;
-		int ac = 0;
-		int speed = 1;
-
-		const std::string characterName;
-		const std::string playerName;
-
-		StatModifier race;
-		StatModifier dndClass;
-		StatModifier dndSubClass;
-
+		std::string characterName;
+		std::string playerName;
+		std::string dndClass;
+		std::string dndSubClass;
 		std::string hdType;
 		std::string background;
+
+		Race race;
+
+		boost::optional<std::string> charIconPath;
 
 		AttributeSet baseStats;
 		ProficiencySet proficiencies;
 
-		entity_details::EnumMap<Currency> wallet;
-		std::unordered_set<Item, ItemHasher> items;
-		std::unordered_set<Spell, SpellHasher> spells;
+		entity_details::ObjectCounter<Currency> wallet;
+		entity_details::ObjectCounter<Item> items;
+		std::unordered_set<Spell> spells;
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version) {
+			ar& ac;
+			ar& background;
+			ar& baseStats;
+			ar& characterName;
+			ar& charIconPath;
+			ar& dndClass;
+			ar& dndSubClass;
+			ar& hdType;
+			ar& hp;
+			ar& items;
+			ar& level;
+			ar& playerName;
+			ar& proficiencies;
+			ar& race;
+		}
 	};
 
 }
+
+BOOST_CLASS_VERSION(DND::Character, 1)

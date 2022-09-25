@@ -1,8 +1,18 @@
 #pragma once
+#include "ObjectCounter.h"
 #include "Attribute.h"
-#include "EnumMap.h"
+#include "Rules.h" // include here so as to avoid linking errors
+#include <unordered_set>
+/*
+* Straight up include this because implementing the save/load procedures
+* without the access would need to implement setters to all classes and break
+* encapsulation
+*/
+#include <boost/serialization/access.hpp>
 
 namespace DND {
+
+	typedef std::unordered_set<Attribute> Attributes;
 
 	/**
 	 * @brief A class representing the basic attributes of each character such as Strength, Charisma, Dexterity etc.
@@ -68,9 +78,15 @@ namespace DND {
 		*/
 		void setAttribute(Attribute attr, int amt);
 
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version) {
+			ar& map;
+		}
+
 	private:
-		entity_details::EnumMap<Attribute> map;
+
+		entity_details::ObjectCounter<Attribute> map;
+
+		friend class boost::serialization::access;
 	};
 }
-
-

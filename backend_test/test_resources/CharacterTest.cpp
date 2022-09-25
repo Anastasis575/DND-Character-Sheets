@@ -6,11 +6,12 @@ using namespace DND;
 class CharacterTest : public ::testing::Test {
 
 protected:
-	const std::string CHAR_NAME = "PANOS";
-	const std::string PLAYER_NAME = "SEX FROG";
-	const StatModifier RACE = StatModifier("LAMROUPOULI", AttributeSet(3)); //todo: make meaningful
-	const StatModifier CLASS = StatModifier("WORKING", AttributeSet(4));
-	const StatModifier SUBCLASS = StatModifier("KOMMOUNISTIS", AttributeSet(5));
+	const AttributeSet& BASE_STATS = AttributeSet(2);
+	const std::string& CHAR_NAME = "PANOS";
+	const std::string& PLAYER_NAME = "SEX FROG";
+	const Race& RACE = Race("LAMROUPOULI", AttributeSet(3));
+	const std::string& CLASS = "WORKING";
+	const std::string& SUBCLASS = "KOMMOUNISTIS";
 
 	Character* character = createCharacter();
 
@@ -24,7 +25,10 @@ protected:
 
 	Character * createCharacter() {
 		character = new Character(CHAR_NAME, PLAYER_NAME);
-	
+		
+		for each (Attribute attr in attributeValues()) {
+			character->setBaseStats(attr, BASE_STATS.getAttributeScore(attr));
+		}
 		character->setRace(RACE);
 		character->setClass(CLASS);
 		character->setSubClass(SUBCLASS);
@@ -33,6 +37,8 @@ protected:
 	}
 };
 
+bool contains(const Items& items, const Item& item, int amount);
+
 TEST_F(CharacterTest, TestConstructor) {
 	EXPECT_EQ(character->getPlayerName(), PLAYER_NAME);
 	EXPECT_EQ(character->getCharacterName(), CHAR_NAME);
@@ -40,11 +46,9 @@ TEST_F(CharacterTest, TestConstructor) {
 	EXPECT_EQ(character->getRace().getName(), RACE.getName());
 	EXPECT_EQ(character->getRace().getStats(), RACE.getStats());
 
-	EXPECT_EQ(character->getClass().getName(), CLASS.getName());
-	EXPECT_EQ(character->getClass().getStats(), CLASS.getStats());
+	EXPECT_EQ(character->getClass(), CLASS);
 
-	EXPECT_EQ(character->getSubclass().getName(), SUBCLASS.getName());
-	EXPECT_EQ(character->getSubclass().getStats(), SUBCLASS.getStats());
+	EXPECT_EQ(character->getSubclass(), SUBCLASS);
 }
 
 TEST_F(CharacterTest, ProficiencyTest) {
@@ -71,32 +75,53 @@ TEST_F(CharacterTest, GetAttributeScoreTest) {
 	character->setProfiency(Attribute::Constitution, true);
 	character->setLevel(1);
 
-	EXPECT_EQ(character->getAttributeScore(Attribute::Charisma), 12);
-	EXPECT_EQ(character->getAttributeScore(Attribute::Constitution), 14);
+	EXPECT_EQ(character->getAttributeScore(Attribute::Charisma), 5);
+	EXPECT_EQ(character->getAttributeScore(Attribute::Constitution), 7);
 
 	character->setLevel(5);
-	EXPECT_EQ(character->getAttributeScore(Attribute::Charisma), 12);
-	EXPECT_EQ(character->getAttributeScore(Attribute::Constitution), 15);
+	EXPECT_EQ(character->getAttributeScore(Attribute::Charisma), 5);
+	EXPECT_EQ(character->getAttributeScore(Attribute::Constitution), 8);
 }
 
+TEST_F(CharacterTest, SetBaseStatsTest) {
+	Attribute changed = Attribute::Charisma;
+	character->setBaseStats(changed, 12);
+	EXPECT_EQ(character->getAttributeScore(changed), 12 + RACE.getStats().getAttributeScore(changed));
+}
+
+TEST_F(CharacterTest, GetAttributeModifierTest) {
+	Attribute changed = Attribute::Constitution;
+	character->setBaseStats(changed, 12);
+	EXPECT_EQ(character->getAttributeModifier(changed), 2);
+}
+
+TEST_F(CharacterTest, GetSkillTest) {
+	Skill skill= Skill::ACROBATICS;
+	EXPECT_EQ(character->getSkillModifier(skill), -2);
+
+	character->setProfiency(getSkillDependency(skill), true);
+	EXPECT_EQ(character->getSkillModifier(skill), 1);
+}
 TEST_F(CharacterTest, ItemTest) {
 	EXPECT_EQ(character->getItems().size(), 0);
 	Item item1 = Item("TEST_ITEM1", "does stuff");
 	Item item2 = Item("TEST_ITEM2", "does other stuff");
+	Item item1_copy = Item(item1);
 
 	character->addItem(item1);
 	character->addItem(item2);
+	character->addItem(item1_copy);
 	Items items = character->getItems();
 
 	EXPECT_EQ(items.size(), 2);
-	EXPECT_NE(items.find(item1), items.end());
-	EXPECT_NE(items.find(item2), items.end());
+	EXPECT_TRUE(contains(items, item1, 2));
+	EXPECT_TRUE(contains(items, item2, 1));
 
-	character->removeItem(item1);
+	character->removeItem(item2);
 	items = character->getItems();
 
-	EXPECT_EQ(items.find(item1), items.end());
-	EXPECT_NE(items.find(item2), items.end());
+	EXPECT_TRUE(contains(items, item1, 2));
+	EXPECT_FALSE(contains(items, item2, 1));
 	EXPECT_EQ(items.size(), 1);
 }
 
@@ -122,16 +147,51 @@ TEST_F(CharacterTest, SpellTest) {
 }
 
 TEST_F(CharacterTest, TestCurrency) {
-	for each(Currency curr in entity_details::CURRENCY_TYPES) {
+	for each(Currency curr in currencyValues()) {
 		EXPECT_EQ(character->getAmount(curr), 0);
 	}
 
-	Currency changed = entity_details::CURRENCY_TYPES[0];
+	Currency changed = Currency::COPPER;
 	character->setAmount(changed, 45);
 
-	for each (Currency curr in entity_details::CURRENCY_TYPES) {
+	for each (Currency curr in currencyValues()) {
 		if(curr != changed)
 			EXPECT_EQ(character->getAmount(curr), 0);
 	}
 	EXPECT_EQ(character->getAmount(changed), 45);
+}
+
+TEST_F(CharacterTest, TestIcon) {
+	EXPECT_FALSE(character->getIcon());
+
+	std::string newIcon = "icon.ico";
+	std::string altIcon = "icon2.ico";
+
+	character->setIcon(newIcon);
+	EXPECT_EQ(newIcon, character->getIcon());
+
+	character->removeIcon();
+	EXPECT_FALSE(character->getIcon());
+
+	character->setIcon(newIcon);
+	character->setIcon(altIcon);
+	EXPECT_EQ(altIcon, character->getIcon());
+}
+
+TEST_F(CharacterTest, TestSerialization) {
+	testSerialization<Character>(*character,
+		[](const Character& a, const Character& b) {
+			/* 
+			* There's little point in checking every field individually, as the 
+			* test would need to be refactored every time someone added / removed one
+			* Realistically at some point someone will forget and the whole test will
+			* be rendered obsolete.
+			*/
+			return a.getCharacterName() == b.getCharacterName() &&
+				a.getPlayerName() == b.getPlayerName();
+		});
+}
+
+bool contains(const Items& items, const Item& item, int amount) {
+	return std::find(items.begin(), items.end(), std::make_pair(item, amount)) != items.end();
 }

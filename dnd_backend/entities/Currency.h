@@ -1,28 +1,27 @@
+
 #pragma once
-#include <vector>
+/*File generated automatically by auto_enum.py https://github.com/dimits-exe/CppAutomationTools*/ 
+#include <unordered_map>
 
 namespace DND {
-
 	/**
-	 * @brief The currency types used in the DND economy.
-	 * @author Dimitris Tsirmpas
+	* @brief The currency types used in the DND economy.
+	* @author Dimitris Tsirmpas
 	*/
 	enum class Currency {
 		GOLD,
 		ELECTRUM,
 		SILVER,
-		COPPER
-		// if you modify this enum remember to change the vector in the .hpp file
+		COPPER,
 	};
-
+	
+	
+	std::string currencyToString(DND::Currency currency);
+	
+	
+	std::vector<Currency> currencyValues();
+	
 	namespace entity_details {
-		extern const std::vector<Currency> CURRENCY_TYPES;
+		extern const std::unordered_map<Currency, std::string> CURRENCY_MAP;
 	}
-
-}
-
-namespace std {
-	template <> struct hash<DND::Currency> {
-		size_t operator() (const DND::Currency& t) const { return size_t(t); }
-	};
 }
