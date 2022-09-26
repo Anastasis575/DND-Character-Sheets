@@ -1,4 +1,4 @@
-
+/*File generated automatically by auto_enum.py https://github.com/dimits-exe/CppAutomationTools */ 
 #include "Currency.h"
 #include <string>
 #include <utility>

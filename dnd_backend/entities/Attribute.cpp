@@ -1,4 +1,4 @@
-
+/*File generated automatically by auto_enum.py https://github.com/dimits-exe/CppAutomationTools */ 
 #include "Attribute.h"
 #include <string>
 #include <utility>
@@ -21,12 +21,12 @@ namespace DND {
 	namespace entity_details {
 		const std::unordered_map<Attribute, std::string> ATTRIBUTE_MAP = 
 		 {
-			std::make_pair(Attribute::Strength, "Strength"),
-			std::make_pair(Attribute::Dexterity, "Dexterity"),
-			std::make_pair(Attribute::Constitution, "Constitution"),
-			std::make_pair(Attribute::Intelligence, "Intelligence"),
-			std::make_pair(Attribute::Wisdom, "Wisdom"),
-			std::make_pair(Attribute::Charisma, "Charisma"),
+			std::make_pair(Attribute::STRENGTH, "Strength"),
+			std::make_pair(Attribute::DEXTERITY, "Dexterity"),
+			std::make_pair(Attribute::CONSTITUTION, "Constitution"),
+			std::make_pair(Attribute::INTELLIGENCE, "Intelligence"),
+			std::make_pair(Attribute::WISDOM, "Wisdom"),
+			std::make_pair(Attribute::CHARISMA, "Charisma"),
 		};
 	}
 }

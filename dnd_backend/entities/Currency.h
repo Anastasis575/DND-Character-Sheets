@@ -1,6 +1,5 @@
-
+/*File generated automatically by auto_enum.py https://github.com/dimits-exe/CppAutomationTools */ 
 #pragma once
-/*File generated automatically by auto_enum.py https://github.com/dimits-exe/CppAutomationTools*/ 
 #include <unordered_map>
 
 namespace DND {

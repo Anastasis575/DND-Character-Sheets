@@ -8,6 +8,7 @@
 #include "ProficiencySet.h"
 #include "ObjectCounter.h"
 #include "SkillDepedencies.h"
+#include "Alignment.h"
 
 #include <string>
 #include <unordered_map>

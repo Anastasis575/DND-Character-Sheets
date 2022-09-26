@@ -1,6 +1,6 @@
+/*File generated automatically by auto_enum.py https://github.com/dimits-exe/CppAutomationTools */ 
 #pragma once
 #include <string>
-/*File generated automatically by auto_enum.py https://github.com/dimits-exe/CppAutomationTools*/ 
 
 namespace DND {
 	namespace entity_details {

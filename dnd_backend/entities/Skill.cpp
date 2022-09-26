@@ -1,4 +1,4 @@
-
+/*File generated automatically by auto_enum.py https://github.com/dimits-exe/CppAutomationTools */ 
 #include "Skill.h"
 #include <string>
 #include <utility>
@@ -23,14 +23,14 @@ namespace DND {
 		 {
 			std::make_pair(Skill::ATHLETICS, "Athletics"),
 			std::make_pair(Skill::ACROBATICS, "Acrobatics"),
-			std::make_pair(Skill::SLEIGHT_OF_HAND, "Sleight_of_hand"),
+			std::make_pair(Skill::SLEIGHT_OF_HAND, "Sleight_Of_Hand"),
 			std::make_pair(Skill::STEALTH, "Stealth"),
 			std::make_pair(Skill::ARCANA, "Arcana"),
 			std::make_pair(Skill::HISTORY, "History"),
 			std::make_pair(Skill::INVESTIGATION, "Investigation"),
 			std::make_pair(Skill::NATURE, "Nature"),
 			std::make_pair(Skill::RELIGION, "Religion"),
-			std::make_pair(Skill::ANIMAL_HANDLING, "Animal_handling"),
+			std::make_pair(Skill::ANIMAL_HANDLING, "Animal_Handling"),
 			std::make_pair(Skill::INSIGHT, "Insight"),
 			std::make_pair(Skill::MEDICINE, "Medicine"),
 			std::make_pair(Skill::PERCEPTION, "Perception"),
