@@ -3,6 +3,12 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="README.md" />
+    <None Include="resources\enums.yml">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="resources\rules.yml">
+      <Filter>resources</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entities\AttributeSet.cpp">
@@ -33,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="entities\SkillDepedencies.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Alignment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -82,6 +91,9 @@
     <ClInclude Include="entities\SkillDepedencies.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="entities\Alignment.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -89,6 +101,9 @@
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{b8d49cc5-28bb-4484-9c0d-f22fd7bbdfcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{206d537f-d179-4f6c-a4cc-178bcda97909}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

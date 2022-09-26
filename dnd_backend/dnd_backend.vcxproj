@@ -149,8 +149,11 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="README.md" />
+    <None Include="resources\enums.yml" />
+    <None Include="resources\rules.yml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="entities\Alignment.cpp" />
     <ClCompile Include="entities\Attribute.cpp" />
     <ClCompile Include="entities\AttributeSet.cpp" />
     <ClCompile Include="entities\Character.cpp" />
@@ -163,6 +166,7 @@
     <ClCompile Include="xmldao\XMLCharacterDAO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="entities\Alignment.h" />
     <ClInclude Include="entities\Attribute.h" />
     <ClInclude Include="entities\AttributeSet.h" />
     <ClInclude Include="entities\Character.h" />

@@ -31,6 +31,7 @@ Currency:
     - ELECTRUM
     - SILVER
     - COPPER
+
 Skill: 
   details_namespace: entity_details
   namespace: DND
@@ -55,3 +56,20 @@ Skill:
     - INTIMIDATION
     - PERFORMANCE
     - PERSUASION
+
+Alignment:
+  details_namespace: entity_details
+  namespace: DND
+  strings: true
+  type: enum
+  values:
+    - Lawful good
+    - Neutral good
+    - Chaotic good
+    - Lawful neutral
+    - True neutral
+    - Chaotic neutral
+    - Lawful evil
+    - Neutral evil
+    - Chaotic evil
+    - Unaligned
