@@ -39,11 +39,10 @@ def main2(input_file_path: str, directory: str):
             if generator.group_type(enum_contents) == TYPE_ENUM:
                 # In case of error, keep trying to parse the rest like a normal compiler
                 # The generator will refuse to produce files after we flag any error
-                # try:
-                # enums.append(parse_enum(enum_contents[0], enum_contents[1]))
-                # except Exception as exc:
-                # generator.error(exc)
-                enums.append(parse_enum(enum_contents[0], enum_contents[1]))
+                try:
+                    enums.append(parse_enum(enum_contents[0], enum_contents[1]))
+                except Exception as exc:
+                    generator.error(exc)
 
         for enum in enums:
             print("Producing files for enum " + enum.name + "...")
@@ -63,11 +62,10 @@ def main(input_file_path: str, directory: str):
         if generator.group_type(enum_contents) == TYPE_ENUM:
             # In case of error, keep trying to parse the rest like a normal compiler
             # The generator will refuse to produce files after we flag any error
-            # try:
-            # enums.append(parse_enum(enum_contents[0], enum_contents[1]))
-            # except Exception as exc:
-            # generator.error(exc)
-            enums.append(parse_enum(enum_contents[0], enum_contents[1]))
+            try:
+                enums.append(parse_enum(enum_contents[0], enum_contents[1]))
+            except Exception as exc:
+                generator.error(exc)
 
     for enum in enums:
         print("Producing files for enum " + enum.name + "...")
@@ -123,6 +121,10 @@ def cpp_iter_func_def(enum: Enum) -> str:
     return "std::vector<{0}> {1}Values()".format(enum.name, enum.name.lower())
 
 
+def cpp_enum_value(value_name: str) -> str:
+    return value_name.replace(" ", "_").upper()
+
+
 def generate_header_str(enum: Enum) -> str:
     code = Code()
 
@@ -131,7 +133,6 @@ def generate_header_str(enum: Enum) -> str:
     has_doc: bool = enum.documentation is not None
 
     code.add_statement("#pragma once")
-    code.add_statement(generator.HEADER_COMMENT)
     code.add_statement("#include <unordered_map>")
     code.add_statement()
 
@@ -141,7 +142,7 @@ def generate_header_str(enum: Enum) -> str:
     code.start_block("{0}enum class {1}".format(enum.documentation.replace("\n", "\n\t") if has_doc else "", enum.name))
 
     for value in enum.values:
-        code.add_statement(value + ",")
+        code.add_statement(cpp_enum_value(value) + ",")
 
     code.end_block(True)
     code.add_statement()
@@ -204,7 +205,7 @@ def generate_source_str(enum: Enum) -> str:
 
     code.start_block("")
     for value in enum.values:
-        code.add_statement("std::make_pair({0}::{1}, \"{2}\"),".format(enum.name, value, value.capitalize()))
+        code.add_statement("std::make_pair({0}::{1}, \"{2}\"),".format(enum.name, cpp_enum_value(value), value.title()))
     code.end_block(True)
 
     return code.to_string()

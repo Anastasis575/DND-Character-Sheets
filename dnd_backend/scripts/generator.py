@@ -1,17 +1,17 @@
 import os
 from typing import Optional
-
 import yaml
 
 YAML_TYPE: str = "type"
 __error: bool = False
-HEADER_COMMENT: str = "/*File generated automatically by auto_enum.py " \
-                      "https://github.com/dimits-exe/CppAutomationTools*/ "
 
 
 class Code:
-    def __init__(self, original: str = ""):
-        self.output = original + "\n"
+    HEADER_COMMENT: str = "/*File generated automatically by auto_enum.py " \
+                          "https://github.com/dimits-exe/CppAutomationTools */ "
+
+    def __init__(self):
+        self.output = Code.HEADER_COMMENT + "\n"
         self.indentation = 0
 
     def start_block(self, statement: str) -> None:

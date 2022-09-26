@@ -80,10 +80,10 @@ def generate_cpp_str(group: ConstantGroup) -> str:
 
         return "{0} {1} = {2};".format(type_of_constant, constant.name, value)
 
-    code = generator.Code("#pragma once")
+    code = generator.Code()
 
+    code.add_statement("#pragma once")
     code.add_statement("#include <string>")
-    code.add_statement(generator.HEADER_COMMENT)
     code.add_statement()
 
     for namespace in group.nested_namespaces:
