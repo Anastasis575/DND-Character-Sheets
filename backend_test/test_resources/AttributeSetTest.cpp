@@ -58,11 +58,11 @@ TEST_F(AttributeSetTest, TestConstructorOverflow) {
 }
 
 TEST_F(AttributeSetTest, TestSetAttribute) {
-	EXPECT_ANY_THROW(original.setAttribute(Attribute::Charisma, 789));
-	EXPECT_FALSE(original.getAttributeScore(Attribute::Charisma) == 789);
+	EXPECT_ANY_THROW(original.setAttribute(Attribute::CHARISMA, 789));
+	EXPECT_FALSE(original.getAttributeScore(Attribute::CHARISMA) == 789);
 
-	EXPECT_ANY_THROW(original.setAttribute(Attribute::Charisma, -1));
-	EXPECT_FALSE(original.getAttributeScore(Attribute::Charisma) == -1);
+	EXPECT_ANY_THROW(original.setAttribute(Attribute::CHARISMA, -1));
+	EXPECT_FALSE(original.getAttributeScore(Attribute::CHARISMA) == -1);
 }
 
 TEST_F(AttributeSetTest, TestEqualsOperator) {
@@ -95,12 +95,12 @@ void expectAllEqualTo(const AttributeSet& set, int strengthValue, int dexterityV
 
 	bool success = true;
 
-	success &= set.getAttributeScore(Attribute::Charisma) == charismaValue;
-	success &= set.getAttributeScore(Attribute::Dexterity) == dexterityValue;
-	success &= set.getAttributeScore(Attribute::Constitution) == constitutionValue;
-	success &= set.getAttributeScore(Attribute::Intelligence) == intelligenceValue;
-	success &= set.getAttributeScore(Attribute::Strength) == strengthValue;
-	success &= set.getAttributeScore(Attribute::Wisdom) == wisdomValue;
+	success &= set.getAttributeScore(Attribute::CHARISMA) == charismaValue;
+	success &= set.getAttributeScore(Attribute::DEXTERITY) == dexterityValue;
+	success &= set.getAttributeScore(Attribute::CONSTITUTION) == constitutionValue;
+	success &= set.getAttributeScore(Attribute::INTELLIGENCE) == intelligenceValue;
+	success &= set.getAttributeScore(Attribute::STRENGTH) == strengthValue;
+	success &= set.getAttributeScore(Attribute::WISDOM) == wisdomValue;
 
 	std::cout << success << std::endl;
 	EXPECT_TRUE(success);

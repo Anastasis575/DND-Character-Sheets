@@ -54,43 +54,43 @@ TEST_F(CharacterTest, TestConstructor) {
 TEST_F(CharacterTest, ProficiencyTest) {
 	EXPECT_EQ(character->getProfiencies().size(), 0);
 	
-	character->setProfiency(Attribute::Charisma, true);
-	character->setProfiency(Attribute::Constitution, true);
-	character->setProfiency(Attribute::Charisma, true);
+	character->setProfiency(Attribute::CHARISMA, true);
+	character->setProfiency(Attribute::CONSTITUTION, true);
+	character->setProfiency(Attribute::CHARISMA, true);
 	auto profs = character->getProfiencies();
 
 	EXPECT_EQ(profs.size(), 2);
-	EXPECT_TRUE(profs.find(Attribute::Charisma) != profs.end());
-	EXPECT_TRUE(profs.find(Attribute::Constitution) != profs.end());
+	EXPECT_TRUE(profs.find(Attribute::CHARISMA) != profs.end());
+	EXPECT_TRUE(profs.find(Attribute::CONSTITUTION) != profs.end());
 
-	character->setProfiency(Attribute::Charisma, false);
+	character->setProfiency(Attribute::CHARISMA, false);
 	profs = character->getProfiencies();
 
 	EXPECT_EQ(profs.size(), 1);
-	EXPECT_TRUE(profs.find(Attribute::Charisma) == profs.end());
-	EXPECT_TRUE(profs.find(Attribute::Constitution) != profs.end());
+	EXPECT_TRUE(profs.find(Attribute::CHARISMA) == profs.end());
+	EXPECT_TRUE(profs.find(Attribute::CONSTITUTION) != profs.end());
 }
 
 TEST_F(CharacterTest, GetAttributeScoreTest) {
-	character->setProfiency(Attribute::Constitution, true);
+	character->setProfiency(Attribute::CONSTITUTION, true);
 	character->setLevel(1);
 
-	EXPECT_EQ(character->getAttributeScore(Attribute::Charisma), 5);
-	EXPECT_EQ(character->getAttributeScore(Attribute::Constitution), 7);
+	EXPECT_EQ(character->getAttributeScore(Attribute::CHARISMA), 5);
+	EXPECT_EQ(character->getAttributeScore(Attribute::CONSTITUTION), 7);
 
 	character->setLevel(5);
-	EXPECT_EQ(character->getAttributeScore(Attribute::Charisma), 5);
-	EXPECT_EQ(character->getAttributeScore(Attribute::Constitution), 8);
+	EXPECT_EQ(character->getAttributeScore(Attribute::CHARISMA), 5);
+	EXPECT_EQ(character->getAttributeScore(Attribute::CONSTITUTION), 8);
 }
 
 TEST_F(CharacterTest, SetBaseStatsTest) {
-	Attribute changed = Attribute::Charisma;
+	Attribute changed = Attribute::CHARISMA;
 	character->setBaseStats(changed, 12);
 	EXPECT_EQ(character->getAttributeScore(changed), 12 + RACE.getStats().getAttributeScore(changed));
 }
 
 TEST_F(CharacterTest, GetAttributeModifierTest) {
-	Attribute changed = Attribute::Constitution;
+	Attribute changed = Attribute::CONSTITUTION;
 	character->setBaseStats(changed, 12);
 	EXPECT_EQ(character->getAttributeModifier(changed), 2);
 }
