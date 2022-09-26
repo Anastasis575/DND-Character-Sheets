@@ -6,7 +6,8 @@ using namespace DND;
 std::string outOfBoundsErrorMessage(std::string field, int min, int max);
 
 Character::Character(const std::string& charName, const std::string& playerName):
-	characterName(charName), playerName(playerName), wallet(entity_details::ObjectCounter<Currency>()) {}
+	characterName(charName), playerName(playerName), wallet(entity_details::ObjectCounter<Currency>()),
+	alignment(Alignment::UNALIGNED) {}
 
 Character::Character() : characterName("N/A"), playerName("NON INITIALIZED CHARACTER") {}
 
@@ -191,6 +192,14 @@ void Character::removeIcon() {
 
 void Character::setIcon(std::string iconPath) {
 	charIconPath.emplace(iconPath);
+}
+
+Alignment Character::getAlignment() const {
+	return alignment;
+}
+
+void Character::setAlignment(Alignment alignment) {
+	this->alignment = alignment;
 }
 
 std::string outOfBoundsErrorMessage(std::string field, int min, int max) {

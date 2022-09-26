@@ -101,6 +101,8 @@ namespace DND {
 
 		std::string getBackground() const;
 
+		Alignment getAlignment() const;
+
 		/**
 		 * @brief Set the base stats for a specific attribute
 		 * @param attr the attribute
@@ -212,6 +214,8 @@ namespace DND {
 		*/
 		void setProfiency(Attribute attr, bool isProficient);
 
+		void setAlignment(Alignment alignment);
+
 		/**
 		 * @brief Get all the Attributes to which the character is proficient with.
 		 * @return a set with all the Attributes the character is proficient with
@@ -232,6 +236,7 @@ namespace DND {
 		std::string hdType;
 		std::string background;
 
+		Alignment alignment;
 		Race race;
 
 		boost::optional<std::string> charIconPath;
@@ -261,6 +266,7 @@ namespace DND {
 			ar& playerName;
 			ar& proficiencies;
 			ar& race;
+			ar& alignment;
 		}
 	};
 

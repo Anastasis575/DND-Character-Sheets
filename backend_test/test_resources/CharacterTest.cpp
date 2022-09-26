@@ -178,6 +178,12 @@ TEST_F(CharacterTest, TestIcon) {
 	EXPECT_EQ(altIcon, character->getIcon());
 }
 
+TEST_F(CharacterTest, TestAlignment) {
+	EXPECT_EQ(character->getAlignment(), Alignment::UNALIGNED);
+	character->setAlignment(Alignment::CHAOTIC_EVIL);
+	EXPECT_EQ(character->getAlignment(), Alignment::CHAOTIC_EVIL);
+}
+
 TEST_F(CharacterTest, TestSerialization) {
 	testSerialization<Character>(*character,
 		[](const Character& a, const Character& b) {
