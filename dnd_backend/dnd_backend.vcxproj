@@ -162,6 +162,8 @@
     <ClCompile Include="entities\Skill.cpp" />
     <ClCompile Include="entities\SkillDepedencies.cpp" />
     <ClCompile Include="entities\Race.cpp" />
+    <ClCompile Include="entities\LevelSpellSlot.cpp" />
+    <ClCompile Include="SpellSlot.cpp" />
     <ClCompile Include="xmldao\LocalFileResolver.cpp" />
     <ClCompile Include="xmldao\XMLCharacterDAO.cpp" />
   </ItemGroup>
@@ -179,7 +181,9 @@
     <ClInclude Include="entities\SkillDepedencies.h" />
     <ClInclude Include="entities\Spell.h" />
     <ClInclude Include="entities\Race.h" />
+    <ClInclude Include="entities\LevelSpellSlot.h" />
     <ClInclude Include="idao\ICharacterDAO.h" />
+    <ClInclude Include="SpellSlot.h" />
     <ClInclude Include="xmldao\LocalFileResolver.h" />
     <ClInclude Include="xmldao\XMLCharacterDAO.h" />
   </ItemGroup>
