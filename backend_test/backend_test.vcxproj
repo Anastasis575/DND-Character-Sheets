@@ -36,6 +36,7 @@
     <ClCompile Include="test_resources\AttributeSetTest.cpp" />
     <ClCompile Include="test_resources\CharacterTest.cpp" />
     <ClCompile Include="test_resources\ItemTest.cpp" />
+    <ClCompile Include="test_resources\LevelSpellSlotTest.cpp" />
     <ClCompile Include="test_resources\LocalFileResolverTest.cpp" />
     <ClCompile Include="test_resources\pch.cpp" />
     <ClCompile Include="test_resources\ProficiencyTestSet.cpp" />

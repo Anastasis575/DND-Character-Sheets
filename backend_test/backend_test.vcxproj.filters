@@ -32,6 +32,9 @@
     <ClCompile Include="test_resources\RaceTest.cpp">
       <Filter>Unit Tests</Filter>
     </ClCompile>
+    <ClCompile Include="test_resources\LevelSpellSlotTest.cpp">
+      <Filter>Unit Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
