@@ -202,6 +202,22 @@ void Character::setAlignment(Alignment alignment) {
 	this->alignment = alignment;
 }
 
+void Character::spellUsed(const Spell & spell) {
+	spellSlot.spellUsed(spell.getLevel());
+}
+
+void Character::setSpellSlots(const std::array<int, entity_details::MAX_SPELL_LEVEL>& newSlots) {
+	spellSlot = LevelSpellSlot(newSlots);
+}
+
+void Character::refreshSpellSlots() {
+	spellSlot.refresh();
+}
+
+int Character::getRemainingSpells(int spellLevel) const {
+	return spellSlot.getSpellSlots(spellLevel);
+}
+
 std::string outOfBoundsErrorMessage(std::string field, int min, int max) {
 	return field + " can only be between " + std::to_string(min) + " and " + std::to_string(max);
 }

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Character.h"
+#include <array>
 
 using namespace DND;
 
@@ -12,6 +13,7 @@ protected:
 	const Race& RACE = Race("LAMROUPOULI", AttributeSet(3));
 	const std::string& CLASS = "WORKING";
 	const std::string& SUBCLASS = "KOMMOUNISTIS";
+	const std::array<int, entity_details::MAX_SPELL_LEVEL> VALUES = { 2, 1, 1, 0, 0, 0, 0, 0, 0 };
 
 	Character* character = createCharacter();
 
@@ -32,6 +34,7 @@ protected:
 		character->setRace(RACE);
 		character->setClass(CLASS);
 		character->setSubClass(SUBCLASS);
+		character->setSpellSlots(VALUES);
 
 		return character;
 	}
@@ -182,6 +185,45 @@ TEST_F(CharacterTest, TestAlignment) {
 	EXPECT_EQ(character->getAlignment(), Alignment::UNALIGNED);
 	character->setAlignment(Alignment::CHAOTIC_EVIL);
 	EXPECT_EQ(character->getAlignment(), Alignment::CHAOTIC_EVIL);
+}
+
+TEST_F(CharacterTest, TestGetSpellSlots) {
+	for (unsigned int i = 0; i < VALUES.size(); i++) {
+		EXPECT_EQ(character->getRemainingSpells(i), VALUES[i]);
+	}
+}
+
+TEST_F(CharacterTest, TestRefresh) {
+	Spell spell("Test spell", "descr", 0);
+	character->spellUsed(spell);
+	character->spellUsed(spell);
+
+	character->refreshSpellSlots();
+
+	for (unsigned int i = 0; i < VALUES.size(); i++) {
+		EXPECT_EQ(character->getRemainingSpells(i), VALUES[i]);
+	}
+}
+
+TEST_F(CharacterTest, TestSpellUsed) {
+	Spell spell("Test spell", "descr", 0);
+	character->spellUsed(spell);
+	character->spellUsed(spell);
+
+	EXPECT_EQ(character->getRemainingSpells(0), VALUES[0] - 2);
+
+	for (unsigned int i = 1; i < VALUES.size(); i++) {
+		EXPECT_EQ(character->getRemainingSpells(i), VALUES[i]);
+	}
+}
+
+TEST_F(CharacterTest, TestSetSpellSlots) {
+	const std::array<int, entity_details::MAX_SPELL_LEVEL> NEW_VALUES = { 3,2,2,2,2,2,2,0,9 };
+	character->setSpellSlots(NEW_VALUES);
+
+	for (unsigned int i = 0; i < NEW_VALUES.size(); i++) {
+		EXPECT_EQ(character->getRemainingSpells(i), NEW_VALUES[i]);
+	}
 }
 
 TEST_F(CharacterTest, TestSerialization) {

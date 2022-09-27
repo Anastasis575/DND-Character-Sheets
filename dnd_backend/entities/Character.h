@@ -9,6 +9,7 @@
 #include "ObjectCounter.h"
 #include "SkillDepedencies.h"
 #include "Alignment.h"
+#include "LevelSpellSlot.h"
 
 #include <string>
 #include <unordered_map>
@@ -217,6 +218,32 @@ namespace DND {
 		void setAlignment(Alignment alignment);
 
 		/**
+		 * @brief Mark that a spell has been used, and remove its spell slot.
+		 * @param spell the spell used.
+		*/
+		void spellUsed(const Spell& spell);
+
+		/**
+		 * @brief Set the new spell slots of the character. This should be called 
+		 * during a level-up if the spell slots are modified.
+		 * Note that this automatically refreshes the remaining spell slots.
+		 * @param newSlots an array where maxSlots[spellLevel] = spellSlots for that spell level
+		*/
+		void setSpellSlots(const std::array<int, entity_details::MAX_SPELL_LEVEL> & newSlots);
+
+		/**
+		 * @brief Reset all the spell slots. Use when the character has rested.
+		*/
+		void refreshSpellSlots();
+
+		/**
+		 * @brief Get the remaining slots for a specified spell level.
+		 * @param spellLevel the spell level
+		 * @return the spell slots remaining
+		*/
+		int getRemainingSpells(int spellLevel) const;
+
+		/**
 		 * @brief Get all the Attributes to which the character is proficient with.
 		 * @return a set with all the Attributes the character is proficient with
 		*/
@@ -244,6 +271,7 @@ namespace DND {
 		AttributeSet baseStats;
 		ProficiencySet proficiencies;
 
+		LevelSpellSlot spellSlot;
 		entity_details::ObjectCounter<Currency> wallet;
 		entity_details::ObjectCounter<Item> items;
 		std::unordered_set<Spell> spells;
@@ -267,6 +295,7 @@ namespace DND {
 			ar& proficiencies;
 			ar& race;
 			ar& alignment;
+			ar& spellSlot;
 		}
 	};
 
