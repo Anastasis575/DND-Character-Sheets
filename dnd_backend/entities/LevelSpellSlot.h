@@ -3,6 +3,11 @@
 #include "Rules.h"
 
 namespace DND {
+
+	/**
+	 * @brief A class holding the current and max spell slots for a certain level and character.
+	 * @author Dimitris Tsirmpas
+	*/
 	class LevelSpellSlot {
 	public:
 		/**
