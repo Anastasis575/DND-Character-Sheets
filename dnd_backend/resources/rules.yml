@@ -10,6 +10,8 @@ Rules:
     max_hp : 9999
     min_ac : -5
     max_ac : 32
+    min_spell_level: 0
+    max_spell_level: 9
     min_speed : 1
     max_speed : 9999
     default_level : 1
