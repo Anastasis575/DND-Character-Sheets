@@ -46,3 +46,14 @@ TEST_F(SpellSlotTest, TestRefresh) {
 		EXPECT_EQ(slot.getSpellSlots(i), SLOT_VALUES[i]);
 	}
 }
+
+TEST_F(SpellSlotTest, TestSerialization) {
+	testSerialization<LevelSpellSlot>(slot,
+		[this](const LevelSpellSlot& a, const LevelSpellSlot& b) {
+			for (unsigned int i = 1; i < SLOT_VALUES.size(); i++) {
+				if (a.getSpellSlots(i) != b.getSpellSlots(i))
+					return false;
+			}
+			return true;
+		});
+}

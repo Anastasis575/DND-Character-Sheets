@@ -1,6 +1,7 @@
 #pragma once
 #include "ObjectCounter.h"
 #include "Rules.h"
+#include <boost/serialization/access.hpp>
 
 namespace DND {
 
@@ -10,11 +11,17 @@ namespace DND {
 	*/
 	class LevelSpellSlot {
 	public:
+
 		/**
 		 * @brief Create a spell slot for a specific character level.
 		 * @param maxSlots an array where maxSlots[spellLevel] = spellSlots for that spell level
 		*/
 		explicit LevelSpellSlot(const std::array<int, entity_details::MAX_SPELL_LEVEL>& maxSlots);
+
+		/**
+		 * @brief To be used by the serialization library ONLY.
+		*/
+		LevelSpellSlot();
 
 		/**
 		 * @brief Get the spell slots for a spell level.
@@ -38,6 +45,14 @@ namespace DND {
 	private:
 		entity_details::ObjectCounter<int> MAX_SLOTS; // effectively const, non-const because of serialization
 		entity_details::ObjectCounter<int> currentSlots;
+
+		friend class boost::serialization::access;
+
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int file_version) {
+			ar& MAX_SLOTS;
+			ar& currentSlots;
+		}
 	};
 
 }

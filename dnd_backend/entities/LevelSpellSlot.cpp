@@ -11,6 +11,8 @@ LevelSpellSlot::LevelSpellSlot(const std::array<int, entity_details::MAX_SPELL_L
 	}
 }
 
+LevelSpellSlot::LevelSpellSlot(){}
+
 void LevelSpellSlot::refresh() {
 	currentSlots = MAX_SLOTS;
 }
