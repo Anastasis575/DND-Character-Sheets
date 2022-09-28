@@ -226,6 +226,19 @@ TEST_F(CharacterTest, TestSetSpellSlots) {
 	}
 }
 
+TEST_F(CharacterTest, TestPrepareSpell) {
+	Spell spell = Spell("Spell", "spell d", 3);
+	character->addSpell(spell);
+
+	EXPECT_EQ(character->getSpells().find(spell)->isPrepared(), false);
+
+	character->setPrepared(spell, true);
+	EXPECT_EQ(character->getSpells().find(spell)->isPrepared(), true);
+
+	character->setPrepared(spell, false);
+	EXPECT_EQ(character->getSpells().find(spell)->isPrepared(), false);
+}
+
 TEST_F(CharacterTest, TestSerialization) {
 	testSerialization<Character>(*character,
 		[](const Character& a, const Character& b) {

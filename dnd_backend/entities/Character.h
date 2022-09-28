@@ -158,19 +158,27 @@ namespace DND {
 		 * @brief Add a new spell to the character's inventory.
 		 * @param spell the new spell
 		*/
-		void addSpell(const Spell& original);
+		void addSpell(const Spell& spell);
 
 		/**
 		 * @brief Remove a spell from the character's inventory.
 		 * @param spell the spell to be removed
 		*/
-		void removeSpell(const Spell& original);
+		void removeSpell(const Spell& spell);
 
 		/**
 		 * @brief Get all the spells in the character's inventory.
 		 * @return the spells
 		*/
 		Spells getSpells() const;
+
+		/**
+		 * @brief Marks / unmarks a spell as prepared.
+		 * @param spell the spell to be prepared
+		 * @param isPreapared whether or not the spell becomes prepared
+		 * @throws std::invalid_argument if the spell doesn't exist in the character
+		*/
+		void setPrepared(const Spell& spell, bool isPrepared);
 
 		/**
 		 * @brief Sets the hp to the specified amount.

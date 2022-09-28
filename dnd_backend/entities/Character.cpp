@@ -140,6 +140,18 @@ void Character::removeSpell(const Spell& original) {
 	spells.erase(original);
 }
 
+void Character::setPrepared(const Spell& spell, bool isPrepared) {
+	if (!spells.count(spell))
+		throw std::invalid_argument("Spell " + spell.getName() + " doesn't belong to the character");
+	else {
+		// replace record
+		Spell newSpell(spell);
+		newSpell.setPrepared(isPrepared);
+		spells.erase(spell);
+		spells.emplace(newSpell);
+	}
+}
+
 void Character::setHP(int amt) {
 	if (getHP() < entity_details::MIN_HP || getHP() > entity_details::MAX_HP)
 		throw std::invalid_argument(
