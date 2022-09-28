@@ -25,6 +25,14 @@ TEST_F(SpellTest, TestConstructor) {
 	EXPECT_EQ(original->getName(), name);
 	EXPECT_EQ(original->getDescription(), description);
 	EXPECT_EQ(original->getLevel(), level);
+
+	EXPECT_THROW(Spell("1", "", entity_details::MAX_SPELL_LEVEL + 1), std::invalid_argument);
+	EXPECT_THROW(Spell("1", "", entity_details::MIN_SPELL_LEVEL - 1), std::invalid_argument);
+	EXPECT_THROW(Spell("1", "", -2), std::invalid_argument);
+	EXPECT_THROW(Spell("1", "", 42), std::invalid_argument);
+
+	Spell("", "", entity_details::MIN_SPELL_LEVEL);
+	Spell("", "", entity_details::MAX_SPELL_LEVEL);
 }
 
 TEST_F(SpellTest, TestEquality) {
