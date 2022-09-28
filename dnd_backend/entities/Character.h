@@ -219,6 +219,7 @@ namespace DND {
 
 		/**
 		 * @brief Mark that a spell has been used, and remove its spell slot.
+		 * Note that this method doesn't check whether the spell can be used by the character.
 		 * @param spell the spell used.
 		*/
 		void spellUsed(const Spell& spell);
