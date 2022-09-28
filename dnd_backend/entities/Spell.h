@@ -1,34 +1,46 @@
 #pragma once
+#include "Rules.h"
 #include <string>
-/*
-* Straight up include this because implementing the save/load procedures
-* without the access would need to implement setters to all classes and break
-* encapsulation
-*/
 #include <boost/serialization/access.hpp>
 
 namespace DND {
 	
 	/**
-	 * @brief A record type holding information about a spell.
+	 * @brief A class holding information about a spell.
 	 * @author Dimitris Tsirmpas
 	*/
 	class Spell {
 	public:
-		Spell(const std::string& name, const std::string& description, int level) 
-			: name(name), description(description), level(level) {}
 
-		Spell(): level(-1){}
+		/**
+		 * @brief Construct a new Spell. By default the Spell is unprepared.
+		 * @param name the name of the spell, acts as a unique id
+		 * @param description the description of the spell
+		 * @param level the level of the spell
+		 * @throws std::invalid_argument if the spell's level isn't valid
+		*/
+		Spell(const std::string& name, const std::string& description, int level);
 
-		std::string getName() const { return name; }
-		std::string getDescription() const { return description; }
-		int getLevel() const { return level; }
+		/**
+		 * @brief To be used by the serialization library DO NOT USE.
+		*/
+		Spell();
+
+		std::string getName() const;
+		std::string getDescription() const;
+		int getLevel() const;
+		bool isPrepared() const;
+
+		void setPrepared(bool isPrepared);
 
 	private:
 		//must be non-const for the serialization library
 		std::string name;
 		std::string description;
 		int level;
+		bool prepared;
+
+		void throwIfInvalidLevel() const;
 
 		friend class boost::serialization::access;
 
@@ -37,6 +49,7 @@ namespace DND {
 			ar& name;
 			ar& description;
 			ar& level;
+			ar& prepared;
 		}
 	};
 

@@ -47,6 +47,16 @@ TEST_F(SpellTest, TestImmutability) {
 	EXPECT_EQ(spell.getLevel(), 3);
 }
 
+TEST_F(SpellTest, TestPrepare) {
+	EXPECT_FALSE(original->isPrepared());
+
+	original->setPrepared(true);
+	EXPECT_TRUE(original->isPrepared());
+
+	original->setPrepared(false);
+	EXPECT_FALSE(original->isPrepared());
+}
+
 TEST_F(SpellTest, TestSerialization) {
 	testSerialization<Spell>(*original,
 		[](const Spell& a, const Spell& b) {

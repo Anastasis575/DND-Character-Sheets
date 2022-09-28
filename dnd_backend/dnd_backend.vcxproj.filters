@@ -44,8 +44,10 @@
     <ClCompile Include="entities\Alignment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpellSlot.cpp" />
     <ClCompile Include="entities\LevelSpellSlot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Spell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,7 +100,6 @@
     <ClInclude Include="entities\Alignment.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="SpellSlot.h" />
     <ClInclude Include="entities\LevelSpellSlot.h">
       <Filter>Headers</Filter>
     </ClInclude>

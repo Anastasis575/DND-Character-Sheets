@@ -163,6 +163,7 @@
     <ClCompile Include="entities\SkillDepedencies.cpp" />
     <ClCompile Include="entities\Race.cpp" />
     <ClCompile Include="entities\LevelSpellSlot.cpp" />
+    <ClCompile Include="entities\Spell.cpp" />
     <ClCompile Include="xmldao\LocalFileResolver.cpp" />
     <ClCompile Include="xmldao\XMLCharacterDAO.cpp" />
   </ItemGroup>

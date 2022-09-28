@@ -17,6 +17,7 @@ namespace DND {
 		const int MIN_SPEED = 1;
 		const int MAX_SPEED = 9999;
 		const int DEFAULT_LEVEL = 1;
+		const int DEFAULT_SPELL_LEVEL = 0;
 		const int DEFAULT_HP = 1;
 		const int DEFAULT_AC = 0;
 		const int DEFAULT_SPEED = 0;

@@ -15,6 +15,7 @@ Rules:
     min_speed : 1
     max_speed : 9999
     default_level : 1
+    default_spell_level: 0
     default_hp : 1
     default_ac : 0
     default_speed : 0
