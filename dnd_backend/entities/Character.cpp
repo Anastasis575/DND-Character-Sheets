@@ -7,9 +7,10 @@ std::string outOfBoundsErrorMessage(std::string field, int min, int max);
 
 Character::Character(const std::string& charName, const std::string& playerName):
 	characterName(charName), playerName(playerName), wallet(entity_details::ObjectCounter<Currency>()),
-	alignment(Alignment::UNALIGNED) {}
+	alignment(Alignment::TRUE_NEUTRAL) {}
 
-Character::Character() : characterName("N/A"), playerName("NON INITIALIZED CHARACTER") {}
+Character::Character() : characterName("N/A"), playerName("NON INITIALIZED CHARACTER"), 
+alignment(Alignment::TRUE_NEUTRAL) {}
 
 int Character::getAttributeScore(Attribute attr) const {
 	AttributeSet finalAttributes = baseStats;

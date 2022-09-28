@@ -13,7 +13,6 @@ namespace DND {
 		LAWFUL_EVIL,
 		NEUTRAL_EVIL,
 		CHAOTIC_EVIL,
-		UNALIGNED,
 	};
 	
 	

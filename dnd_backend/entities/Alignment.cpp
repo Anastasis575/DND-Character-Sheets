@@ -30,7 +30,6 @@ namespace DND {
 			std::make_pair(Alignment::LAWFUL_EVIL, "Lawful Evil"),
 			std::make_pair(Alignment::NEUTRAL_EVIL, "Neutral Evil"),
 			std::make_pair(Alignment::CHAOTIC_EVIL, "Chaotic Evil"),
-			std::make_pair(Alignment::UNALIGNED, "Unaligned"),
 		};
 	}
 }
