@@ -182,7 +182,7 @@ TEST_F(CharacterTest, TestIcon) {
 }
 
 TEST_F(CharacterTest, TestAlignment) {
-	EXPECT_EQ(character->getAlignment(), Alignment::UNALIGNED);
+	EXPECT_EQ(character->getAlignment(), Alignment::TRUE_NEUTRAL);
 	character->setAlignment(Alignment::CHAOTIC_EVIL);
 	EXPECT_EQ(character->getAlignment(), Alignment::CHAOTIC_EVIL);
 }
